@@ -1,0 +1,10 @@
+.ai-predictions {
+    padding: 2rem;
+    background-color: #fff;
+    text-align: center;
+}
+
+.ai-predictions h2 {
+    margin-bottom: 1rem;
+    color: #333;
+}
