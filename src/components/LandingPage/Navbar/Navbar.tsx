@@ -1,6 +1,6 @@
 import React from 'react';
 import './Navbar.css';
-import logo from '../../assets/logo_without_background.png';
+import logo from '../../../assets/logo_without_background.png';
 
 const Navbar: React.FC = () => {
     return (
