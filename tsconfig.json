@@ -7,11 +7,12 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-    "declaration": false
+    "declaration": false,
+    "outDir": "./dist"
   },
   "files": [],
   "include": ["src/**/*"],
-  "exclude": ["src/**/*.d.ts"],
+  "exclude": ["dist", "src/**/*.d.ts"],
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
