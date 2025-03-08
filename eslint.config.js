@@ -5,6 +5,9 @@ import pluginReact from 'eslint-plugin-react';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
+  {
+    ignores: ['coverage/'],
+  },
   { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
   { files: ['**/*.js'], languageOptions: { sourceType: 'script' } },
   { languageOptions: { globals: globals.browser } },
@@ -20,6 +23,18 @@ export default [
     rules: {
       'react/react-in-jsx-scope': 'off',
       'react/jsx-no-target-blank': 'warn',
+    },
+  },
+  {
+    files: ['jest.config.cjs'],
+    languageOptions: {
+      globals: {
+        module: 'readonly',
+        require: 'readonly',
+        __dirname: 'readonly',
+        __filename: 'readonly',
+        process: 'readonly',
+      },
     },
   },
 ];
