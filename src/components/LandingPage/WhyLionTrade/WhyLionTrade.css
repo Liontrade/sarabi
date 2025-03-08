@@ -1,0 +1,33 @@
+.why-liontrade {
+  padding: 3rem 2rem;
+  background-color: #fff;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.why-liontrade__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+}
+
+.why-liontrade__card {
+  background-color: #fafafa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.why-liontrade__card h3 {
+  margin-bottom: 1rem;
+  color: #000;
+}
+
+.why-liontrade__card p {
+  color: #555;
+}
