@@ -10,6 +10,7 @@
   },
   "files": [],
   "include": ["src/**/*"],
+  "exclude": ["src/**/*.d.ts"],
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
