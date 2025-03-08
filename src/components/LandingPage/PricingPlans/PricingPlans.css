@@ -1,75 +1,75 @@
 .pricing-plans {
-    padding: 3rem 2rem;
-    text-align: center;
-    background-color: #f9f9f9;
+  padding: 3rem 2rem;
+  text-align: center;
+  background-color: #f9f9f9;
 }
 
 .section-title {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #333;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #333;
 }
 
 .pricing-plans__intro {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    color: #555;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #555;
 }
 
 .pricing-plans__cards {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .pricing-plans__card {
-    background-color: #fff;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    padding: 2rem;
-    width: 300px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 2rem;
+  width: 300px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .pricing-plans__card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #333;
 }
 
 .pricing-plans__price {
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin: 1rem 0;
-    color: #FCA311;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 1rem 0;
+  color: #fca311;
 }
 
 .pricing-plans__features {
-    list-style: none;
-    padding: 0;
-    margin: 1rem 0;
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
 }
 
 .pricing-plans__features li {
-    margin-bottom: 0.5rem;
-    color: #555;
+  margin-bottom: 0.5rem;
+  color: #555;
 }
 
 .pricing-plans__btn {
-    margin-top: auto;
-    background-color: #FCA311;
-    color: #fff;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  margin-top: auto;
+  background-color: #fca311;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .pricing-plans__btn:hover {
-    background-color: #e68b06;
+  background-color: #e68b06;
 }
