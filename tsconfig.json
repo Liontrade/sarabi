@@ -7,7 +7,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-    "declaration": false,
+    "declaration": false
   },
   "files": [],
   "include": ["src/**/*"],
