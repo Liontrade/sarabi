@@ -1,6 +1,7 @@
 import React from 'react';
 import './Navbar.css';
 import logo from '../../../assets/logo_without_background.png';
+import {Link} from "react-router-dom";
 
 const Navbar: React.FC = () => {
   return (
@@ -28,7 +29,7 @@ const Navbar: React.FC = () => {
       </ul>
       <div className="navbar__actions">
         <button className="btn btn--login">Login</button>
-        <button className="btn btn--signup">Sign Up</button>
+          <Link to="/signup" className="btn btn--signup">Sign Up</Link>
       </div>
     </nav>
   );

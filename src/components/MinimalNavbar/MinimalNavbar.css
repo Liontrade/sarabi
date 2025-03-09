@@ -1,0 +1,39 @@
+.minimal-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.minimal-navbar__brand {
+    display: flex;
+    align-items: center;
+}
+
+.minimal-navbar__logo {
+    width: 40px;
+    margin-right: 0.5rem;
+}
+
+.minimal-navbar__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #000;
+}
+
+.minimal-navbar__signin {
+    color: #FCA311;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border: 2px solid #FCA311;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.minimal-navbar__signin:hover {
+    background-color: #FCA311;
+    color: #fff;
+}
