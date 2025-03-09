@@ -14,7 +14,7 @@ const SignUp: React.FC = () => {
 
   return (
     <div className="signup-page">
-      <MinimalNavbar />
+      <MinimalNavbar variant="login" />
 
       <div className="signup-page__content">
         <h1>Create an account</h1>

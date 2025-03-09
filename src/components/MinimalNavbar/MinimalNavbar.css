@@ -10,6 +10,7 @@
 .minimal-navbar__brand {
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .minimal-navbar__logo {
@@ -23,17 +24,18 @@
     color: #000;
 }
 
-.minimal-navbar__signin {
-    color: #FCA311;
-    text-decoration: none;
-    font-weight: 600;
-    padding: 0.5rem 1rem;
+.minimal-navbar__button {
+    background: none;
     border: 2px solid #FCA311;
+    color: #FCA311;
+    padding: 0.5rem 1rem;
     border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
 }
 
-.minimal-navbar__signin:hover {
-    background-color: #FCA311;
+.minimal-navbar__button:hover {
+    background: #FCA311;
     color: #fff;
 }
