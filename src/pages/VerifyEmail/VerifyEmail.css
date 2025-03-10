@@ -4,10 +4,9 @@
     min-height: 100vh;
 }
 
-/* Główna treść ekranu */
 .verify-email-page__container {
     max-width: 600px;
-    margin: 4rem auto 0 auto; /* 4rem od góry, automatyczne wyśrodkowanie w poziomie */
+    margin: 4rem auto 0 auto;
     text-align: center;
     padding: 1rem;
 }

@@ -1,4 +1,3 @@
-// src/pages/Home/Home.tsx
 import React, { useEffect, useState } from 'react';
 import { auth } from '../../firebaseConfig';
 import { onAuthStateChanged, signOut, User } from 'firebase/auth';
@@ -13,7 +12,6 @@ const Home: React.FC = () => {
       if (currentUser) {
         setUser(currentUser);
       } else {
-        // Jeśli użytkownik nie jest zalogowany, przekieruj na /login
         navigate('/login');
       }
     });

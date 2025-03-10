@@ -1,4 +1,3 @@
-// src/pages/SignUp/SignUp.tsx
 import React, { useState } from 'react';
 import './SignUp.css';
 import { auth } from '../../firebaseConfig';
@@ -20,9 +19,7 @@ const SignUp: React.FC = () => {
     }
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      // Wyślij e-mail weryfikacyjny
       await sendEmailVerification(userCredential.user);
-      // Przekieruj na ekran weryfikacji e-mail (np. /verify-email)
       navigate('/verify-email');
     } catch (error: any) {
       console.error('Error creating account:', error);
