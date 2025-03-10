@@ -1,15 +1,33 @@
+// src/pages/SignUp/SignUp.tsx
 import React, { useState } from 'react';
 import './SignUp.css';
+import { auth } from '../../firebaseConfig';
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 import MinimalNavbar from '../../components/MinimalNavbar/MinimalNavabr';
 
 const SignUp: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('Creating account:', { email, password, repeatPassword });
+    if (password !== repeatPassword) {
+      alert('Passwords do not match!');
+      return;
+    }
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      // Wyślij e-mail weryfikacyjny
+      await sendEmailVerification(userCredential.user);
+      // Przekieruj na ekran weryfikacji e-mail (np. /verify-email)
+      navigate('/verify-email');
+    } catch (error: any) {
+      console.error('Error creating account:', error);
+      alert(error.message);
+    }
   };
 
   return (

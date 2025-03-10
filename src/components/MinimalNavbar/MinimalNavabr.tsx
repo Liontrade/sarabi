@@ -4,15 +4,22 @@ import './MinimalNavbar.css';
 import logo from '../../assets/logo_without_background.png';
 
 interface MinimalNavbarProps {
-  variant: 'signup' | 'login';
+  variant?: 'login' | 'signup' | 'none';
 }
 
-const MinimalNavbar: React.FC<MinimalNavbarProps> = ({ variant }) => {
+const MinimalNavbar: React.FC<MinimalNavbarProps> = ({ variant = 'none' }) => {
   const navigate = useNavigate();
 
-  const isSignupVariant = variant === 'signup';
-  const buttonText = isSignupVariant ? 'Sign Up' : 'Sign In';
-  const buttonLink = isSignupVariant ? '/signup' : '/login';
+  let buttonText = '';
+  let buttonLink = '';
+
+  if (variant === 'login') {
+    buttonText = 'Sign In';
+    buttonLink = '/login';
+  } else if (variant === 'signup') {
+    buttonText = 'Sign Up';
+    buttonLink = '/signup';
+  }
 
   return (
     <header className="minimal-navbar">
@@ -20,17 +27,19 @@ const MinimalNavbar: React.FC<MinimalNavbarProps> = ({ variant }) => {
         className="minimal-navbar__brand"
         onClick={() => navigate('/')}
         role="button"
-        tabIndex={0} // aby element był dostępny z klawiatury
+        tabIndex={0}
       >
         <img src={logo} alt="LionTrade Logo" className="minimal-navbar__logo" />
         <h1 className="minimal-navbar__title">LionTrade</h1>
       </div>
-      <button
-        className="minimal-navbar__button"
-        onClick={() => navigate(buttonLink)}
-      >
-        {buttonText}
-      </button>
+      {variant !== 'none' && (
+        <button
+          className="minimal-navbar__button"
+          onClick={() => navigate(buttonLink)}
+        >
+          {buttonText}
+        </button>
+      )}
     </header>
   );
 };

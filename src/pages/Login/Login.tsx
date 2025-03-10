@@ -1,15 +1,26 @@
+// src/pages/Login/Login.tsx
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
+import { auth } from '../../firebaseConfig';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate, Link } from 'react-router-dom';
 import MinimalNavbar from '../../components/MinimalNavbar/MinimalNavabr';
 
 const Login: React.FC = () => {
-  const [email, setEmail] = useState('johndoe@gmail.com');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  useNavigate();
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('Logging in with:', { email, password });
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      // Po udanym logowaniu przekieruj na stronę główną/dashbord
+      navigate('/home');
+    } catch (error: any) {
+      console.error('Error logging in:', error);
+      alert(error.message);
+    }
   };
 
   return (
@@ -53,7 +64,9 @@ const Login: React.FC = () => {
               Forgot Password?
             </Link>
             <span> | </span>
-            <span>Don’t have an account? <Link to="/signup" className="login-form__link">Sign up</Link></span>
+            <span>
+              Don’t have an account? <Link to="/signup" className="login-form__link">Sign up</Link>
+            </span>
           </div>
         </form>
       </div>
