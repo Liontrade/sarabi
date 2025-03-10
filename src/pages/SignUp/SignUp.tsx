@@ -5,7 +5,7 @@ import { auth } from '../../firebaseConfig';
 import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import Spinner from '../../components/Spinner/Spinner';
-import MinimalNavbar from '../../components/MinimalNavbar/MinimalNavabr';
+import MinimalNavbar from '../../components/MinimalNavbar/MinimalNavbar';
 
 const SignUp: React.FC = () => {
   const [email, setEmail] = useState('');

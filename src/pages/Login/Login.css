@@ -11,11 +11,12 @@
 
 .login-page__content h1 {
     margin-bottom: 1.5rem;
-    color: #333;
+    color: var(--color-dark);
+    font-weight: 600;
 }
 
 .login-form {
-    background-color: #fff;
+    background-color: var(--color-secondary);
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -24,7 +25,7 @@
 .login-form label {
     display: block;
     margin-bottom: 0.5rem;
-    color: #555;
+    color: var(--color-muted);
     font-weight: 500;
 }
 
@@ -39,8 +40,8 @@
 .login-form__submit {
     width: 100%;
     padding: 0.75rem;
-    background-color: #FCA311;
-    color: #fff;
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -50,7 +51,7 @@
 }
 
 .login-form__submit:hover {
-    background-color: #e68b06;
+    background-color: var(--color-primary-hover);
 }
 
 .login-form__or {
@@ -64,8 +65,8 @@
     width: 100%;
     padding: 0.75rem;
     border: 2px solid #ddd;
-    background-color: #fff;
-    color: #333;
+    background-color: var(--color-secondary);
+    color: var(--color-dark);
     border-radius: 4px;
     cursor: pointer;
     margin-bottom: 0.5rem;
@@ -74,18 +75,18 @@
 }
 
 .login-form__social:hover {
-    border-color: #333;
+    border-color: var(--color-dark);
 }
 
 .login-form__links {
     margin-top: 1rem;
     text-align: center;
     font-size: 0.9rem;
-    color: #666;
+    color: var(--color-muted);
 }
 
 .login-form__link {
-    color: #FCA311;
+    color: var(--color-primary);
     text-decoration: none;
     font-weight: 500;
 }

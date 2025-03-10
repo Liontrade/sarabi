@@ -11,11 +11,12 @@
 
 .signup-page__content h1 {
     margin-bottom: 1.5rem;
-    color: #333;
+    color: var(--color-dark);
+    font-weight: 600;
 }
 
 .signup-form {
-    background-color: #fff;
+    background-color: var(--color-secondary);
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -24,7 +25,7 @@
 .signup-form label {
     display: block;
     margin-bottom: 0.5rem;
-    color: #555;
+    color: var(--color-muted);
     font-weight: 500;
 }
 
@@ -39,8 +40,8 @@
 .signup-form__submit {
     width: 100%;
     padding: 0.75rem;
-    background-color: #FCA311;
-    color: #fff;
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -50,12 +51,12 @@
 }
 
 .signup-form__submit:hover {
-    background-color: #e68b06;
+    background-color: var(--color-primary-hover);
 }
 
 .signup-form__info {
     margin-bottom: 1rem;
-    color: #666;
+    color: var(--color-muted);
     text-align: center;
 }
 
@@ -63,8 +64,8 @@
     width: 100%;
     padding: 0.75rem;
     border: 2px solid #ddd;
-    background-color: #fff;
-    color: #333;
+    background-color: var(--color-secondary);
+    color: var(--color-dark);
     border-radius: 4px;
     cursor: pointer;
     margin-bottom: 0.5rem;
@@ -73,12 +74,12 @@
 }
 
 .signup-form__social:hover {
-    border-color: #333;
+    border-color: var(--color-dark);
 }
 
 .signup-form__terms {
     margin-top: 1rem;
     font-size: 0.9rem;
-    color: #999;
+    color: var(--color-muted);
     text-align: center;
 }

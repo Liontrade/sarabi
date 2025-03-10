@@ -3,7 +3,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    background-color: #fff;
+    background-color: var(--color-secondary);
     border-bottom: 1px solid #eee;
 }
 
@@ -21,13 +21,13 @@
 .minimal-navbar__title {
     font-size: 1.25rem;
     font-weight: 600;
-    color: #000;
+    color: var(--color-dark);
 }
 
 .minimal-navbar__button {
     background: none;
-    border: 2px solid #FCA311;
-    color: #FCA311;
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
     padding: 0.5rem 1rem;
     border-radius: 4px;
     font-weight: 600;
@@ -36,6 +36,6 @@
 }
 
 .minimal-navbar__button:hover {
-    background: #FCA311;
-    color: #fff;
+    background: var(--color-primary);
+    color: var(--color-secondary);
 }

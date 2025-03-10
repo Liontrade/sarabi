@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #fff;
+  background-color: var(--color-secondary);
   border-bottom: 1px solid #eee;
   position: sticky;
   top: 0;
@@ -22,7 +22,7 @@
 .navbar__brand {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #000;
+  color: var(--color-dark);
   margin-left: 0.5rem;
 }
 
@@ -34,13 +34,13 @@
 
 .navbar__links li a {
   text-decoration: none;
-  color: #000;
+  color: var(--color-dark);
   font-weight: 500;
   transition: color 0.3s;
 }
 
 .navbar__links li a:hover {
-  color: #fca311;
+  color: var(--color-primary);
 }
 
 .navbar__actions {
@@ -58,21 +58,21 @@
 }
 
 .btn--login {
-  background-color: #fff;
-  color: #000;
-  border-color: #000;
+  background-color: var(--color-secondary);
+  color: var(--color-dark);
+  border-color: var(--color-dark);
 }
 
 .btn--login:hover {
-  background-color: #000;
-  color: #fff;
+  background-color: var(--color-dark);
+  color: var(--color-secondary);
 }
 
 .btn--signup {
-  background-color: #fca311;
-  color: #fff;
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
 }
 
 .btn--signup:hover {
-  background-color: #e68b06;
+  background-color: var(--color-primary-hover);
 }

@@ -4,7 +4,7 @@ import { auth } from '../../firebaseConfig';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import Spinner from '../../components/Spinner/Spinner';
 import './ForgotPassword.css';
-import MinimalNavbar from '../../components/MinimalNavbar/MinimalNavabr';
+import MinimalNavbar from '../../components/MinimalNavbar/MinimalNavbar';
 
 const ForgotPassword: React.FC = () => {
   const [email, setEmail] = useState('');

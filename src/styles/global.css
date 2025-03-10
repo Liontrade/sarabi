@@ -1,7 +1,7 @@
+/* src/styles/global.css */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 :root {
-  /* Definicje kolorów */
   --color-dark: #333;
   --color-muted: #555;
   --color-primary: #FCA311;
@@ -10,8 +10,7 @@
   --color-background: #fff;
   --color-footer-bg: #333;
   --color-footer-text: #fff;
-
-  /* Definicja fontu */
+  --color-light: #fafafa;
   --font-base: 'Poppins', sans-serif;
 }
 
@@ -21,9 +20,7 @@
   box-sizing: border-box;
 }
 
-html,
-body,
-#root {
+html, body, #root {
   height: 100%;
   font-family: var(--font-base);
   background-color: var(--color-background);

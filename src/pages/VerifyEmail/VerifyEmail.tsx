@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebaseConfig';
 import { sendEmailVerification } from 'firebase/auth';
 import './VerifyEmail.css';
-import MinimalNavbar from '../../components/MinimalNavbar/MinimalNavabr';
+import MinimalNavbar from '../../components/MinimalNavbar/MinimalNavbar';
 
 const VerifyEmail: React.FC = () => {
   const navigate = useNavigate();

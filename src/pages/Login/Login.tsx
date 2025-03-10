@@ -4,7 +4,7 @@ import { auth } from '../../firebaseConfig';
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useNavigate, Link } from 'react-router-dom';
 import Spinner from '../../components/Spinner/Spinner';
-import MinimalNavbar from '../../components/MinimalNavbar/MinimalNavabr';
+import MinimalNavbar from '../../components/MinimalNavbar/MinimalNavbar';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
