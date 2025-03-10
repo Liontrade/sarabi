@@ -5,6 +5,8 @@ import SignUp from './pages/SignUp/SignUp';
 import Login from './pages/Login/Login';
 import Home from './pages/Home/Home';
 import VerifyEmail from './pages/VerifyEmail/VerifyEmail';
+import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
+import './styles/global.css';
 
 const App: React.FC = () => {
   return (
@@ -15,6 +17,7 @@ const App: React.FC = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
       </Routes>
     </Router>
   );
