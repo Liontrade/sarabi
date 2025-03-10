@@ -1,24 +1,42 @@
-// src/pages/Login/Login.tsx
 import React, { useState } from 'react';
 import './Login.css';
 import { auth } from '../../firebaseConfig';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useNavigate, Link } from 'react-router-dom';
+import Spinner from '../../components/Spinner/Spinner';
 import MinimalNavbar from '../../components/MinimalNavbar/MinimalNavabr';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      setLoading(true);
       await signInWithEmailAndPassword(auth, email, password);
       navigate('/home');
     } catch (error: any) {
       console.error('Error logging in:', error);
       alert(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      setLoading(true);
+      await signInWithPopup(auth, provider);
+      navigate('/home');
+    } catch (error: any) {
+      console.error('Error during Google sign in:', error);
+      alert(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -49,14 +67,17 @@ const Login: React.FC = () => {
             required
           />
 
-          <button type="submit" className="login-form__submit">Log In</button>
+          <button type="submit" className="login-form__submit" disabled={loading}>
+            {loading ? <Spinner /> : 'Log In'}
+          </button>
 
           <div className="login-form__or">
             <span>or</span>
           </div>
 
-          <button type="button" className="login-form__social">Continue with Google</button>
-          <button type="button" className="login-form__social">Continue with Apple</button>
+          <button type="button" className="login-form__social" onClick={handleGoogleSignIn} disabled={loading}>
+            {loading ? <Spinner /> : 'Continue with Google'}
+          </button>
 
           <div className="login-form__links">
             <Link to="/forgot-password" className="login-form__link">

@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './SignUp.css';
 import { auth } from '../../firebaseConfig';
 import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import Spinner from '../../components/Spinner/Spinner';
 import MinimalNavbar from '../../components/MinimalNavbar/MinimalNavabr';
 
 const SignUp: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -18,12 +21,29 @@ const SignUp: React.FC = () => {
       return;
     }
     try {
+      setLoading(true);
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       await sendEmailVerification(userCredential.user);
       navigate('/verify-email');
     } catch (error: any) {
       console.error('Error creating account:', error);
       alert(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      setLoading(true);
+      await signInWithPopup(auth, provider);
+      navigate('/home');
+    } catch (error: any) {
+      console.error('Error during Google sign in:', error);
+      alert(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -34,7 +54,6 @@ const SignUp: React.FC = () => {
       <div className="signup-page__content">
         <h1>Create an account</h1>
         <form className="signup-form" onSubmit={handleSubmit}>
-
           <label htmlFor="email">Email</label>
           <input
             id="email"
@@ -65,17 +84,16 @@ const SignUp: React.FC = () => {
             required
           />
 
-          <button type="submit" className="signup-form__submit">Create Account</button>
+          <button type="submit" className="signup-form__submit" disabled={loading}>
+            {loading ? <Spinner /> : 'Create Account'}
+          </button>
 
           <p className="signup-form__info">
             Join 10,000+ investors on LionTrade and get a free stock slice
           </p>
 
-          <button type="button" className="signup-form__social">
-            Sign up with Google
-          </button>
-          <button type="button" className="signup-form__social">
-            Sign up with Apple
+          <button type="button" className="signup-form__social" onClick={handleGoogleSignIn} disabled={loading}>
+            {loading ? <Spinner /> : 'Sign up with Google'}
           </button>
 
           <p className="signup-form__terms">
