@@ -14,6 +14,13 @@
     padding: 2rem;
 }
 
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
 .dashboard-page__title {
     font-size: 1.8rem;
     font-weight: 700;
@@ -41,4 +48,10 @@
 .dashboard-page__notifications .notifications__list {
     display: flex;
     flex-direction: column;
+}
+
+.metrics-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
 }

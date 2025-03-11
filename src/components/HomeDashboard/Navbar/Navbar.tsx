@@ -18,16 +18,16 @@ const Navbar: React.FC = () => {
           <img src={logo} alt="LionTrade" className="navbar__logo" />
           <h1 className="navbar__title">LionTrade</h1>
         </div>
-        {/* Menu linki */}
+      </div>
+
+      <div className="navbar__right">
         <ul className="navbar__links">
           <li><a href="#market">Market</a></li>
           <li><a href="#ai-predictions">AI Predictions</a></li>
           <li><a href="#my-investments">My Investments</a></li>
           <li><a href="#market-news">Market News/Alerts</a></li>
         </ul>
-      </div>
 
-      <div className="navbar__right">
         <button className="navbar__signout" onClick={handleSignOut}>
           Sign Out
         </button>

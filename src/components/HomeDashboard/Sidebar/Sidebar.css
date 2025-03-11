@@ -25,7 +25,7 @@
 
 .sidebar__role {
     font-size: 0.85rem;
-    color: var(--color-muted);
+    color: var(--color-primary);
 }
 
 .sidebar__nav ul {
@@ -39,13 +39,21 @@
 }
 
 .sidebar__nav li a {
-    color: var(--color-dark);
+    display: flex;
+    align-items: center;
     text-decoration: none;
+    color: var(--color-dark);
     font-weight: 500;
     transition: color 0.3s;
 }
 
+
 .sidebar__nav li a:hover,
 .sidebar__nav li a.active {
     color: var(--color-primary);
+}
+
+.sidebar__icon {
+    margin-right: 0.5rem;
+    font-size: 1.5rem;
 }

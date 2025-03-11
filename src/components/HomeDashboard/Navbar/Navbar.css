@@ -48,6 +48,9 @@
 }
 
 .navbar__right {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
 }
 
 .navbar__signout {

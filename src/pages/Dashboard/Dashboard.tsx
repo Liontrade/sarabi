@@ -10,8 +10,16 @@ import Sidebar from '../../components/HomeDashboard/Sidebar/Sidebar';
 import QuickAccessCard from '../../components/HomeDashboard/QuickAccessCard/QuickAccessCard';
 import NotificationItem from '../../components/HomeDashboard/NotificationItem/NotificationItem';
 import Navbar from '../../components/HomeDashboard/Navbar/Navbar';
+import DepositButton from '../../components/HomeDashboard/DepositButton/DepositButton';
+import MetricCard from '../../components/HomeDashboard/MetricCard/MetricCard';
 
 const Dashboard: React.FC = () => {
+  const metrics = [
+    { value: '$3,000', label: 'Portfolio Value' },
+    { value: '$1,500', label: 'Cash Balance' },
+    { value: '20%', label: 'Daily Change' },
+  ];
+
   const quickAccessItems = [
     {
       image: marketImg,
@@ -59,7 +67,15 @@ const Dashboard: React.FC = () => {
       <div className="dashboard-page__layout">
         <Sidebar />
         <main className="dashboard-page__content">
-          <h2 className="dashboard-page__title">Dashboard</h2>
+          <div className="dashboard-header">
+            <h2 className="dashboard-page__title">Dashboard</h2>
+            <DepositButton onClick={() => console.log('Deposit clicked')} />
+          </div>
+          <div className="metrics-row">
+            {metrics.map((m, idx) => (
+              <MetricCard key={idx} value={m.value} label={m.label} />
+            ))}
+          </div>
           <section className="dashboard-page__quick-access">
             <h3 className="section-heading">Quick Access</h3>
             <div className="quick-access__grid">
