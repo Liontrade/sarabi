@@ -38,7 +38,7 @@ const SignUp: React.FC = () => {
     try {
       setLoading(true);
       await signInWithPopup(auth, provider);
-      navigate('/home');
+      navigate('/dashboard');
     } catch (error: any) {
       console.error('Error during Google sign in:', error);
       alert(error.message);

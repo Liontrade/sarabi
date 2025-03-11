@@ -1,0 +1,51 @@
+.sidebar {
+    width: 220px;
+    border-right: 1px solid #eee;
+    padding: 1rem;
+}
+
+.sidebar__user {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.sidebar__avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 0.75rem;
+}
+
+.sidebar__username {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-dark);
+}
+
+.sidebar__role {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+}
+
+.sidebar__nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar__nav li {
+    margin-bottom: 1rem;
+}
+
+.sidebar__nav li a {
+    color: var(--color-dark);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.sidebar__nav li a:hover,
+.sidebar__nav li a.active {
+    color: var(--color-primary);
+}

@@ -1,3 +1,4 @@
+// src/pages/Login/Login.tsx
 import React, { useState } from 'react';
 import './Login.css';
 import { auth } from '../../firebaseConfig';
@@ -14,10 +15,12 @@ const Login: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log('Attempting to log in with email:', email);
     try {
       setLoading(true);
-      await signInWithEmailAndPassword(auth, email, password);
-      navigate('/home');
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log('User logged in successfully:', userCredential.user);
+      navigate('/dashboard');
     } catch (error: any) {
       console.error('Error logging in:', error);
       alert(error.message);
@@ -28,10 +31,12 @@ const Login: React.FC = () => {
 
   const handleGoogleSignIn = async () => {
     const provider = new GoogleAuthProvider();
+    console.log('Attempting Google sign in...');
     try {
       setLoading(true);
-      await signInWithPopup(auth, provider);
-      navigate('/home');
+      const userCredential = await signInWithPopup(auth, provider);
+      console.log('Google sign in successful:', userCredential.user);
+      navigate('/dashboard');
     } catch (error: any) {
       console.error('Error during Google sign in:', error);
       alert(error.message);
@@ -53,7 +58,10 @@ const Login: React.FC = () => {
             type="email"
             placeholder="johndoe@gmail.com"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              console.log('Email changed:', e.target.value);
+              setEmail(e.target.value);
+            }}
             required
           />
 
@@ -63,7 +71,10 @@ const Login: React.FC = () => {
             type="password"
             placeholder="Enter your password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              console.log('Password changed');
+              setPassword(e.target.value);
+            }}
             required
           />
 
@@ -75,7 +86,12 @@ const Login: React.FC = () => {
             <span>or</span>
           </div>
 
-          <button type="button" className="login-form__social" onClick={handleGoogleSignIn} disabled={loading}>
+          <button
+            type="button"
+            className="login-form__social"
+            onClick={handleGoogleSignIn}
+            disabled={loading}
+          >
             {loading ? <Spinner /> : 'Continue with Google'}
           </button>
 
@@ -85,7 +101,10 @@ const Login: React.FC = () => {
             </Link>
             <span> | </span>
             <span>
-              Don’t have an account? <Link to="/signup" className="login-form__link">Sign up</Link>
+              Don’t have an account?{' '}
+              <Link to="/signup" className="login-form__link">
+                Sign up
+              </Link>
             </span>
           </div>
         </form>
