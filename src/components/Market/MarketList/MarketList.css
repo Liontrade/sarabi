@@ -1,0 +1,38 @@
+.market-list {
+    margin-top: 1.5rem;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.market-list__table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.market-list__table thead {
+    background-color: #f9f9f9;
+}
+
+.market-list__table th,
+.market-list__table td {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.company-logo {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.change-cell.change--up {
+    color: green;
+}
+
+.change-cell.change--down {
+    color: red;
+}
