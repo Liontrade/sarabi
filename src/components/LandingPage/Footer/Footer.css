@@ -1,6 +1,6 @@
 .footer {
-  background-color: #333;
-  color: #fff;
+  background: linear-gradient(135deg, var(--color-dark) 0%, #222 100%);
+  color: var(--color-footer-text);
   padding: 2rem;
 }
 
@@ -20,7 +20,7 @@
 .footer__column h4 {
   font-size: 1.2rem;
   margin-bottom: 1rem;
-  color: #fca311;
+  color: var(--color-primary);
 }
 
 .footer__column ul {
@@ -33,13 +33,13 @@
 }
 
 .footer__column ul li a {
-  color: #fff;
+  color: var(--color-footer-text);
   text-decoration: none;
   transition: color 0.3s;
 }
 
 .footer__column ul li a:hover {
-  color: #fca311;
+  color: var(--color-primary);
 }
 
 .footer__bottom {
