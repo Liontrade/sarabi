@@ -10,20 +10,20 @@ import Footer from '../../components/LandingPage/Footer/Footer';
 import JoinCTA from '../../components/LandingPage/JoinCTA/JoinCTA';
 
 const LandingPage: React.FC = () => {
-  return (
-    <div className="landing-page">
-      <Navbar />
-      <main>
-        <Hero />
-        <WhyLionTrade />
-        <LiveMarketInsights />
-        <AIPredictions />
-        <PricingPlans />
-        <JoinCTA />
-      </main>
-      <Footer />
-    </div>
-  );
+    return (
+        <div className="landing-page">
+            <Navbar />
+            <main>
+                <Hero />
+                <WhyLionTrade />
+                <LiveMarketInsights />
+                <AIPredictions />
+                <PricingPlans />
+                <JoinCTA />
+            </main>
+            <Footer />
+        </div>
+    );
 };
 
 export default LandingPage;

@@ -1,31 +1,31 @@
 .live-market-insights {
-  padding: 2rem;
-  background-color: var(--color-background);
-  text-align: center;
+    padding: 2rem;
+    background-color: var(--color-background);
+    text-align: center;
 }
 
 .live-market-insights h2 {
-  margin-bottom: 1rem;
-  color: var(--color-dark);
-  font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--color-dark);
+    font-weight: 600;
 }
 
 .market-data {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
 }
 
 .market-data__item {
-  background-color: var(--color-light);
-  padding: 1rem 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  min-width: 150px;
-  transition: transform 0.3s;
+    background-color: var(--color-light);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    min-width: 150px;
+    transition: transform 0.3s;
 }
 
 .market-data__item:hover {
-  transform: translateY(-3px);
+    transform: translateY(-3px);
 }
