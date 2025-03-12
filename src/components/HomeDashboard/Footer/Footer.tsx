@@ -21,9 +21,7 @@ const Footer: React.FC = () => {
         <FaLinkedin className="footer__icon" />
       </div>
 
-      <div className="footer__bottom">
-        &copy; 2025 LionTrade
-      </div>
+      <div className="footer__bottom">&copy; 2025 LionTrade</div>
     </footer>
   );
 };
