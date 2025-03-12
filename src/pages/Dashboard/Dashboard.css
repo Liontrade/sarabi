@@ -1,35 +1,35 @@
 .dashboard-page {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .dashboard-page__layout {
-  display: flex;
-  flex: 1;
+    display: flex;
+    flex: 1;
 }
 
 .dashboard-page__content {
-  flex-grow: 1;
-  padding: 2rem;
+    flex-grow: 1;
+    padding: 2rem;
 }
 
 .dashboard-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
 }
 
 .dashboard-page__title {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--color-dark);
-  margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-dark);
+    margin: 0;
 }
 
 .metrics-row {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
 }
