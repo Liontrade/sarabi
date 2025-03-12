@@ -1,4 +1,3 @@
-// src/pages/Login/Login.tsx
 import React, { useState } from 'react';
 import './Login.css';
 import { auth } from '../../firebaseConfig';
@@ -11,10 +10,12 @@ const Login: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setError(null); 
         console.log('Attempting to log in with email:', email);
         try {
             setLoading(true);
@@ -22,15 +23,15 @@ const Login: React.FC = () => {
             console.log('User logged in successfully:', userCredential.user);
             navigate('/dashboard');
         } catch (error: unknown) {
-            const err = error as Error;
             console.error('Error logging in:', error);
-            console.error(err.message);
+            setError('Login failed: Wrong email or password'); 
         } finally {
             setLoading(false);
         }
     };
 
     const handleGoogleSignIn = async () => {
+        setError(null); // Clear previous errors
         const provider = new GoogleAuthProvider();
         console.log('Attempting Google sign in...');
         try {
@@ -39,9 +40,8 @@ const Login: React.FC = () => {
             console.log('Google sign in successful:', userCredential.user);
             navigate('/dashboard');
         } catch (error: unknown) {
-            const err = error as Error;
             console.error('Error during Google sign in:', error);
-            console.error(err.message);
+            setError('Google sign-in failed. Please try again.');
         } finally {
             setLoading(false);
         }
@@ -53,6 +53,9 @@ const Login: React.FC = () => {
 
             <div className="login-page__content">
                 <h1>Sign in to LionTrade</h1>
+                
+                {error && <p className="login-error">{error}</p>} {}
+
                 <form className="login-form" onSubmit={handleSubmit}>
                     <label htmlFor="email">Email</label>
                     <input
