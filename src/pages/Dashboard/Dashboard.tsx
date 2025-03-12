@@ -8,6 +8,7 @@ import NotificationItem from '../../components/HomeDashboard/NotificationItem/No
 
 import './Dashboard.css';
 import HotNewsSection from '../../components/HomeDashboard/HotNewsSection/HotNewsSection';
+import Footer from '../../components/HomeDashboard/Footer/Footer';
 
 const Dashboard: React.FC = () => {
   const metrics = [
@@ -67,6 +68,7 @@ const Dashboard: React.FC = () => {
           </section>
         </main>
       </div>
+      <Footer />
     </div>
   );
 };
