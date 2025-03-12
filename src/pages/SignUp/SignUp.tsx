@@ -3,37 +3,57 @@ import { useNavigate } from 'react-router-dom';
 import './SignUp.css';
 import { auth } from '../../firebaseConfig';
 import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import Spinner from '../../components/Spinner/Spinner';
 import MinimalNavbar from '../../components/MinimalNavbar/MinimalNavbar';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 const SignUp: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
+    const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
+    const validateEmail = (email: string) => {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    };
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (password !== repeatPassword) {
-            alert('Passwords do not match!');
+        setError('');
+
+        if (!validateEmail(email)) {
+            setError('Please enter a valid email address.');
             return;
         }
+        if (password.length < 8) {
+            setError('Password must be at least 8 characters long.');
+            return;
+        }
+        if (password !== repeatPassword) {
+            setError('Passwords do not match.');
+            return;
+        }
+
         try {
             setLoading(true);
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             await sendEmailVerification(userCredential.user);
             navigate('/verify-email');
-        } catch (error: unknown) {
-            const err = error as Error;
+        } catch (error: any) {
+            if (error.code === 'auth/email-already-in-use') {
+                setError('This email is already registered. Please log in instead.');
+            } else if (error.code === 'auth/invalid-email') {
+                setError('Invalid email format.');
+            } else {
+                setError('An error occurred. Please try again.');
+            }
             console.error('Error creating account:', error);
-            console.error(err.message);
         } finally {
             setLoading(false);
         }
     };
-
     const handleGoogleSignIn = async () => {
         const provider = new GoogleAuthProvider();
         try {
@@ -49,6 +69,8 @@ const SignUp: React.FC = () => {
         }
     };
 
+
+
     return (
         <div className="signup-page">
             <MinimalNavbar variant="login" />
@@ -56,6 +78,8 @@ const SignUp: React.FC = () => {
             <div className="signup-page__content">
                 <h1>Create an account</h1>
                 <form className="signup-form" onSubmit={handleSubmit}>
+                    {error && <div className="signup-form__error">{error}</div>}
+
                     <label htmlFor="email">Email</label>
                     <input
                         id="email"
@@ -63,6 +87,7 @@ const SignUp: React.FC = () => {
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                         placeholder="Enter your email"
+                        className={error.includes('email') ? 'input-error' : ''}
                         required
                     />
 
@@ -73,6 +98,7 @@ const SignUp: React.FC = () => {
                         value={password}
                         onChange={e => setPassword(e.target.value)}
                         placeholder="Password must be at least 8 characters"
+                        className={error.includes('Password') ? 'input-error' : ''}
                         required
                     />
 
@@ -83,6 +109,7 @@ const SignUp: React.FC = () => {
                         value={repeatPassword}
                         onChange={e => setRepeatPassword(e.target.value)}
                         placeholder="Repeat your password"
+                        className={error.includes('match') ? 'input-error' : ''}
                         required
                     />
 
