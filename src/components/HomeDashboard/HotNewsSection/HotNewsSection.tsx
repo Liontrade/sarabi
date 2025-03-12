@@ -14,49 +14,59 @@ interface NewsItem {
 const hotNews: NewsItem[] = [
   {
     headline: 'Tech stocks surge as market optimism returns',
-    description: 'A surge in technology stocks has boosted market sentiment, driving up indices.',
+    description:
+      'A surge in technology stocks has boosted market sentiment, driving up indices.',
     source: 'Reuters',
     time: '10 mins ago',
     image: newsImg,
   },
   {
     headline: 'New economic policies boost investor confidence',
-    description: 'Investors are reacting positively to new economic policies, expecting higher growth.',
+    description:
+      'Investors are reacting positively to new economic policies, expecting higher growth.',
     source: 'Bloomberg',
     time: '20 mins ago',
     image: newsImg,
   },
   {
     headline: 'Global markets mixed amid rising interest rates',
-    description: 'Market movements are mixed as rising interest rates impact global stocks.',
+    description:
+      'Market movements are mixed as rising interest rates impact global stocks.',
     source: 'CNBC',
     time: '30 mins ago',
     image: newsImg,
   },
   {
     headline: 'Tech stocks surge as market optimism returns',
-    description: 'A surge in technology stocks has boosted market sentiment, driving up indices.',
+    description:
+      'A surge in technology stocks has boosted market sentiment, driving up indices.',
     source: 'Reuters',
     time: '10 mins ago',
     image: newsImg,
   },
   {
     headline: 'New economic policies boost investor confidence',
-    description: 'Investors are reacting positively to new economic policies, expecting higher growth.',
+    description:
+      'Investors are reacting positively to new economic policies, expecting higher growth.',
     source: 'Bloomberg',
     time: '20 mins ago',
     image: newsImg,
   },
   {
     headline: 'Global markets mixed amid rising interest rates',
-    description: 'Market movements are mixed as rising interest rates impact global stocks.',
+    description:
+      'Market movements are mixed as rising interest rates impact global stocks.',
     source: 'CNBC',
     time: '30 mins ago',
     image: newsImg,
   },
 ];
 
-const getItemWidth = (containerWidth: number, itemsVisible: number, gap: number) => {
+const getItemWidth = (
+  containerWidth: number,
+  itemsVisible: number,
+  gap: number,
+) => {
   return (containerWidth - gap * (itemsVisible - 1)) / itemsVisible;
 };
 
@@ -116,11 +126,18 @@ const HotNewsSection: React.FC = () => {
     <section className="hot-news-section">
       <h3 className="section-heading">Hot News</h3>
       <div className="news-container">
-        <MdChevronLeft className="arrow-btn arrow-btn--left" onClick={scrollLeft} />
+        <MdChevronLeft
+          className="arrow-btn arrow-btn--left"
+          onClick={scrollLeft}
+        />
         <div className="news-grid" ref={scrollContainerRef}>
           {extendedNews.map((news, idx) => (
             <div key={idx} className="hot-news-card">
-              <img src={news.image} alt={news.headline} className="hot-news-card__image" />
+              <img
+                src={news.image}
+                alt={news.headline}
+                className="hot-news-card__image"
+              />
               <div className="hot-news-card__content">
                 <h4 className="hot-news-card__headline">{news.headline}</h4>
                 <p className="hot-news-card__description">{news.description}</p>
@@ -132,7 +149,10 @@ const HotNewsSection: React.FC = () => {
             </div>
           ))}
         </div>
-        <MdChevronRight className="arrow-btn arrow-btn--right" onClick={scrollRight} />
+        <MdChevronRight
+          className="arrow-btn arrow-btn--right"
+          onClick={scrollRight}
+        />
       </div>
     </section>
   );

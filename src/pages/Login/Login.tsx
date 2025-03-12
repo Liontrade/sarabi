@@ -2,7 +2,11 @@
 import React, { useState } from 'react';
 import './Login.css';
 import { auth } from '../../firebaseConfig';
-import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import {
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from 'firebase/auth';
 import { useNavigate, Link } from 'react-router-dom';
 import Spinner from '../../components/Spinner/Spinner';
 import MinimalNavbar from '../../components/MinimalNavbar/MinimalNavbar';
@@ -18,12 +22,17 @@ const Login: React.FC = () => {
     console.log('Attempting to log in with email:', email);
     try {
       setLoading(true);
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
       console.log('User logged in successfully:', userCredential.user);
       navigate('/dashboard');
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const err = error as Error;
       console.error('Error logging in:', error);
-      alert(error.message);
+      console.error(err.message);
     } finally {
       setLoading(false);
     }
@@ -37,9 +46,10 @@ const Login: React.FC = () => {
       const userCredential = await signInWithPopup(auth, provider);
       console.log('Google sign in successful:', userCredential.user);
       navigate('/dashboard');
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const err = error as Error;
       console.error('Error during Google sign in:', error);
-      alert(error.message);
+      console.error(err.message);
     } finally {
       setLoading(false);
     }
@@ -78,7 +88,11 @@ const Login: React.FC = () => {
             required
           />
 
-          <button type="submit" className="login-form__submit" disabled={loading}>
+          <button
+            type="submit"
+            className="login-form__submit"
+            disabled={loading}
+          >
             {loading ? <Spinner /> : 'Log In'}
           </button>
 

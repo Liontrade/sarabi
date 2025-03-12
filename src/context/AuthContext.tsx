@@ -1,5 +1,10 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { onAuthStateChanged, User, setPersistence, browserLocalPersistence } from 'firebase/auth';
+import {
+  onAuthStateChanged,
+  User,
+  setPersistence,
+  browserLocalPersistence,
+} from 'firebase/auth';
 import { auth } from '../firebaseConfig';
 
 interface AuthContextValue {
@@ -30,7 +35,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
 
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log('AuthContext: onAuthStateChanged fired, currentUser =', currentUser);
+      console.log(
+        'AuthContext: onAuthStateChanged fired, currentUser =',
+        currentUser,
+      );
       setUser(currentUser);
       setLoading(false);
     });

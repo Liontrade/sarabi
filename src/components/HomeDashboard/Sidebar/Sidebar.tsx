@@ -3,16 +3,27 @@ import './Sidebar.css';
 import userAvatar from '../../../assets/home-page/user-avatar.png';
 
 import { MdDashboard, MdInsights, MdTrendingUp } from 'react-icons/md';
-import {RiRobot2Fill} from 'react-icons/ri';
+import { RiRobot2Fill } from 'react-icons/ri';
 
 const Sidebar: React.FC = () => {
   const navLinks = [
     { href: '#dashboard', label: 'Dashboard', icon: <MdDashboard /> },
-    { href: '#market-overview', label: 'Market Overview', icon: <MdInsights /> },
-    { href: '#ai-predictions', label: 'AI Predictions', icon: <RiRobot2Fill /> },
-    { href: '#my-investments', label: 'My Investments', icon: <MdTrendingUp /> },
+    {
+      href: '#market-overview',
+      label: 'Market Overview',
+      icon: <MdInsights />,
+    },
+    {
+      href: '#ai-predictions',
+      label: 'AI Predictions',
+      icon: <RiRobot2Fill />,
+    },
+    {
+      href: '#my-investments',
+      label: 'My Investments',
+      icon: <MdTrendingUp />,
+    },
   ];
-
 
   return (
     <aside className="sidebar">

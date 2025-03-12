@@ -1,41 +1,43 @@
 .minimal-navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background-color: var(--color-secondary);
-    border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--color-secondary);
+  border-bottom: 1px solid #eee;
 }
 
 .minimal-navbar__brand {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
 .minimal-navbar__logo {
-    width: 40px;
-    margin-right: 0.5rem;
+  width: 40px;
+  margin-right: 0.5rem;
 }
 
 .minimal-navbar__title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--color-dark);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-dark);
 }
 
 .minimal-navbar__button {
-    background: none;
-    border: 2px solid var(--color-primary);
-    color: var(--color-primary);
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+  background: none;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 }
 
 .minimal-navbar__button:hover {
-    background: var(--color-primary);
-    color: var(--color-secondary);
+  background: var(--color-primary);
+  color: var(--color-secondary);
 }

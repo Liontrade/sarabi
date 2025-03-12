@@ -9,10 +9,10 @@ interface NotificationItemProps {
 }
 
 const NotificationItem: React.FC<NotificationItemProps> = ({
-                                                             title,
-                                                             description,
-                                                             time,
-                                                           }) => {
+  title,
+  description,
+  time,
+}) => {
   return (
     <div className="notification-item">
       <div className="notification-item__left">

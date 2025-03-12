@@ -1,5 +1,10 @@
 import { JSX } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 
 import LandingPage from './pages/LandingPage/LandingPage';
@@ -20,7 +25,14 @@ function App() {
     console.log('ProtectedRoute: loading =', loading, ', user =', user);
     if (loading) {
       return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: '100vh',
+          }}
+        >
           <Spinner />
         </div>
       );

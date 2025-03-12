@@ -31,10 +31,18 @@ const Navbar: React.FC = () => {
 
       <div className="navbar__right">
         <ul className="navbar__links">
-          <li><a href="#market">Market</a></li>
-          <li><a href="#ai-predictions">AI Predictions</a></li>
-          <li><a href="#my-investments">My Investments</a></li>
-          <li><a href="#market-news">Market News/Alerts</a></li>
+          <li>
+            <a href="#market">Market</a>
+          </li>
+          <li>
+            <a href="#ai-predictions">AI Predictions</a>
+          </li>
+          <li>
+            <a href="#my-investments">My Investments</a>
+          </li>
+          <li>
+            <a href="#market-news">Market News/Alerts</a>
+          </li>
         </ul>
 
         <div className="navbar__icons">

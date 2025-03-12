@@ -30,7 +30,11 @@ const trendingStocks: StockItem[] = [
   { symbol: 'MSFT', change: '+0.2%', logo: msftLogo },
 ];
 
-const getItemWidth = (containerWidth: number, itemsVisible: number, gap: number) => {
+const getItemWidth = (
+  containerWidth: number,
+  itemsVisible: number,
+  gap: number,
+) => {
   return (containerWidth - gap * (itemsVisible - 1)) / itemsVisible;
 };
 
@@ -88,11 +92,18 @@ const TrendingStocksSection: React.FC = () => {
     <section className="trending-stocks-section">
       <h3 className="section-heading">Trending Stocks</h3>
       <div className="stocks-container">
-        <MdChevronLeft className="arrow-btn arrow-btn--left" onClick={scrollLeft} />
+        <MdChevronLeft
+          className="arrow-btn arrow-btn--left"
+          onClick={scrollLeft}
+        />
         <div className="stocks-grid" ref={scrollContainerRef}>
           {trendingStocks.map((stock, idx) => (
             <div key={idx} className="stock-card">
-              <img src={stock.logo} alt={stock.symbol} className="stock-card__logo" />
+              <img
+                src={stock.logo}
+                alt={stock.symbol}
+                className="stock-card__logo"
+              />
               <div className="stock-card__info">
                 <span className="stock-card__symbol">{stock.symbol}</span>
                 <span className="stock-card__change">{stock.change}</span>
@@ -100,7 +111,10 @@ const TrendingStocksSection: React.FC = () => {
             </div>
           ))}
         </div>
-        <MdChevronRight className="arrow-btn arrow-btn--right" onClick={scrollRight} />
+        <MdChevronRight
+          className="arrow-btn arrow-btn--right"
+          onClick={scrollRight}
+        />
       </div>
     </section>
   );

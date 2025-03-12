@@ -22,9 +22,11 @@ const ForgotPassword: React.FC = () => {
     try {
       await sendPasswordResetEmail(auth, email);
       setMessage('A password reset email has been sent to your email address.');
-      setRedirectCountdown(5); // rozpocznij countdown
-    } catch (err: any) {
-      setError(err.message);
+      setRedirectCountdown(5);
+    } catch (error: unknown) {
+      const err = error as Error;
+      console.error('Error resending email:', error);
+      console.error(err.message);
     } finally {
       setLoading(false);
     }
@@ -34,7 +36,7 @@ const ForgotPassword: React.FC = () => {
     let timer: NodeJS.Timeout;
     if (message && redirectCountdown > 0) {
       timer = setTimeout(() => {
-        setRedirectCountdown(prev => prev - 1);
+        setRedirectCountdown((prev) => prev - 1);
       }, 1000);
     } else if (message && redirectCountdown === 0) {
       navigate('/login');
@@ -49,7 +51,8 @@ const ForgotPassword: React.FC = () => {
       <div className="forgot-password-container">
         <h1>Forgot Password</h1>
         <p>
-          Enter your email address below and we will send you a link to reset your password.
+          Enter your email address below and we will send you a link to reset
+          your password.
         </p>
         <form className="forgot-password-form" onSubmit={handleSubmit}>
           <label htmlFor="email">Email</label>
@@ -61,7 +64,11 @@ const ForgotPassword: React.FC = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <button type="submit" className="forgot-password-submit" disabled={loading}>
+          <button
+            type="submit"
+            className="forgot-password-submit"
+            disabled={loading}
+          >
             {loading ? <Spinner /> : 'Reset Password'}
           </button>
         </form>

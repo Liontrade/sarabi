@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SignUp.css';
 import { auth } from '../../firebaseConfig';
-import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from 'firebase/auth';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import Spinner from '../../components/Spinner/Spinner';
 import MinimalNavbar from '../../components/MinimalNavbar/MinimalNavbar';
@@ -22,12 +25,17 @@ const SignUp: React.FC = () => {
     }
     try {
       setLoading(true);
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
       await sendEmailVerification(userCredential.user);
       navigate('/verify-email');
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const err = error as Error;
       console.error('Error creating account:', error);
-      alert(error.message);
+      console.error(err.message);
     } finally {
       setLoading(false);
     }
@@ -39,9 +47,10 @@ const SignUp: React.FC = () => {
       setLoading(true);
       await signInWithPopup(auth, provider);
       navigate('/dashboard');
-    } catch (error: any) {
-      console.error('Error during Google sign in:', error);
-      alert(error.message);
+    } catch (error: unknown) {
+      const err = error as Error;
+      console.error('Error during Google sin in:', error);
+      console.error(err.message);
     } finally {
       setLoading(false);
     }
@@ -84,7 +93,11 @@ const SignUp: React.FC = () => {
             required
           />
 
-          <button type="submit" className="signup-form__submit" disabled={loading}>
+          <button
+            type="submit"
+            className="signup-form__submit"
+            disabled={loading}
+          >
             {loading ? <Spinner /> : 'Create Account'}
           </button>
 
@@ -92,12 +105,18 @@ const SignUp: React.FC = () => {
             Join 10,000+ investors on LionTrade and get a free stock slice
           </p>
 
-          <button type="button" className="signup-form__social" onClick={handleGoogleSignIn} disabled={loading}>
+          <button
+            type="button"
+            className="signup-form__social"
+            onClick={handleGoogleSignIn}
+            disabled={loading}
+          >
             {loading ? <Spinner /> : 'Sign up with Google'}
           </button>
 
           <p className="signup-form__terms">
-            By creating an account, you agree to LionTrade&#39;s terms of service and privacy policy
+            By creating an account, you agree to LionTrade&#39;s terms of
+            service and privacy policy
           </p>
         </form>
       </div>

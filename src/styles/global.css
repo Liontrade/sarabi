@@ -3,7 +3,7 @@
 :root {
   --color-dark: #333;
   --color-muted: #555;
-  --color-primary: #FCA311;
+  --color-primary: #fca311;
   --color-primary-hover: #e68b06;
   --color-secondary: #fff;
   --color-background: #fff;
@@ -19,7 +19,9 @@
   box-sizing: border-box;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   font-family: var(--font-base);
   background-color: var(--color-background);

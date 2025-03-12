@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import "./Navbar.css";
-import logo from "../../../assets/logo_without_background.png";
-import { Link } from "react-router-dom";
-import { FiMenu, FiX } from "react-icons/fi"; 
+import React, { useState } from 'react';
+import './Navbar.css';
+import logo from '../../../assets/logo_without_background.png';
+import { Link } from 'react-router-dom';
+import { FiMenu, FiX } from 'react-icons/fi';
 
 const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -20,7 +20,9 @@ const Navbar: React.FC = () => {
       </button>
 
       {/* Links - Responsive Menu */}
-      <ul className={`navbar__links ${menuOpen ? "navbar__links--active" : ""}`}>
+      <ul
+        className={`navbar__links ${menuOpen ? 'navbar__links--active' : ''}`}
+      >
         <li>
           <a href="#why-liontrade">Why LionTrade?</a>
         </li>

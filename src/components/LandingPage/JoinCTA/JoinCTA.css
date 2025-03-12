@@ -4,7 +4,7 @@
   text-align: center;
   color: var(--color-secondary);
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .join-cta__content {
@@ -30,7 +30,9 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 }
 
 .join-cta__btn:hover {
