@@ -1,46 +1,19 @@
 import React from 'react';
-
-import marketImg from '../../assets/home-page/market-overwiew.jpg';
-import aiImg from '../../assets/home-page/ai-overwiew.jpg';
-import investImg from '../../assets/home-page/my-investments.jpg';
-import newsImg from '../../assets/home-page/news-alert.jpg';
-
-import './Dashboard.css';
-import Sidebar from '../../components/HomeDashboard/Sidebar/Sidebar';
-import QuickAccessCard from '../../components/HomeDashboard/QuickAccessCard/QuickAccessCard';
-import NotificationItem from '../../components/HomeDashboard/NotificationItem/NotificationItem';
 import Navbar from '../../components/HomeDashboard/Navbar/Navbar';
+import Sidebar from '../../components/HomeDashboard/Sidebar/Sidebar';
 import DepositButton from '../../components/HomeDashboard/DepositButton/DepositButton';
 import MetricCard from '../../components/HomeDashboard/MetricCard/MetricCard';
+import TrendingStocksSection from '../../components/HomeDashboard/TrendingStocksSection/TrendingStocksSection';
+import NotificationItem from '../../components/HomeDashboard/NotificationItem/NotificationItem';
+
+import './Dashboard.css';
+import HotNewsSection from '../../components/HomeDashboard/HotNewsSection/HotNewsSection';
 
 const Dashboard: React.FC = () => {
   const metrics = [
     { value: '$3,000', label: 'Portfolio Value' },
     { value: '$1,500', label: 'Cash Balance' },
     { value: '20%', label: 'Daily Change' },
-  ];
-
-  const quickAccessItems = [
-    {
-      image: marketImg,
-      title: 'Market Overview',
-      description: 'View real-time market data',
-    },
-    {
-      image: aiImg,
-      title: 'AI Predictions',
-      description: 'Explore advanced analytics',
-    },
-    {
-      image: investImg,
-      title: 'My Investments',
-      description: 'Track your investments',
-    },
-    {
-      image: newsImg,
-      title: 'Market News/Alerts',
-      description: 'Stay informed with updates',
-    },
   ];
 
   const notifications = [
@@ -76,30 +49,18 @@ const Dashboard: React.FC = () => {
               <MetricCard key={idx} value={m.value} label={m.label} />
             ))}
           </div>
-          <section className="dashboard-page__quick-access">
-            <h3 className="section-heading">Quick Access</h3>
-            <div className="quick-access__grid">
-              {quickAccessItems.map((item, index) => (
-                <QuickAccessCard
-                  key={index}
-                  image={item.image}
-                  title={item.title}
-                  description={item.description}
-                  onClick={() => console.log(`Navigating to ${item.title}...`)}
-                />
-              ))}
-            </div>
-          </section>
+          <HotNewsSection />
+          <TrendingStocksSection />
 
           <section className="dashboard-page__notifications">
             <h3 className="section-heading">Notifications</h3>
             <div className="notifications__list">
-              {notifications.map((notif, idx) => (
+              {notifications.map((n, idx) => (
                 <NotificationItem
                   key={idx}
-                  title={notif.title}
-                  description={notif.description}
-                  time={notif.time}
+                  title={n.title}
+                  description={n.description}
+                  time={n.time}
                 />
               ))}
             </div>

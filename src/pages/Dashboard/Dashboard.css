@@ -18,36 +18,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 }
 
 .dashboard-page__title {
     font-size: 1.8rem;
     font-weight: 700;
     color: var(--color-dark);
-    margin-bottom: 1rem;
-}
-
-.section-heading {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--color-dark);
-    margin-bottom: 1rem;
-}
-
-.dashboard-page__quick-access {
-    margin-bottom: 2rem;
-}
-
-.quick-access__grid {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
-
-.dashboard-page__notifications .notifications__list {
-    display: flex;
-    flex-direction: column;
+    margin: 0;
 }
 
 .metrics-row {
