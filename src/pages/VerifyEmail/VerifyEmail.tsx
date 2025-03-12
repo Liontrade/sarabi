@@ -26,7 +26,7 @@ const VerifyEmail: React.FC = () => {
         await auth.currentUser.reload();
         if (auth.currentUser.emailVerified) {
           clearInterval(intervalId);
-          navigate('/home');
+          navigate('/dashboard');
         }
       }
     }, 3000);
