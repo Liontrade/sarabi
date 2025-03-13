@@ -1,0 +1,11 @@
+.market-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.market-page__content {
+    width: 100%;
+    padding: 2rem;
+    margin: 0;
+}

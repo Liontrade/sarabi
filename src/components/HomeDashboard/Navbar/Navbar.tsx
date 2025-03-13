@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import logo from '../../../assets/logo_without_background.png';
 import { IoSettingsOutline, IoNotificationsOutline } from 'react-icons/io5';
@@ -32,16 +32,16 @@ const Navbar: React.FC = () => {
             <div className="navbar__right">
                 <ul className="navbar__links">
                     <li>
-                        <a href="#market">Market</a>
+                        <Link to="/market">Market</Link>
                     </li>
                     <li>
-                        <a href="#ai-predictions">AI Predictions</a>
+                        <Link to="/predictions">AI Predictions</Link>
                     </li>
                     <li>
-                        <a href="#my-investments">My Investments</a>
+                        <Link to="/investments">My Investments</Link>
                     </li>
                     <li>
-                        <a href="#market-news">Market News/Alerts</a>
+                        <Link to="/news">Market News/Alerts</Link>
                     </li>
                 </ul>
 

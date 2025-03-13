@@ -8,6 +8,7 @@ import Login from './pages/Login/Login';
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
 import VerifyEmail from './pages/VerifyEmail/VerifyEmail';
 import Dashboard from './pages/Dashboard/Dashboard';
+import MarketPage from './pages/MarketPage/MarketPage';
 import Spinner from './components/Spinner/Spinner';
 
 import './styles/global.css';
@@ -47,6 +48,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/verify-email" element={<VerifyEmail />} />
+
                 <Route
                     path="/dashboard"
                     element={
@@ -55,6 +57,15 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
+                <Route
+                    path="/market"
+                    element={
+                        <ProtectedRoute>
+                            <MarketPage />
+                        </ProtectedRoute>
+                    }
+                />
+
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         </Router>
