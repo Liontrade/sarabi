@@ -35,7 +35,7 @@ const MarketList: React.FC<MarketListProps> = ({ filter, searchQuery }) => {
                             return {
                                 ...company,
                                 price: data.price ? `$${data.price.toFixed(2)}` : '--',
-                                change: data.change ? `${(data.change * 100).toFixed(2)}%` : '--',
+                                change: data.change ? `${(data.change).toFixed(2)}%` : '--',
                             };
                         } catch (error) {
                             console.error(`Failed to fetch data for ${company.ticker}`, error);
