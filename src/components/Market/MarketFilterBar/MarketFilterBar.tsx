@@ -8,7 +8,12 @@ interface MarketFilterBarProps {
     onSearchChange: (query: string) => void;
 }
 
-const MarketFilterBar: React.FC<MarketFilterBarProps> = ({ activeFilter, onFilterChange, searchQuery, onSearchChange }) => {
+const MarketFilterBar: React.FC<MarketFilterBarProps> = ({
+    activeFilter,
+    onFilterChange,
+    searchQuery,
+    onSearchChange,
+}) => {
     return (
         <div className="market-filter-bar">
             <div className="market-filter-bar__tabs">
@@ -48,7 +53,7 @@ const MarketFilterBar: React.FC<MarketFilterBarProps> = ({ activeFilter, onFilte
                     type="text"
                     placeholder="Search for assets by name or ticker"
                     value={searchQuery}
-                    onChange={(e) => onSearchChange(e.target.value)}
+                    onChange={e => onSearchChange(e.target.value)}
                 />
             </div>
         </div>

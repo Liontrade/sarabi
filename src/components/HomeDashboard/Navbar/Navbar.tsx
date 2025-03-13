@@ -45,7 +45,6 @@ const Navbar: React.FC = () => {
                     </li>
                 </ul>
 
-
                 <div className="navbar__icons">
                     <div className="navbar__icon-btn" onClick={handleNotificationsClick}>
                         <IoNotificationsOutline className="navbar__icon" />

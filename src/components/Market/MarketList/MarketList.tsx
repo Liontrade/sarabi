@@ -82,9 +82,10 @@ const MarketList: React.FC<MarketListProps> = ({ filter, searchQuery }) => {
         },
     ];
 
-
     const filteredCompanies = companies.filter(company => {
-        const matchesSearch = company.name.toLowerCase().includes(searchQuery.toLowerCase()) || company.ticker.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesSearch =
+            company.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            company.ticker.toLowerCase().includes(searchQuery.toLowerCase());
         if (filter === 'gainers') return matchesSearch && company.change.startsWith('+');
         if (filter === 'losers') return matchesSearch && company.change.startsWith('-');
         return matchesSearch;
@@ -94,33 +95,33 @@ const MarketList: React.FC<MarketListProps> = ({ filter, searchQuery }) => {
         <div className="market-list">
             <table className="market-list__table">
                 <thead>
-                <tr>
-                    <th>Logo</th>
-                    <th>Name</th>
-                    <th>Ticker</th>
-                    <th>Price</th>
-                    <th>Change</th>
-                </tr>
+                    <tr>
+                        <th>Logo</th>
+                        <th>Name</th>
+                        <th>Ticker</th>
+                        <th>Price</th>
+                        <th>Change</th>
+                    </tr>
                 </thead>
                 <tbody>
-                {filteredCompanies.map((company, idx) => {
-                    const isNegative = company.change.startsWith('-');
-                    return (
-                        <tr key={idx}>
-                            <td className="company-name-cell">
-                                {company.logo && (
-                                    <img src={company.logo} alt={company.name} className="company-logo" />
-                                )}
-                            </td>
-                            <td>{company.name} </td>
-                            <td>{company.ticker}</td>
-                            <td>{company.price}</td>
-                            <td className={`change-cell ${isNegative ? 'change--down' : 'change--up'}`}>
-                                {company.change}
-                            </td>
-                        </tr>
-                    );
-                })}
+                    {filteredCompanies.map((company, idx) => {
+                        const isNegative = company.change.startsWith('-');
+                        return (
+                            <tr key={idx}>
+                                <td className="company-name-cell">
+                                    {company.logo && (
+                                        <img src={company.logo} alt={company.name} className="company-logo" />
+                                    )}
+                                </td>
+                                <td>{company.name} </td>
+                                <td>{company.ticker}</td>
+                                <td>{company.price}</td>
+                                <td className={`change-cell ${isNegative ? 'change--down' : 'change--up'}`}>
+                                    {company.change}
+                                </td>
+                            </tr>
+                        );
+                    })}
                 </tbody>
             </table>
         </div>
