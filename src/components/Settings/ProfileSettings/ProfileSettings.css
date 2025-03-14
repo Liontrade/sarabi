@@ -59,6 +59,17 @@
     padding: 0.5rem;
     border: 1px solid #ddd;
     border-radius: 4px;
+    transition: border-color 0.3s;
+}
+
+.input-error {
+    border-color: red !important;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
 }
 
 .profile-settings__save-btn {
