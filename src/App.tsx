@@ -12,6 +12,7 @@ import MarketPage from './pages/MarketPage/MarketPage';
 import Spinner from './components/Spinner/Spinner';
 
 import './styles/global.css';
+import SettingsPage from './pages/SettingsPage/SettingsPage';
 
 function App() {
     const { user, loading } = useAuth();
@@ -62,6 +63,14 @@ function App() {
                     element={
                         <ProtectedRoute>
                             <MarketPage />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/settings"
+                    element={
+                        <ProtectedRoute>
+                            <SettingsPage />
                         </ProtectedRoute>
                     }
                 />

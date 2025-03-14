@@ -1,0 +1,78 @@
+.profile-settings {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.profile-settings h2 {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.profile-settings p {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.profile-settings__pictures {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.profile-settings__picture {
+    border: 2px solid transparent;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.profile-settings__picture img {
+    display: block;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.profile-settings__picture:hover {
+    border-color: #ccc;
+}
+
+.profile-settings__picture.active {
+    border-color: #fca311;
+}
+
+.profile-settings__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.profile-settings__fields label {
+    font-weight: 600;
+    color: #333;
+}
+
+.profile-settings__fields input {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.profile-settings__save-btn {
+    align-self: flex-start;
+    background-color: #fca311;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.profile-settings__save-btn:hover {
+    background-color: #e68b06;
+}

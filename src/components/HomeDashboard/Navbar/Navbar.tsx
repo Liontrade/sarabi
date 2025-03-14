@@ -13,7 +13,8 @@ const Navbar: React.FC = () => {
     };
 
     const handleSettingsClick = () => {
-        console.log('Settings clicked');
+        console.log('SettingsPage clicked');
+        navigate('/settings');
     };
 
     const handleNotificationsClick = () => {
