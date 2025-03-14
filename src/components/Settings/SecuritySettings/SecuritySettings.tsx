@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import './SecuritySettings.css';
+import { auth } from '../../../firebaseConfig';
+import { EmailAuthProvider, reauthenticateWithCredential, updatePassword } from 'firebase/auth';
+import { toast } from 'react-toastify';
 
 interface LoginSession {
     id: string;
@@ -12,6 +15,10 @@ const SecuritySettings: React.FC = () => {
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
+
+    const [currentPasswordError, setCurrentPasswordError] = useState('');
+    const [newPasswordError, setNewPasswordError] = useState('');
+    const [confirmPasswordError, setConfirmPasswordError] = useState('');
 
     const [twoFactorEnabled, setTwoFactorEnabled] = useState(false);
 
@@ -30,12 +37,76 @@ const SecuritySettings: React.FC = () => {
         },
     ]);
 
-    const handleChangePassword = () => {
-        if (newPassword !== confirmNewPassword) {
-            alert('New passwords do not match!');
+    const validateCurrentPassword = (value: string) => {
+        if (!value.trim()) {
+            return 'Current password cannot be empty.';
+        }
+        return '';
+    };
+
+    const validateNewPassword = (value: string, currentVal: string) => {
+        if (!value.trim()) {
+            return 'New password cannot be empty.';
+        }
+        if (value.trim().length < 8) {
+            return 'New password must be at least 8 characters.';
+        }
+        if (value === currentVal) {
+            return 'New password must be different from current password.';
+        }
+        const regex = /^[A-Za-z0-9]+$/;
+        if (!regex.test(value)) {
+            return 'New password can only contain letters and numbers.';
+        }
+        return '';
+    };
+
+    const validateConfirmNewPassword = (newPass: string, confirmPass: string) => {
+        if (!confirmPass.trim()) {
+            return 'Please confirm your new password.';
+        }
+        if (newPass !== confirmPass) {
+            return 'New passwords do not match.';
+        }
+        return '';
+    };
+
+    const handleChangePassword = async () => {
+        const currErr = validateCurrentPassword(currentPassword);
+        const newErr = validateNewPassword(newPassword, currentPassword);
+        const confErr = validateConfirmNewPassword(newPassword, confirmNewPassword);
+
+        setCurrentPasswordError(currErr);
+        setNewPasswordError(newErr);
+        setConfirmPasswordError(confErr);
+
+        if (currErr || newErr || confErr) {
             return;
         }
-        console.log('Changing password:', { currentPassword, newPassword });
+
+        try {
+            if (!auth.currentUser || !auth.currentUser.email) {
+                toast.error('No authenticated user or missing email.');
+                return;
+            }
+            const credential = EmailAuthProvider.credential(auth.currentUser.email, currentPassword);
+            await reauthenticateWithCredential(auth.currentUser, credential);
+
+            await updatePassword(auth.currentUser, newPassword);
+
+            toast.success('Password updated successfully');
+
+            setCurrentPassword('');
+            setNewPassword('');
+            setConfirmNewPassword('');
+        } catch (error: unknown) {
+            console.error('Error updating password:', error);
+            if (error instanceof Error) {
+                toast.error(error.message);
+            } else {
+                toast.error('An unknown error occurred');
+            }
+        }
     };
 
     const handleToggle2FA = () => {
@@ -45,14 +116,11 @@ const SecuritySettings: React.FC = () => {
 
     const handleSignOutSession = (sessionId: string) => {
         console.log('Signing out session:', sessionId);
-        setLoginHistory(loginHistory.filter(s => s.id !== sessionId));
+        setLoginHistory(loginHistory.filter((s) => s.id !== sessionId));
     };
 
     const handleDeleteAccount = () => {
-        const confirmed = window.confirm('Are you sure you want to delete your account? This action cannot be undone.');
-        if (confirmed) {
-            console.log('Deleting account...');
-        }
+        console.log('Deleting account...');
     };
 
     return (
@@ -69,17 +137,21 @@ const SecuritySettings: React.FC = () => {
                         type="password"
                         placeholder="Enter current password"
                         value={currentPassword}
-                        onChange={e => setCurrentPassword(e.target.value)}
+                        onChange={(e) => setCurrentPassword(e.target.value)}
+                        className={currentPasswordError ? 'input-error' : ''}
                     />
+                    {currentPasswordError && <div className="error-message">{currentPasswordError}</div>}
 
                     <label htmlFor="newPassword">New Password</label>
                     <input
                         id="newPassword"
                         type="password"
-                        placeholder="Password must be at least 8 characters"
+                        placeholder="At least 8 characters, letters and numbers only"
                         value={newPassword}
-                        onChange={e => setNewPassword(e.target.value)}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        className={newPasswordError ? 'input-error' : ''}
                     />
+                    {newPasswordError && <div className="error-message">{newPasswordError}</div>}
 
                     <label htmlFor="confirmNewPassword">Confirm New Password</label>
                     <input
@@ -87,8 +159,10 @@ const SecuritySettings: React.FC = () => {
                         type="password"
                         placeholder="Re-enter your new password"
                         value={confirmNewPassword}
-                        onChange={e => setConfirmNewPassword(e.target.value)}
+                        onChange={(e) => setConfirmNewPassword(e.target.value)}
+                        className={confirmPasswordError ? 'input-error' : ''}
                     />
+                    {confirmPasswordError && <div className="error-message">{confirmPasswordError}</div>}
 
                     <button className="btn btn-primary" onClick={handleChangePassword}>
                         Change Password
@@ -100,7 +174,8 @@ const SecuritySettings: React.FC = () => {
                 <h3>Two-Factor Authentication (2FA)</h3>
                 <p>
                     Add an extra layer of security to your account. When 2FA is enabled, you’ll need to provide a second
-                    form of verification in addition to your password.
+                    form of
+                    verification in addition to your password.
                 </p>
                 <button className="btn btn-secondary" onClick={handleToggle2FA}>
                     {twoFactorEnabled ? 'Disable 2FA' : 'Enable 2FA'}
@@ -113,7 +188,7 @@ const SecuritySettings: React.FC = () => {
                     <p>No active sessions.</p>
                 ) : (
                     <ul className="session-list">
-                        {loginHistory.map(session => (
+                        {loginHistory.map((session) => (
                             <li key={session.id} className="session-item">
                                 <div>
                                     <div className="session-date">{session.date}</div>
@@ -134,7 +209,8 @@ const SecuritySettings: React.FC = () => {
                 <h3>Account Deletion</h3>
                 <p>
                     If you delete your account, you won’t be able to recover it. You will lose access to all data,
-                    including your portfolio and personal settings.
+                    including your
+                    portfolio and personal settings.
                 </p>
                 <button className="btn btn-delete" onClick={handleDeleteAccount}>
                     Delete Account

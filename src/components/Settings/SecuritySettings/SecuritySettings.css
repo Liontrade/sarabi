@@ -6,6 +6,7 @@
 
 .security-settings h2 {
     margin-bottom: 0.5rem;
+    font-size: 1.5rem;
 }
 
 .security-settings p {
@@ -42,15 +43,24 @@
     padding: 0.5rem;
     border: 1px solid #ddd;
     border-radius: 4px;
+    transition: border-color 0.3s;
+}
+
+.input-error {
+    border-color: red !important;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
 }
 
 .btn {
     cursor: pointer;
     font-weight: 600;
     border-radius: 4px;
-    transition:
-        background-color 0.3s,
-        color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
     width: 140px;
     text-align: center;
     padding: 0.5rem;
