@@ -20,14 +20,20 @@ const MarketList: React.FC<MarketListProps> = ({ filter, searchQuery }) => {
         { logo: 'https://via.placeholder.com/24', name: 'Tesla Inc.', ticker: 'TSLA', price: '--', change: '--' },
         { logo: 'https://via.placeholder.com/24', name: 'Amazon.com, Inc.', ticker: 'AMZN', price: '--', change: '--' },
         { logo: 'https://via.placeholder.com/24', name: 'Alphabet Inc.', ticker: 'GOOGL', price: '--', change: '--' },
-        { logo: 'https://via.placeholder.com/24', name: 'Microsoft Corporation', ticker: 'MSFT', price: '--', change: '--' },
+        {
+            logo: 'https://via.placeholder.com/24',
+            name: 'Microsoft Corporation',
+            ticker: 'MSFT',
+            price: '--',
+            change: '--',
+        },
     ]);
 
     useEffect(() => {
         const fetchStockData = async () => {
             try {
                 const updatedCompanies = await Promise.all(
-                    companies.map(async (company) => {
+                    companies.map(async company => {
                         try {
                             const response = await fetch(`http://localhost:5000/api/stocks/${company.ticker}`);
                             const data = await response.json();
@@ -35,13 +41,13 @@ const MarketList: React.FC<MarketListProps> = ({ filter, searchQuery }) => {
                             return {
                                 ...company,
                                 price: data.price ? `$${data.price.toFixed(2)}` : '--',
-                                change: data.change ? `${(data.change).toFixed(2)}%` : '--',
+                                change: data.change ? `${data.change.toFixed(2)}%` : '--',
                             };
                         } catch (error) {
                             console.error(`Failed to fetch data for ${company.ticker}`, error);
                             return company;
                         }
-                    })
+                    }),
                 );
 
                 setCompanies(updatedCompanies);
@@ -51,7 +57,7 @@ const MarketList: React.FC<MarketListProps> = ({ filter, searchQuery }) => {
         };
 
         fetchStockData();
-    }, []); 
+    }, []);
 
     const filteredCompanies = companies.filter(company => {
         const matchesSearch =
