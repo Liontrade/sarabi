@@ -4,10 +4,12 @@ import InvestmentPreferencesSettings from '../../components/Settings/InvestmentP
 import NotificationSettings from '../../components/Settings/NotificationSettings/NotificationSettings';
 import SecuritySettings from '../../components/Settings/SecuritySettings/SecuritySettings';
 import InterfaceSettings from '../../components/Settings/InterfaceSettings/InterfaceSettings';
-import './SettingsPage.css';
+import LegalHelpSettings from '../../components/Settings/LegalHelpSettings/LegalHelpSettings';
+
 import Footer from '../../components/HomeDashboard/Footer/Footer';
 import Navbar from '../../components/HomeDashboard/Navbar/Navbar';
-import LegalHelpSettings from '../../components/Settings/LegalHelpSettings/LegalHelpSettings';
+
+import './SettingsPage.css';
 
 const SettingsPage: React.FC = () => {
     type TabType = 'profile' | 'investment' | 'notification' | 'security' | 'interface' | 'legal';
@@ -16,6 +18,7 @@ const SettingsPage: React.FC = () => {
     return (
         <div className="settings-page">
             <Navbar />
+
             <div className="settings-page__container">
                 <nav className="settings-page__sidebar">
                     <ul>
@@ -47,7 +50,7 @@ const SettingsPage: React.FC = () => {
                             Interface
                         </li>
                         <li className={activeTab === 'legal' ? 'active' : ''} onClick={() => setActiveTab('legal')}>
-                            Legal & Help
+                            Legal &amp; Help
                         </li>
                     </ul>
                 </nav>
@@ -61,6 +64,7 @@ const SettingsPage: React.FC = () => {
                     {activeTab === 'legal' && <LegalHelpSettings />}
                 </div>
             </div>
+
             <Footer />
         </div>
     );
