@@ -14,6 +14,9 @@ import Spinner from './components/Spinner/Spinner';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './styles/global.css';
+import TwoFactorPrompt from './pages/TwoFactorPage/TwoFactorPromptPage/TwoFactorPromptPage';
+import TwoFactorSetup from './pages/TwoFactorPage/TwoFactorSetupPage/TwoFactorSetupPage';
+
 
 function App() {
     const { user, loading } = useAuth();
@@ -82,6 +85,22 @@ function App() {
                     element={
                         <ProtectedRoute>
                             <SettingsPage />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/twofactor/prompt"
+                    element={
+                        <ProtectedRoute>
+                            <TwoFactorPrompt />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/twofactor/setup"
+                    element={
+                        <ProtectedRoute>
+                            <TwoFactorSetup />
                         </ProtectedRoute>
                     }
                 />

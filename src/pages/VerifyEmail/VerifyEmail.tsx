@@ -27,7 +27,7 @@ const VerifyEmail: React.FC = () => {
                 await auth.currentUser.reload();
                 if (auth.currentUser.emailVerified) {
                     clearInterval(intervalId);
-                    navigate('/dashboard');
+                    navigate('/twofactor/prompt');
                 }
             }
         }, 3000);
