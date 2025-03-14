@@ -69,8 +69,6 @@ const SignUp: React.FC = () => {
         }
     };
 
-
-
     return (
         <div className="signup-page">
             <MinimalNavbar variant="login" />

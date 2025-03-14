@@ -15,7 +15,7 @@ const Login: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setError(null); 
+        setError(null);
         console.log('Attempting to log in with email:', email);
         try {
             setLoading(true);
@@ -24,7 +24,7 @@ const Login: React.FC = () => {
             navigate('/dashboard');
         } catch (error: unknown) {
             console.error('Error logging in:', error);
-            setError('Login failed: Wrong email or password'); 
+            setError('Login failed: Wrong email or password');
         } finally {
             setLoading(false);
         }
@@ -53,9 +53,7 @@ const Login: React.FC = () => {
 
             <div className="login-page__content">
                 <h1>Sign in to LionTrade</h1>
-                
                 {error && <p className="login-error">{error}</p>} {}
-
                 <form className="login-form" onSubmit={handleSubmit}>
                     <label htmlFor="email">Email</label>
                     <input
