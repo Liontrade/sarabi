@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './SecuritySettings.css';
 import { auth } from '../../../firebaseConfig';
-import { EmailAuthProvider, reauthenticateWithCredential, updatePassword } from 'firebase/auth';
+import {
+    EmailAuthProvider,
+    reauthenticateWithCredential,
+    updatePassword,
+    deleteUser,
+} from 'firebase/auth';
 import { toast } from 'react-toastify';
+import DeleteAccountModal from '../DeleteAccountModal/DeleteAccountModal';
 
 interface LoginSession {
     id: string;
@@ -12,6 +19,7 @@ interface LoginSession {
 }
 
 const SecuritySettings: React.FC = () => {
+    const navigate = useNavigate();
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
@@ -36,6 +44,8 @@ const SecuritySettings: React.FC = () => {
             location: 'San Francisco, CA',
         },
     ]);
+
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
 
     const validateCurrentPassword = (value: string) => {
         if (!value.trim()) {
@@ -91,11 +101,8 @@ const SecuritySettings: React.FC = () => {
             }
             const credential = EmailAuthProvider.credential(auth.currentUser.email, currentPassword);
             await reauthenticateWithCredential(auth.currentUser, credential);
-
             await updatePassword(auth.currentUser, newPassword);
-
             toast.success('Password updated successfully');
-
             setCurrentPassword('');
             setNewPassword('');
             setConfirmNewPassword('');
@@ -119,8 +126,32 @@ const SecuritySettings: React.FC = () => {
         setLoginHistory(loginHistory.filter((s) => s.id !== sessionId));
     };
 
-    const handleDeleteAccount = () => {
-        console.log('Deleting account...');
+    const openDeleteModal = () => {
+        setShowDeleteModal(true);
+    };
+
+    const handleDeleteAccount = async (passwordForDeletion: string) => {
+        try {
+            if (!auth.currentUser || !auth.currentUser.email) {
+                toast.error('No authenticated user or missing email.');
+                return;
+            }
+            const credential = EmailAuthProvider.credential(
+                auth.currentUser.email,
+                passwordForDeletion,
+            );
+            await reauthenticateWithCredential(auth.currentUser, credential);
+            await deleteUser(auth.currentUser);
+            toast.success('Account deleted successfully');
+            navigate('/');
+        } catch (error: unknown) {
+            console.error('Error deleting account:', error);
+            if (error instanceof Error) {
+                toast.error(error.message);
+            } else {
+                toast.error('An unknown error occurred');
+            }
+        }
     };
 
     return (
@@ -212,7 +243,7 @@ const SecuritySettings: React.FC = () => {
                     including your
                     portfolio and personal settings.
                 </p>
-                <button className="btn btn-delete" onClick={handleDeleteAccount}>
+                <button className="btn btn-delete" onClick={openDeleteModal}>
                     Delete Account
                 </button>
             </div>
@@ -225,6 +256,16 @@ const SecuritySettings: React.FC = () => {
                     <li>Always enable 2FA on your critical accounts.</li>
                 </ul>
             </div>
+
+            {showDeleteModal && (
+                <DeleteAccountModal
+                    onConfirm={(password) => {
+                        setShowDeleteModal(false);
+                        handleDeleteAccount(password);
+                    }}
+                    onCancel={() => setShowDeleteModal(false)}
+                />
+            )}
         </div>
     );
 };
