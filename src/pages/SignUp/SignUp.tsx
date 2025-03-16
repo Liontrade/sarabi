@@ -41,16 +41,23 @@ const SignUp: React.FC = () => {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             await sendEmailVerification(userCredential.user);
             navigate('/verify-email');
-        } catch (error: any) {
-            if (error.code === 'auth/email-already-in-use') {
-                setError('This email is already registered. Please log in instead.');
-            } else if (error.code === 'auth/invalid-email') {
-                setError('Invalid email format.');
-            } else {
-                setError('An error occurred. Please try again.');
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                if ('code' in error && typeof error.code === 'string') {
+                    if (error.code === 'auth/email-already-in-use') {
+                        setError('This email is already registered. Please log in instead.');
+                    } else if (error.code === 'auth/invalid-email') {
+                        setError('Invalid email format.');
+                    } else {
+                        setError('An error occurred. Please try again.');
+                    }
+                } else {
+                    setError('An unexpected error occurred.');
+                }
+                console.error('Error creating account:', error);
             }
-            console.error('Error creating account:', error);
-        } finally {
+        }
+         finally {
             setLoading(false);
         }
     };
