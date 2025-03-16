@@ -56,8 +56,7 @@ const SignUp: React.FC = () => {
                 }
                 console.error('Error creating account:', error);
             }
-        }
-         finally {
+        } finally {
             setLoading(false);
         }
     };
