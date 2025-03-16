@@ -2,12 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SecuritySettings.css';
 import { auth } from '../../../firebaseConfig';
-import {
-    EmailAuthProvider,
-    reauthenticateWithCredential,
-    updatePassword,
-    deleteUser,
-} from 'firebase/auth';
+import { EmailAuthProvider, reauthenticateWithCredential, updatePassword, deleteUser } from 'firebase/auth';
 import { toast } from 'react-toastify';
 import DeleteAccountModal from '../DeleteAccountModal/DeleteAccountModal';
 
@@ -123,7 +118,7 @@ const SecuritySettings: React.FC = () => {
 
     const handleSignOutSession = (sessionId: string) => {
         console.log('Signing out session:', sessionId);
-        setLoginHistory(loginHistory.filter((s) => s.id !== sessionId));
+        setLoginHistory(loginHistory.filter(s => s.id !== sessionId));
     };
 
     const openDeleteModal = () => {
@@ -136,10 +131,7 @@ const SecuritySettings: React.FC = () => {
                 toast.error('No authenticated user or missing email.');
                 return;
             }
-            const credential = EmailAuthProvider.credential(
-                auth.currentUser.email,
-                passwordForDeletion,
-            );
+            const credential = EmailAuthProvider.credential(auth.currentUser.email, passwordForDeletion);
             await reauthenticateWithCredential(auth.currentUser, credential);
             await deleteUser(auth.currentUser);
             toast.success('Account deleted successfully');
@@ -168,7 +160,7 @@ const SecuritySettings: React.FC = () => {
                         type="password"
                         placeholder="Enter current password"
                         value={currentPassword}
-                        onChange={(e) => setCurrentPassword(e.target.value)}
+                        onChange={e => setCurrentPassword(e.target.value)}
                         className={currentPasswordError ? 'input-error' : ''}
                     />
                     {currentPasswordError && <div className="error-message">{currentPasswordError}</div>}
@@ -179,7 +171,7 @@ const SecuritySettings: React.FC = () => {
                         type="password"
                         placeholder="At least 8 characters, letters and numbers only"
                         value={newPassword}
-                        onChange={(e) => setNewPassword(e.target.value)}
+                        onChange={e => setNewPassword(e.target.value)}
                         className={newPasswordError ? 'input-error' : ''}
                     />
                     {newPasswordError && <div className="error-message">{newPasswordError}</div>}
@@ -190,7 +182,7 @@ const SecuritySettings: React.FC = () => {
                         type="password"
                         placeholder="Re-enter your new password"
                         value={confirmNewPassword}
-                        onChange={(e) => setConfirmNewPassword(e.target.value)}
+                        onChange={e => setConfirmNewPassword(e.target.value)}
                         className={confirmPasswordError ? 'input-error' : ''}
                     />
                     {confirmPasswordError && <div className="error-message">{confirmPasswordError}</div>}
@@ -205,8 +197,7 @@ const SecuritySettings: React.FC = () => {
                 <h3>Two-Factor Authentication (2FA)</h3>
                 <p>
                     Add an extra layer of security to your account. When 2FA is enabled, you’ll need to provide a second
-                    form of
-                    verification in addition to your password.
+                    form of verification in addition to your password.
                 </p>
                 <button className="btn btn-secondary" onClick={handleToggle2FA}>
                     {twoFactorEnabled ? 'Disable 2FA' : 'Enable 2FA'}
@@ -219,7 +210,7 @@ const SecuritySettings: React.FC = () => {
                     <p>No active sessions.</p>
                 ) : (
                     <ul className="session-list">
-                        {loginHistory.map((session) => (
+                        {loginHistory.map(session => (
                             <li key={session.id} className="session-item">
                                 <div>
                                     <div className="session-date">{session.date}</div>
@@ -240,8 +231,7 @@ const SecuritySettings: React.FC = () => {
                 <h3>Account Deletion</h3>
                 <p>
                     If you delete your account, you won’t be able to recover it. You will lose access to all data,
-                    including your
-                    portfolio and personal settings.
+                    including your portfolio and personal settings.
                 </p>
                 <button className="btn btn-delete" onClick={openDeleteModal}>
                     Delete Account
@@ -259,7 +249,7 @@ const SecuritySettings: React.FC = () => {
 
             {showDeleteModal && (
                 <DeleteAccountModal
-                    onConfirm={(password) => {
+                    onConfirm={password => {
                         setShowDeleteModal(false);
                         handleDeleteAccount(password);
                     }}

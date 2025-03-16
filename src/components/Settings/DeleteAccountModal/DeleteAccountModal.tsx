@@ -17,15 +17,13 @@ const DeleteAccountModal: React.FC<DeleteAccountModalProps> = ({ onConfirm, onCa
         <div className="modal-overlay">
             <div className="modal-content">
                 <h3>Delete Account</h3>
-                <p>
-                    Are you sure you want to delete your account? This action cannot be undone.
-                </p>
+                <p>Are you sure you want to delete your account? This action cannot be undone.</p>
                 <label htmlFor="delete-password">Enter your current password to confirm:</label>
                 <input
                     id="delete-password"
                     type="password"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={e => setPassword(e.target.value)}
                 />
                 <div className="modal-buttons">
                     <button className="btn btn-secondary" onClick={onCancel}>

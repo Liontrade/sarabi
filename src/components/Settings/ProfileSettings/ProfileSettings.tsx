@@ -56,11 +56,7 @@ const ProfileSettings: React.FC = () => {
                 });
 
                 const userDocRef = doc(db, 'users', auth.currentUser.uid);
-                await setDoc(
-                    userDocRef,
-                    { name: name, photoURL: selectedPicture },
-                    { merge: true },
-                );
+                await setDoc(userDocRef, { name: name, photoURL: selectedPicture }, { merge: true });
                 console.log('Profile updated successfully');
                 toast.success('Profile updated successfully');
             }
@@ -83,7 +79,7 @@ const ProfileSettings: React.FC = () => {
             </p>
 
             <div className="profile-settings__pictures">
-                {profilePictures.map((pic) => (
+                {profilePictures.map(pic => (
                     <div
                         key={pic}
                         className={`profile-settings__picture ${selectedPicture === pic ? 'active' : ''}`}
@@ -100,7 +96,7 @@ const ProfileSettings: React.FC = () => {
                     id="profileName"
                     type="text"
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={e => setName(e.target.value)}
                     onBlur={() => {
                         const errorMsg = validateName(name);
                         setNameError(errorMsg ? errorMsg : '');
