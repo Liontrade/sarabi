@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
 import LandingPage from '../../../pages/LandingPage/LandingPage';
 import {
     BRAND_NAME,
@@ -73,5 +74,48 @@ describe('LandingPage integration', () => {
             name: FOOTER_COLUMNS[0].title,
         });
         expect(firstFooterTitle).toBeInTheDocument();
+    });
+
+    test('renders sections in the correct order and includes Footer at the end', () => {
+        const { container } = render(
+            <MemoryRouter>
+                <LandingPage />
+            </MemoryRouter>
+        );
+
+        const sections = container.querySelectorAll('section');
+        expect(sections).toHaveLength(5);
+
+        const classList = Array.from(sections).map((sec) => sec.className);
+        expect(classList).toEqual([
+            'hero',
+            'key-benefits',
+            'pricing-plans',
+            'how-it-works',
+            'join-cta',
+        ]);
+
+        const footer = container.querySelector('footer.footer');
+        expect(footer).toBeInTheDocument();
+    });
+
+    test('toggles navbar menu open and close within LandingPage', async () => {
+        const user = userEvent.setup();
+        const { container } = render(
+            <MemoryRouter>
+                <LandingPage />
+            </MemoryRouter>
+        );
+        const toggle = container.querySelector('.navbar__toggle');
+        const linksList = container.querySelector('.navbar__links');
+
+        expect(toggle).toBeInTheDocument();
+        expect(linksList).not.toHaveClass('navbar__links--active');
+
+        await user.click(toggle!);
+        expect(linksList).toHaveClass('navbar__links--active');
+
+        await user.click(toggle!);
+        expect(linksList).not.toHaveClass('navbar__links--active');
     });
 });
