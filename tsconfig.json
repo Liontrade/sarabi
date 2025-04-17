@@ -1,16 +1,35 @@
 {
-    "compilerOptions": {
-        "target": "es6",
-        "module": "commonjs",
-        "strict": true,
-        "esModuleInterop": true,
-        "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true,
-        "noEmit": true,
-        "declaration": false,
-        "outDir": "./dist"
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "declaration": false,
+    "jsx": "react-jsx",
+    "outDir": "./dist",
+    "types": [
+      "jest",
+      "node",
+      "@testing-library/jest-dom"
+    ]
+  },
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
     },
-    "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
-    "include": [],
-    "exclude": ["dist"]
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ],
+  "include": [
+    "src",
+    "src/__tests__/setupTests.ts",
+    "src/**/*.tsx"
+  ],
+  "exclude": [
+    "dist"
+  ]
 }
