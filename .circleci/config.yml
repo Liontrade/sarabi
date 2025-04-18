@@ -1,0 +1,51 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4
+
+jobs:
+  test_and_build:
+    description: |
+      1. Install deps (czysty, deterministyczny npm ci)
+      2. Check code formatting (Prettier)
+      3. Lint code (ESLint)
+      4. Run tests
+      5. Build production bundle
+    executor:
+      name: node/default
+      tag: '18.20.8'
+    steps:
+      - checkout
+
+      - run:
+          name: Install dependencies
+          command: npm ci --legacy-peer-deps
+
+      - run:
+          name: Check formatting with Prettier
+          command: npm run format-check
+
+      - run:
+          name: Lint with ESLint
+          command: npm run lint
+
+      - run:
+          name: Run tests
+          command: npm test -- --watchAll=false --ci
+
+      - run:
+          name: Build production bundle
+          command: npm run build
+
+workflows:
+  version: 2
+  pr-check:
+    jobs:
+      - test_and_build:
+          filters:
+            branches:
+              ignore:
+                - main
+            tags:
+              ignore:
+                - /.*/
