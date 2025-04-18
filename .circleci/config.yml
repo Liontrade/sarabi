@@ -46,6 +46,8 @@ workflows:
       - test_and_build:
           filters:
             branches:
-              ignore: /.*/
+              ignore:
+                - main
             tags:
-              ignore: /.*/
+              ignore:
+                - /.*/
