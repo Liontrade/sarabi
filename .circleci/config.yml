@@ -10,16 +10,14 @@ jobs:
       name: node/default
     steps:
       - checkout
-      - node/with-cache:
-          steps:
-            - run:
-                name: Install dependencies
-                command: |
-                  if [ -f yarn.lock ]; then
-                    yarn install --frozen-lockfile
-                  else
-                    npm ci
-                  fi
+      - run:
+          name: Install dependencies
+          command: |
+            if [ -f yarn.lock ]; then
+              yarn install --frozen-lockfile
+            else
+              npm ci
+            fi
       - run:
           name: Run tests
           command: |
