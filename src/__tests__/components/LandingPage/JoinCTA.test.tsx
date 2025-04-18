@@ -1,4 +1,5 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import { screen } from '@testing-library/dom';
 import JoinCTA from '../../../components/LandingPage/JoinCTA/JoinCTA';
 import {
     JOIN_CTA_TITLE,
