@@ -8,6 +8,7 @@ module.exports = {
     },
     setupFilesAfterEnv: [
         '<rootDir>/src/__tests__/setupTests.ts',
+        '@testing-library/jest-dom/extend-expect',
     ],
     testMatch: [
         '<rootDir>/src/**/*.(test|spec).ts?(x)',
@@ -18,4 +19,5 @@ module.exports = {
         // Obrazki → prosty mock
         '^.+\\.(png|jpe?g|gif|svg)$': '<rootDir>/src/__mocks__/fileMock.js',
     },
+    moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 };
