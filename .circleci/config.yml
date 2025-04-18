@@ -14,6 +14,8 @@ jobs:
       - run:
           name: Install NPM packages
           command: |
+            nvm install 18
+            nvm use 18
             npm install
 
       - run:
