@@ -16,10 +16,7 @@ const Navbar: React.FC = () => {
                 <h1 className="navbar__brand">{BRAND_NAME}</h1>
             </div>
 
-            <button
-                className="navbar__toggle"
-                onClick={() => setMenuOpen(o => !o)}
-            >
+            <button className="navbar__toggle" onClick={() => setMenuOpen(open => !open)}>
                 {menuOpen ? <FiX /> : <FiMenu />}
             </button>
 
@@ -33,11 +30,7 @@ const Navbar: React.FC = () => {
 
             <div className="navbar__actions">
                 {ACTION_BUTTONS.map((btn, i) => (
-                    <Link
-                        key={i}
-                        to={btn.to}
-                        className={`btn btn--${btn.variant}`}
-                    >
+                    <Link key={i} to={btn.to} className={`btn btn--${btn.variant}`}>
                         {btn.text}
                     </Link>
                 ))}

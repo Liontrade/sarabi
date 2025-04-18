@@ -2,11 +2,10 @@
 export const HOME_URL     = '/';
 export const LOGIN_URL    = '/login';
 export const SIGNUP_URL   = '/signup';
-export const WHY_HREF     = '#why-liontrade';
-export const INSIGHTS_HREF = '#live-market-insights';
-export const AI_HREF       = '#ai-predictions';
-export const PRICING_HREF  = '#pricing-plans';
-export const LEARN_HREF    = '#learn-grow';
+export const KEY_BENEFITS_HREF   = '#key-benefits';
+export const PRICING_HREF        = '#pricing-plans';
+export const HOW_IT_WORKS_HREF   = '#how-it-works';
+export const JOIN_CTA_HREF       = '#join-cta';
 
 /// FOOTER LANDING PAGE
 export const ABOUT_US_URL      = '#about-us';

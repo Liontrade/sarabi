@@ -24,7 +24,7 @@ const texts = [
 ];
 
 const HowItWorks: React.FC = () => (
-    <section className="how-it-works">
+    <section id="how-it-works" className="how-it-works">
         <h2 className="section-title">{HOW_IT_WORKS_SECTION_TITLE}</h2>
         <div className="hiw__grid">
             {titles.map((title, i) => {

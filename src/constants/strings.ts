@@ -2,11 +2,10 @@
 export const BRAND_NAME = 'LionTrade';
 export const LOGIN_TEXT = 'Login';
 export const SIGNUP_TEXT = 'Sign Up';
-export const WHY_LABEL = 'Why LionTrade?';
-export const INSIGHTS_LABEL = 'Live Market Insights';
-export const AI_LABEL = 'AI Predictions';
-export const PRICING_LABEL = 'Pricing & Plans';
-export const LEARN_LABEL = 'Learn & Grow';
+export const KEY_BENEFITS_LABEL   = 'Key Benefits';
+export const PRICING_LABEL        = 'Pricing & Plans';
+export const HOW_IT_WORKS_LABEL   = 'How It Works';
+export const JOIN_CTA_LABEL       = 'Join Now';
 
 /// FOOTER LANDING PAGE
 export const ABOUT_US = 'About Us';

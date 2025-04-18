@@ -1,20 +1,27 @@
 import {
-    WHY_LABEL, INSIGHTS_LABEL,
-    AI_LABEL, PRICING_LABEL, LEARN_LABEL,
-    LOGIN_TEXT, SIGNUP_TEXT
+    KEY_BENEFITS_LABEL,
+    PRICING_LABEL,
+    HOW_IT_WORKS_LABEL,
+    JOIN_CTA_LABEL,
+    LOGIN_TEXT,
+    SIGNUP_TEXT,
 } from '../strings';
+
 import {
-    WHY_HREF, INSIGHTS_HREF,
-    AI_HREF, PRICING_HREF, LEARN_HREF,
-    LOGIN_URL, SIGNUP_URL
+    KEY_BENEFITS_HREF,
+    PRICING_HREF,
+    HOW_IT_WORKS_HREF,
+    JOIN_CTA_HREF,
+    LOGIN_URL,
+    SIGNUP_URL,
 } from '../urls';
 
+// Sekcje “anchor” w głównej nawigacji
 export const NAV_LINKS = [
-    { text: WHY_LABEL,      href: WHY_HREF },
-    { text: INSIGHTS_LABEL, href: INSIGHTS_HREF },
-    { text: AI_LABEL,       href: AI_HREF },
-    { text: PRICING_LABEL,  href: PRICING_HREF },
-    { text: LEARN_LABEL,    href: LEARN_HREF },
+    { text: KEY_BENEFITS_LABEL, href: KEY_BENEFITS_HREF },
+    { text: PRICING_LABEL,      href: PRICING_HREF },
+    { text: HOW_IT_WORKS_LABEL, href: HOW_IT_WORKS_HREF },
+    { text: JOIN_CTA_LABEL,     href: JOIN_CTA_HREF },
 ];
 
 export const ACTION_BUTTONS = [

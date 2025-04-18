@@ -31,7 +31,7 @@ const titles = [
 ];
 
 const KeyBenefits: React.FC = () => (
-    <section className="key-benefits">
+    <section id="key-benefits" className="key-benefits">
         <h2 className="section-title">{KEY_BENEFITS_SECTION_TITLE}</h2>
         <p className="section-subtitle">{KEY_BENEFITS_SECTION_SUBTITLE}</p>
         <div className="benefits__grid">
