@@ -23,7 +23,7 @@ jobs:
 
       - run:
           name: Check formatting with Prettier
-          command: npm run format:check
+          command: npm run format-check
 
       - run:
           name: Lint with ESLint
