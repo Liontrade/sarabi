@@ -5,15 +5,17 @@ orbs:
 
 jobs:
   test_and_build:
-    description: Install dependencies, run tests, then build the React app
+    description: Install deps, run tests, then build the React app
     executor:
       name: node/default
     steps:
       - checkout
 
-      - run:
-          name: Install dependencies
-          command: npm ci --legacy-peer-deps
+      - node/with-cache:
+          steps:
+            - run:
+                name: Install dependencies
+                command: npm install --legacy-peer-deps
 
       - run:
           name: Run tests
