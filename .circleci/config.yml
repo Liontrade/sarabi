@@ -49,5 +49,5 @@ workflows:
           filters:
             branches:
               ignore: /.*/
-            pull-requests:
-              only: /.*/
+            tags:
+              ignore: /.*/
