@@ -10,30 +10,21 @@ jobs:
       name: node/default
     steps:
       - checkout
-      - run:
-          name: Install dependencies
-          command: |
-            if [ -f yarn.lock ]; then
-              yarn install --frozen-lockfile
-            else
-              npm ci
-            fi
+
+      - node/with-cache:
+          steps:
+            - run:
+                name: Install dependencies
+                command: yarn install --frozen-lockfile
+
       - run:
           name: Run tests
-          command: |
-            if [ -f yarn.lock ]; then
-              yarn test -- --watchAll=false --ci
-            else
-              npm test -- --watchAll=false --ci
-            fi
+          command: yarn test -- --ci --watchAll=false
+
       - run:
           name: Build production bundle
-          command: |
-            if [ -f yarn.lock ]; then
-              yarn build
-            else
-              npm run build
-            fi
+          command: yarn build
+
       - persist_to_workspace:
           root: .
           paths:
