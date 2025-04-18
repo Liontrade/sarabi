@@ -13,8 +13,6 @@ jobs:
 
       - node/install-packages:
           pkg-manager: npm
-          cache-key: npm-cache-{{ checksum "package-lock.json" }}
-          install-command: npm install --legacy-peer-deps
 
       - run:
           name: Run tests
@@ -41,3 +39,4 @@ workflows:
             tags:
               ignore:
                 - /.*/
+                  
