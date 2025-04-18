@@ -8,7 +8,6 @@ module.exports = {
     },
     setupFilesAfterEnv: [
         '<rootDir>/src/__tests__/setupTests.ts',
-        '@testing-library/jest-dom/extend-expect',
     ],
     testMatch: [
         '<rootDir>/src/**/*.(test|spec).ts?(x)',
