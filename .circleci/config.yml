@@ -11,11 +11,10 @@ jobs:
     steps:
       - checkout
 
-      - node/with-cache:
-          steps:
-            - run:
-                name: Install dependencies
-                command: npm install --legacy-peer-deps
+      - node/install-packages:
+          pkg-manager: npm
+          cache-key: npm-cache-{{ checksum "package-lock.json" }}
+          install-command: npm install --legacy-peer-deps
 
       - run:
           name: Run tests
