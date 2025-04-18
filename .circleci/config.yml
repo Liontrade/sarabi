@@ -24,11 +24,6 @@ jobs:
           name: Build production bundle
           command: npm run build
 
-      - persist_to_workspace:
-          root: .
-          paths:
-            - build
-
 workflows:
   version: 2
   pr-check:
