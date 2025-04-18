@@ -5,26 +5,22 @@ orbs:
 
 jobs:
   test_and_build:
-    description: Install deps, run tests, then build the React app
+    description: Install deps, run tests & build the React app
     executor:
       name: node/default
+      tag: '18.20.8'
     steps:
       - checkout
 
-      - run:
-          name: Install NPM packages
-          command: |
-            echo "Setting up NVM"
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-            nvm install 18
-            nvm use 18
-            npm install
+      - node/with-cache:
+          steps:
+            - run:
+                name: Install dependencies
+                command: npm install --legacy-peer-deps
 
       - run:
           name: Run tests
-          command: npm test -- --coverage
+          command: npm test -- --watchAll=false --ci
 
       - run:
           name: Build production bundle
