@@ -11,19 +11,17 @@ jobs:
     steps:
       - checkout
 
-      - node/with-cache:
-          steps:
-            - run:
-                name: Install dependencies
-                command: yarn install --frozen-lockfile
+      - run:
+          name: Install dependencies
+          command: npm ci
 
       - run:
           name: Run tests
-          command: yarn test -- --ci --watchAll=false
+          command: npm test -- --watchAll=false --ci
 
       - run:
           name: Build production bundle
-          command: yarn build
+          command: npm run build
 
       - persist_to_workspace:
           root: .
