@@ -12,11 +12,18 @@ jobs:
     steps:
       - checkout
 
-      - node/with-cache:
-          steps:
-            - run:
-                name: Install dependencies
-                command: npm install --legacy-peer-deps
+      - restore_cache:
+          keys:
+            - v1-deps-{{ checksum "package-lock.json" }}
+
+      - run:
+          name: Install dependencies
+          command: npm install --legacy-peer-deps
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-deps-{{ checksum "package-lock.json" }}
 
       - run:
           name: Run tests
@@ -43,3 +50,4 @@ workflows:
             tags:
               ignore:
                 - /.*/
+                
