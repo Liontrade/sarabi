@@ -5,7 +5,12 @@ orbs:
 
 jobs:
   test_and_build:
-    description: Install deps, run tests & build the React app
+    description: |
+      1. Install deps (czysty, deterministyczny npm ci)
+      2. Check code formatting (Prettier)
+      3. Lint code (ESLint)
+      4. Run tests
+      5. Build production bundle
     executor:
       name: node/default
       tag: '18.20.8'
@@ -14,7 +19,15 @@ jobs:
 
       - run:
           name: Install dependencies
-          command: npm install --legacy-peer-deps
+          command: npm ci --legacy-peer-deps
+
+      - run:
+          name: Check formatting with Prettier
+          command: npm run format:check
+
+      - run:
+          name: Lint with ESLint
+          command: npm run lint
 
       - run:
           name: Run tests
