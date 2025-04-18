@@ -26,16 +26,8 @@ describe('HowItWorks component', () => {
         const cards = container.getElementsByClassName('hiw__card');
         expect(cards.length).toBe(3);
 
-        const titles = [
-            HOW_IT_WORKS_STEP1_TITLE,
-            HOW_IT_WORKS_STEP2_TITLE,
-            HOW_IT_WORKS_STEP3_TITLE,
-        ];
-        const texts = [
-            HOW_IT_WORKS_STEP1_TEXT,
-            HOW_IT_WORKS_STEP2_TEXT,
-            HOW_IT_WORKS_STEP3_TEXT,
-        ];
+        const titles = [HOW_IT_WORKS_STEP1_TITLE, HOW_IT_WORKS_STEP2_TITLE, HOW_IT_WORKS_STEP3_TITLE];
+        const texts = [HOW_IT_WORKS_STEP1_TEXT, HOW_IT_WORKS_STEP2_TEXT, HOW_IT_WORKS_STEP3_TEXT];
 
         Array.from(cards).forEach((card, i) => {
             const icon = card.querySelector('.hiw__icon');

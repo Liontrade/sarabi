@@ -1,11 +1,7 @@
 import { render } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 import JoinCTA from '../../../components/LandingPage/JoinCTA/JoinCTA';
-import {
-    JOIN_CTA_TITLE,
-    JOIN_CTA_SUBTITLE,
-    JOIN_CTA_BUTTON,
-} from '../../../constants/strings';
+import { JOIN_CTA_TITLE, JOIN_CTA_SUBTITLE, JOIN_CTA_BUTTON } from '../../../constants/strings';
 import { JOIN_CTA_ID } from '../../../constants/urls';
 
 describe('JoinCTA component', () => {

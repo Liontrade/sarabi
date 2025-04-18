@@ -30,12 +30,7 @@ describe('KeyBenefits component', () => {
         const cards = container.getElementsByClassName('benefits__card');
         expect(cards.length).toBe(4);
 
-        const expectedTitles = [
-            KEY_BENEFIT_1,
-            KEY_BENEFIT_2,
-            KEY_BENEFIT_3,
-            KEY_BENEFIT_4,
-        ];
+        const expectedTitles = [KEY_BENEFIT_1, KEY_BENEFIT_2, KEY_BENEFIT_3, KEY_BENEFIT_4];
 
         Array.from(cards).forEach((card, i) => {
             const icon = card.querySelector('.benefits__icon');

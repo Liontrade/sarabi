@@ -2,10 +2,10 @@
 export const BRAND_NAME = 'LionTrade';
 export const LOGIN_TEXT = 'Login';
 export const SIGNUP_TEXT = 'Sign Up';
-export const KEY_BENEFITS_LABEL   = 'Key Benefits';
-export const PRICING_LABEL        = 'Pricing & Plans';
-export const HOW_IT_WORKS_LABEL   = 'How It Works';
-export const JOIN_CTA_LABEL       = 'Join Now';
+export const KEY_BENEFITS_LABEL = 'Key Benefits';
+export const PRICING_LABEL = 'Pricing & Plans';
+export const HOW_IT_WORKS_LABEL = 'How It Works';
+export const JOIN_CTA_LABEL = 'Join Now';
 
 /// FOOTER LANDING PAGE
 export const ABOUT_US = 'About Us';
@@ -44,7 +44,8 @@ export const HOW_IT_WORKS_STEP3_TEXT = 'Use the interactive AI charts and simula
 
 /// JOIN CTA LANDING PAGE
 export const JOIN_CTA_TITLE = 'Revolutionize Your Investment Experience';
-export const JOIN_CTA_SUBTITLE = 'Join thousands of investors optimizing their portfolios with cutting-edge AI insights.';
+export const JOIN_CTA_SUBTITLE =
+    'Join thousands of investors optimizing their portfolios with cutting-edge AI insights.';
 export const JOIN_CTA_BUTTON = 'Join Now';
 
 // KEY BENEFITS LANDING PAGE

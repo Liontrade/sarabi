@@ -26,9 +26,7 @@ describe('Hero component', () => {
         });
         expect(title).toBeInTheDocument();
 
-        const subtitle = screen.getByText(
-            /Learn markets, test strategies & build confidence—no jargon, no risk\./i,
-        );
+        const subtitle = screen.getByText(/Learn markets, test strategies & build confidence—no jargon, no risk\./i);
         expect(subtitle).toBeInTheDocument();
 
         const button = screen.getByRole('button', {

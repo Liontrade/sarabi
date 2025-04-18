@@ -7,11 +7,11 @@ describe('Footer component', () => {
     test('renders all footer columns with correct titles and links', () => {
         render(<Footer />);
 
-        FOOTER_COLUMNS.forEach((column) => {
+        FOOTER_COLUMNS.forEach(column => {
             const titleElement = screen.getByRole('heading', { level: 4, name: column.title });
             expect(titleElement).toBeInTheDocument();
 
-            column.links.forEach((link) => {
+            column.links.forEach(link => {
                 const linkElement = screen.getByRole('link', { name: link.label });
                 expect(linkElement).toBeInTheDocument();
                 expect(linkElement).toHaveAttribute('href', link.href);

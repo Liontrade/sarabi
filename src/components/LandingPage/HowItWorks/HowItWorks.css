@@ -12,7 +12,7 @@
 
 .hiw__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 2rem;
 }
 
@@ -20,7 +20,7 @@
     background: #fff;
     border-radius: 8px;
     padding: 2rem 1.5rem;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .hiw__icon {
@@ -28,4 +28,3 @@
     margin-bottom: 1rem;
     color: var(--color-primary);
 }
-

@@ -24,21 +24,13 @@ export const PRICING_PLANS: PricingPlan[] = [
     {
         name: PRICING_FREE_NAME,
         price: PRICING_FREE_PRICE,
-        features: [
-            PRICING_FREE_FEATURE_1,
-            PRICING_FREE_FEATURE_2,
-            PRICING_FREE_FEATURE_3,
-        ],
+        features: [PRICING_FREE_FEATURE_1, PRICING_FREE_FEATURE_2, PRICING_FREE_FEATURE_3],
         buttonLabel: PRICING_FREE_BUTTON,
     },
     {
         name: PRICING_PREMIUM_NAME,
         price: PRICING_PREMIUM_PRICE,
-        features: [
-            PRICING_PREMIUM_FEATURE_1,
-            PRICING_PREMIUM_FEATURE_2,
-            PRICING_PREMIUM_FEATURE_3,
-        ],
+        features: [PRICING_PREMIUM_FEATURE_1, PRICING_PREMIUM_FEATURE_2, PRICING_PREMIUM_FEATURE_3],
         buttonLabel: PRICING_PREMIUM_BUTTON,
     },
 ];

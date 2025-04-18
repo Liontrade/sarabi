@@ -1,10 +1,6 @@
 import React from 'react';
 import './JoinCTA.css';
-import {
-    JOIN_CTA_TITLE,
-    JOIN_CTA_SUBTITLE,
-    JOIN_CTA_BUTTON,
-} from '../../../constants/strings';
+import { JOIN_CTA_TITLE, JOIN_CTA_SUBTITLE, JOIN_CTA_BUTTON } from '../../../constants/strings';
 import { JOIN_CTA_ID } from '../../../constants/urls';
 
 const JoinCTA: React.FC = () => (

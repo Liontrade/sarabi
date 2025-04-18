@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-    FiBookOpen,
-    FiBell,
-    FiBarChart2,
-    FiMessageCircle,
-} from 'react-icons/fi';
+import { FiBookOpen, FiBell, FiBarChart2, FiMessageCircle } from 'react-icons/fi';
 import './KeyBenefits.css';
 
 import {
@@ -16,19 +11,9 @@ import {
     KEY_BENEFIT_4,
 } from '../../../constants/strings';
 
-const icons = [
-    FiBookOpen,
-    FiBell,
-    FiBarChart2,
-    FiMessageCircle,
-];
+const icons = [FiBookOpen, FiBell, FiBarChart2, FiMessageCircle];
 
-const titles = [
-    KEY_BENEFIT_1,
-    KEY_BENEFIT_2,
-    KEY_BENEFIT_3,
-    KEY_BENEFIT_4,
-];
+const titles = [KEY_BENEFIT_1, KEY_BENEFIT_2, KEY_BENEFIT_3, KEY_BENEFIT_4];
 
 const KeyBenefits: React.FC = () => (
     <section id="key-benefits" className="key-benefits">

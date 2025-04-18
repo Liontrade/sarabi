@@ -17,7 +17,7 @@ describe('LandingPage integration', () => {
         render(
             <MemoryRouter>
                 <LandingPage />
-            </MemoryRouter>
+            </MemoryRouter>,
         );
     });
 
@@ -80,20 +80,14 @@ describe('LandingPage integration', () => {
         const { container } = render(
             <MemoryRouter>
                 <LandingPage />
-            </MemoryRouter>
+            </MemoryRouter>,
         );
 
         const sections = container.querySelectorAll('section');
         expect(sections).toHaveLength(5);
 
-        const classList = Array.from(sections).map((sec) => sec.className);
-        expect(classList).toEqual([
-            'hero',
-            'key-benefits',
-            'pricing-plans',
-            'how-it-works',
-            'join-cta',
-        ]);
+        const classList = Array.from(sections).map(sec => sec.className);
+        expect(classList).toEqual(['hero', 'key-benefits', 'pricing-plans', 'how-it-works', 'join-cta']);
 
         const footer = container.querySelector('footer.footer');
         expect(footer).toBeInTheDocument();
@@ -104,7 +98,7 @@ describe('LandingPage integration', () => {
         const { container } = render(
             <MemoryRouter>
                 <LandingPage />
-            </MemoryRouter>
+            </MemoryRouter>,
         );
         const toggle = container.querySelector('.navbar__toggle');
         const linksList = container.querySelector('.navbar__links');

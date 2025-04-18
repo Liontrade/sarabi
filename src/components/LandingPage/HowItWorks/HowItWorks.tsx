@@ -12,16 +12,8 @@ import {
 } from '../../../constants/strings';
 
 const icons = [FiBookOpen, FiMessageCircle, FiTrendingUp];
-const titles = [
-    HOW_IT_WORKS_STEP1_TITLE,
-    HOW_IT_WORKS_STEP2_TITLE,
-    HOW_IT_WORKS_STEP3_TITLE,
-];
-const texts = [
-    HOW_IT_WORKS_STEP1_TEXT,
-    HOW_IT_WORKS_STEP2_TEXT,
-    HOW_IT_WORKS_STEP3_TEXT,
-];
+const titles = [HOW_IT_WORKS_STEP1_TITLE, HOW_IT_WORKS_STEP2_TITLE, HOW_IT_WORKS_STEP3_TITLE];
+const texts = [HOW_IT_WORKS_STEP1_TEXT, HOW_IT_WORKS_STEP2_TEXT, HOW_IT_WORKS_STEP3_TEXT];
 
 const HowItWorks: React.FC = () => (
     <section id="how-it-works" className="how-it-works">
