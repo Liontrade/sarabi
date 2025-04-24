@@ -1,57 +1,92 @@
-.trending-stocks-section {
-    padding: 2rem 0;
-    background-color: var(--color-background);
-    margin-bottom: 2rem;
-    position: relative;
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
-.stocks-container {
-    position: relative;
+.trending-section {
+    background: var(--color-secondary);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     width: 100%;
-    margin: 0 auto;
-    overflow: hidden;
+    max-width: none;
+    margin: 0;
 }
 
-.stocks-grid {
+.trending-header {
     display: flex;
-    gap: 16px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.trending-header h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-dark);
+}
+
+.trending-refresh {
+    background: var(--color-light);
+    border: none;
+    padding: 0.5rem;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--color-dark);
+    transition:
+        background 0.2s,
+        color 0.2s;
+}
+
+.trending-refresh:hover {
+    background: var(--color-primary-hover);
+    color: var(--color-secondary);
+}
+
+.trending-grid-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.trending-grid {
+    display: flex;
+    gap: 1rem;
     overflow-x: auto;
-    scroll-behavior: smooth;
-    padding-bottom: 1rem;
-    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.5rem;
 }
 
-@media (max-width: 800px) {
-    .stock-card {
-        width: calc((100% - 32px) / 3);
-    }
+.trending-grid::-webkit-scrollbar {
+    height: 6px;
 }
 
-@media (min-width: 801px) and (max-width: 1200px) {
-    .stock-card {
-        width: calc((100% - 64px) / 5);
-    }
-}
-
-@media (min-width: 1201px) {
-    .stock-card {
-        width: calc((100% - 96px) / 7);
-    }
+.trending-grid::-webkit-scrollbar-thumb {
+    background: var(--color-light);
+    border-radius: 3px;
 }
 
 .stock-card {
-    flex: 0 0 auto;
-    background-color: var(--color-secondary);
+    flex: 0 0 300px;
+    min-width: 300px;
+    max-width: 300px;
+    background: #fff;
     border: 1px solid #eee;
     border-radius: 8px;
     padding: 1rem;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
 }
 
 .stock-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .stock-card__logo {
@@ -62,13 +97,12 @@
 }
 
 .stock-card__info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    text-align: center;
 }
 
 .stock-card__symbol {
-    font-size: 1rem;
+    display: block;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--color-dark);
     margin-bottom: 0.25rem;
@@ -77,32 +111,49 @@
 .stock-card__change {
     font-size: 0.9rem;
     font-weight: 600;
-    color: var(--color-primary);
 }
 
-.arrow-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 2.5rem;
-    color: var(--color-dark);
-    background-color: var(--color-secondary);
-    border-radius: 50%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+.stock-card__change.up {
+    color: #34a853;
+}
+
+.stock-card__change.down {
+    color: #d93025;
+}
+
+.trending-footer {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.trending-footer .view-all-btn {
+    background: var(--color-primary);
+    color: var(--color-secondary);
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-weight: 600;
     cursor: pointer;
-    z-index: 2;
-    padding: 0.5rem;
-    transition: background-color 0.3s;
+    transition: background 0.2s;
 }
 
-.arrow-btn:hover {
-    background-color: #f0f0f0;
+.trending-footer .view-all-btn:hover {
+    background: var(--color-primary-hover);
 }
 
-.arrow-btn--left {
-    left: 0.5rem;
+@media (max-width: 768px) {
+    .stock-card {
+        flex: 0 0 200px;
+        min-width: 200px;
+        max-width: 200px;
+    }
 }
 
-.arrow-btn--right {
-    right: 0.5rem;
+@media (max-width: 480px) {
+    .stock-card {
+        flex: 0 0 100%;
+        min-width: 100%;
+        max-width: 100%;
+    }
 }

@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
     return (
         <footer className="footer">
             <div className="footer__links">
-                <a href="#about">About</a>
+                <a href="/about">About</a>
                 <a href="#careers">Careers</a>
                 <a href="#security">Security</a>
                 <a href="#help-center">Help Center</a>
