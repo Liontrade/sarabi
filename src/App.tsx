@@ -6,7 +6,7 @@ import LandingPage from './pages/LandingPage/LandingPage';
 import SignUpPage from './pages/SignUpPage/SignUpPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
-import VerifyEmail from './pages/VerifyEmail/VerifyEmail';
+import VerifyEmailPage from './pages/VerifyEmailPage/VerifyEmailPage';
 import Dashboard from './pages/Dashboard/Dashboard';
 import MarketPage from './pages/MarketPage/MarketPage';
 import SettingsPage from './pages/SettingsPage/SettingsPage';
@@ -60,7 +60,7 @@ function App() {
                 <Route path="/signup" element={<SignUpPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
-                <Route path="/verify-email" element={<VerifyEmail />} />
+                <Route path="/verify-email" element={<VerifyEmailPage />} />
                 <Route
                     path="/dashboard"
                     element={

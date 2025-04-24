@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebaseConfig';
 import { sendEmailVerification } from 'firebase/auth';
-import './VerifyEmail.css';
+import './VerifyEmailPage.css';
 import MinimalNavbar from '../../components/MinimalNavbar/MinimalNavbar';
 
-const VerifyEmail: React.FC = () => {
+const VerifyEmailPage: React.FC = () => {
     const navigate = useNavigate();
 
     const handleResend = async () => {
@@ -53,4 +53,4 @@ const VerifyEmail: React.FC = () => {
     );
 };
 
-export default VerifyEmail;
+export default VerifyEmailPage;
