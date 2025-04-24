@@ -49,12 +49,10 @@ const recommended: Stock[] = [
 const RecommendedSection: React.FC = () => {
     const handleRefresh = () => {
         console.log('Refresh recommendations');
-        // tu możesz wywołać fetch nowych danych
     };
 
     const handleAdd = (ticker: string) => {
         console.log(`Add ${ticker} to watchlist`);
-        // tu akcja dodania do watchlisty
     };
 
     return (

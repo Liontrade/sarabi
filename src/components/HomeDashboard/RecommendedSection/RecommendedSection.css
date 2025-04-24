@@ -65,6 +65,7 @@
 }
 
 .recommended-section .stock-card {
+    position: relative;
     flex: 0 0 300px;
     min-width: 300px;
     max-width: 300px;
@@ -97,6 +98,9 @@
 }
 
 .recommended-section .stock-card__add {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
     background: var(--color-primary);
     border: none;
     color: var(--color-secondary);
@@ -109,6 +113,11 @@
     font-size: 1rem;
     cursor: pointer;
     transition: background 0.2s;
+}
+
+.recommended-section .stock-card__add {
+    transition: opacity 0.2s;
+    opacity: 1;
 }
 
 .recommended-section .stock-card__add:hover {
