@@ -81,3 +81,17 @@ export const CONTINUE_WITH_GOOGLE = 'Continue with Google';
 export const FORGOT_PASSWORD_LINK = 'Forgot Password?';
 export const DONT_HAVE_ACCOUNT_TEXT = 'Don’t have an account?';
 export const SIGNUP_LINK_TEXT = 'Sign up';
+
+/// SIGNUP PAGE
+export const SIGNUP_TITLE = 'Create an account';
+export const VALID_EMAIL_ERROR = 'Please enter a valid email address.';
+export const PASSWORD_MIN_LENGTH_ERROR = 'Password must be at least 8 characters long.';
+export const PASSWORD_MATCH_ERROR = 'Passwords do not match.';
+export const EMAIL_ALREADY_IN_USE_ERROR = 'This email is already registered. Please log in instead.';
+export const INVALID_EMAIL_FORMAT_ERROR = 'Invalid email format.';
+export const GENERIC_SIGNUP_ERROR = 'An error occurred. Please try again.';
+export const UNEXPECTED_SIGNUP_ERROR = 'An unexpected error occurred.';
+export const CREATE_ACCOUNT_BUTTON = 'Create Account';
+export const SIGNUP_SOCIAL_BUTTON = 'Sign up with Google';
+export const SIGNUP_INFO_TEXT = 'Join 10,000+ investors on LionTrade and get a free stock slice';
+export const SIGNUP_TERMS_TEXT = "By creating an account, you agree to LionTrade's terms of service and privacy policy";

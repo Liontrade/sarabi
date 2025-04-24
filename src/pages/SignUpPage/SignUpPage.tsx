@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import './SignUpPage.css';
 import { auth } from '../../firebaseConfig';
 import {
@@ -9,12 +8,27 @@ import {
     signInWithPopup,
 } from 'firebase/auth';
 import { FirebaseError } from 'firebase/app';
+import { useNavigate } from 'react-router-dom';
 import Spinner from '../../components/Spinner/Spinner';
 import MinimalNavbar from '../../components/MinimalNavbar/MinimalNavbar';
 
-export const validateEmail = (email: string): boolean => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-};
+import {
+    SIGNUP_TITLE,
+    CREATE_ACCOUNT_BUTTON,
+    SIGNUP_SOCIAL_BUTTON,
+    SIGNUP_INFO_TEXT,
+    SIGNUP_TERMS_TEXT,
+    VALID_EMAIL_ERROR,
+    PASSWORD_MIN_LENGTH_ERROR,
+    PASSWORD_MATCH_ERROR,
+    EMAIL_ALREADY_IN_USE_ERROR,
+    INVALID_EMAIL_FORMAT_ERROR,
+    GENERIC_SIGNUP_ERROR,
+    UNEXPECTED_SIGNUP_ERROR,
+} from '../../constants/strings';
+import { VERIFY_EMAIL_URL, DASHBOARD_URL } from '../../constants/urls';
+
+export const validateEmail = (email: string): boolean => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
 const SignUpPage: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -29,15 +43,15 @@ const SignUpPage: React.FC = () => {
         setError('');
 
         if (!validateEmail(email)) {
-            setError('Please enter a valid email address.');
+            setError(VALID_EMAIL_ERROR);
             return;
         }
         if (password.length < 8) {
-            setError('Password must be at least 8 characters long.');
+            setError(PASSWORD_MIN_LENGTH_ERROR);
             return;
         }
         if (password !== repeatPassword) {
-            setError('Passwords do not match.');
+            setError(PASSWORD_MATCH_ERROR);
             return;
         }
 
@@ -45,21 +59,21 @@ const SignUpPage: React.FC = () => {
             setLoading(true);
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             await sendEmailVerification(userCredential.user);
-            navigate('/verify-email');
+            navigate(VERIFY_EMAIL_URL);
         } catch (err: unknown) {
             if (err instanceof FirebaseError) {
                 switch (err.code) {
                     case 'auth/email-already-in-use':
-                        setError('This email is already registered. Please log in instead.');
+                        setError(EMAIL_ALREADY_IN_USE_ERROR);
                         break;
                     case 'auth/invalid-email':
-                        setError('Invalid email format.');
+                        setError(INVALID_EMAIL_FORMAT_ERROR);
                         break;
                     default:
-                        setError('An error occurred. Please try again.');
+                        setError(GENERIC_SIGNUP_ERROR);
                 }
             } else {
-                setError('An unexpected error occurred.');
+                setError(UNEXPECTED_SIGNUP_ERROR);
             }
             console.error('Error creating account:', err);
         } finally {
@@ -72,7 +86,7 @@ const SignUpPage: React.FC = () => {
         try {
             setLoading(true);
             await signInWithPopup(auth, provider);
-            navigate('/dashboard');
+            navigate(DASHBOARD_URL);
         } catch (err: unknown) {
             if (err instanceof FirebaseError) {
                 console.error('Error during Google sign-in:', err.message);
@@ -87,8 +101,10 @@ const SignUpPage: React.FC = () => {
     return (
         <div className="signup-page">
             <MinimalNavbar variant="login" />
+
             <div className="signup-page__content">
-                <h1>Create an account</h1>
+                <h1>{SIGNUP_TITLE}</h1>
+
                 <form data-testid="signup-form" className="signup-form" onSubmit={handleSubmit}>
                     {error && (
                         <div role="alert" className="signup-form__error">
@@ -100,9 +116,9 @@ const SignUpPage: React.FC = () => {
                     <input
                         id="email"
                         type="email"
+                        placeholder="Enter your email"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
-                        placeholder="Enter your email"
                         className={error.includes('email') ? 'input-error' : ''}
                         required
                     />
@@ -111,9 +127,9 @@ const SignUpPage: React.FC = () => {
                     <input
                         id="password"
                         type="password"
+                        placeholder="Password must be at least 8 characters"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
-                        placeholder="Password must be at least 8 characters"
                         className={error.includes('Password') ? 'input-error' : ''}
                         required
                     />
@@ -122,18 +138,18 @@ const SignUpPage: React.FC = () => {
                     <input
                         id="repeatPassword"
                         type="password"
+                        placeholder="Repeat your password"
                         value={repeatPassword}
                         onChange={e => setRepeatPassword(e.target.value)}
-                        placeholder="Repeat your password"
                         className={error.includes('match') ? 'input-error' : ''}
                         required
                     />
 
                     <button type="submit" className="signup-form__submit" disabled={loading}>
-                        {loading ? <Spinner /> : 'Create Account'}
+                        {loading ? <Spinner /> : CREATE_ACCOUNT_BUTTON}
                     </button>
 
-                    <p className="signup-form__info">Join 10,000+ investors on LionTrade and get a free stock slice</p>
+                    <p className="signup-form__info">{SIGNUP_INFO_TEXT}</p>
 
                     <button
                         type="button"
@@ -141,12 +157,10 @@ const SignUpPage: React.FC = () => {
                         onClick={handleGoogleSignIn}
                         disabled={loading}
                     >
-                        {loading ? <Spinner /> : 'Sign up with Google'}
+                        {loading ? <Spinner /> : SIGNUP_SOCIAL_BUTTON}
                     </button>
 
-                    <p className="signup-form__terms">
-                        By creating an account, you agree to LionTrade&#39;s terms of service and privacy policy
-                    </p>
+                    <p className="signup-form__terms">{SIGNUP_TERMS_TEXT}</p>
                 </form>
             </div>
         </div>

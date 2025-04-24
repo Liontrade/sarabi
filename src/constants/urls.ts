@@ -34,3 +34,4 @@ export const PRICING_SECTION_ID = 'pricing-plans';
 /// LOGIN / AUTH
 export const FORGOT_PASSWORD_URL = '/forgot-password';
 export const DASHBOARD_URL = '/dashboard';
+export const VERIFY_EMAIL_URL = '/verify-email';
