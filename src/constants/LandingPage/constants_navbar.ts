@@ -9,7 +9,6 @@ import {
 
 import { KEY_BENEFITS_HREF, PRICING_HREF, HOW_IT_WORKS_HREF, JOIN_CTA_HREF, LOGIN_URL, SIGNUP_URL } from '../urls';
 
-// Sekcje “anchor” w głównej nawigacji
 export const NAV_LINKS = [
     { text: KEY_BENEFITS_LABEL, href: KEY_BENEFITS_HREF },
     { text: PRICING_LABEL, href: PRICING_HREF },
