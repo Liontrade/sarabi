@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import './Login.css';
+import './LoginPage.css';
 import { auth } from '../../firebaseConfig';
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useNavigate, Link } from 'react-router-dom';
 import Spinner from '../../components/Spinner/Spinner';
 import MinimalNavbar from '../../components/MinimalNavbar/MinimalNavbar';
 
-const Login: React.FC = () => {
+const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -24,7 +24,7 @@ const Login: React.FC = () => {
             navigate('/dashboard');
         } catch (error: unknown) {
             console.error('Error logging in:', error);
-            setError('Login failed: Wrong email or password');
+            setError('LoginPage failed: Wrong email or password');
         } finally {
             setLoading(false);
         }
@@ -116,4 +116,4 @@ const Login: React.FC = () => {
     );
 };
 
-export default Login;
+export default LoginPage;

@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import SignUp, { validateEmail } from '../../../pages/SignUp/SignUp';
+import SignUpPage, { validateEmail } from '../../../pages/SignUpPage/SignUpPage';
 import {
     createUserWithEmailAndPassword,
     sendEmailVerification,
@@ -23,7 +23,7 @@ jest.mock('react-router-dom', () => ({
     useNavigate: () => mockNavigate,
 }));
 
-describe('SignUp Component & validateEmail()', () => {
+describe('SignUpPage Component & validateEmail()', () => {
     beforeEach(() => {
         jest.clearAllMocks();
     });
@@ -40,9 +40,9 @@ describe('SignUp Component & validateEmail()', () => {
         });
     });
 
-    describe('<SignUp />', () => {
+    describe('<SignUpPage />', () => {
         it('shows error for invalid email', async () => {
-            render(<SignUp />, { wrapper: BrowserRouter });
+            render(<SignUpPage />, { wrapper: BrowserRouter });
 
             fireEvent.change(screen.getByLabelText(/Email/i), { target: { value: 'foo' } });
             fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'abcdefgh' } });
@@ -56,7 +56,7 @@ describe('SignUp Component & validateEmail()', () => {
         });
 
         it('shows error if password is too short', async () => {
-            render(<SignUp />, { wrapper: BrowserRouter });
+            render(<SignUpPage />, { wrapper: BrowserRouter });
             fireEvent.change(screen.getByLabelText(/Email/i), { target: { value: 'test@example.com' } });
             fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'short' } });
             fireEvent.change(screen.getByLabelText(/Repeat Password/i), { target: { value: 'short' } });
@@ -66,7 +66,7 @@ describe('SignUp Component & validateEmail()', () => {
         });
 
         it('shows error when passwords do not match', async () => {
-            render(<SignUp />, { wrapper: BrowserRouter });
+            render(<SignUpPage />, { wrapper: BrowserRouter });
             fireEvent.change(screen.getByLabelText(/Email/i), { target: { value: 'test@example.com' } });
             fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'abcdefgh' } });
             fireEvent.change(screen.getByLabelText(/Repeat Password/i), { target: { value: 'abcdefgi' } });
@@ -77,7 +77,7 @@ describe('SignUp Component & validateEmail()', () => {
 
         it('calls createUserWithEmailAndPassword and navigates on success', async () => {
             (createUserWithEmailAndPassword as jest.Mock).mockResolvedValue({ user: { uid: '123' } });
-            render(<SignUp />, { wrapper: BrowserRouter });
+            render(<SignUpPage />, { wrapper: BrowserRouter });
 
             fireEvent.change(screen.getByLabelText(/Email/i), { target: { value: 'test@example.com' } });
             fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'abcdefgh' } });
@@ -101,7 +101,7 @@ describe('SignUp Component & validateEmail()', () => {
             const err = new FirebaseError('auth/email-already-in-use', 'fail');
             (createUserWithEmailAndPassword as jest.Mock).mockRejectedValue(err);
 
-            render(<SignUp />, { wrapper: BrowserRouter });
+            render(<SignUpPage />, { wrapper: BrowserRouter });
             fireEvent.change(screen.getByLabelText(/Email/i), { target: { value: 'a@a.com' } });
             fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'abcdefgh' } });
             fireEvent.change(screen.getByLabelText(/Repeat Password/i), { target: { value: 'abcdefgh' } });
@@ -114,7 +114,7 @@ describe('SignUp Component & validateEmail()', () => {
 
         it('handles Google Sign-In and navigation', async () => {
             (signInWithPopup as jest.Mock).mockResolvedValue({});
-            render(<SignUp />, { wrapper: BrowserRouter });
+            render(<SignUpPage />, { wrapper: BrowserRouter });
             fireEvent.click(screen.getByRole('button', { name: /Sign up with Google/i }));
 
             await waitFor(() => {

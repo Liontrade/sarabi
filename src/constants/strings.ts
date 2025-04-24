@@ -1,6 +1,6 @@
 /// LANDING PAGE
 export const BRAND_NAME = 'LionTrade';
-export const LOGIN_TEXT = 'Login';
+export const LOGIN_TEXT = 'LoginPage';
 export const SIGNUP_TEXT = 'Sign Up';
 export const KEY_BENEFITS_LABEL = 'Key Benefits';
 export const PRICING_LABEL = 'Pricing & Plans';

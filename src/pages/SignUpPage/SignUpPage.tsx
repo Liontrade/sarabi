@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './SignUp.css';
+import './SignUpPage.css';
 import { auth } from '../../firebaseConfig';
 import {
     createUserWithEmailAndPassword,
@@ -16,7 +16,7 @@ export const validateEmail = (email: string): boolean => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 };
 
-const SignUp: React.FC = () => {
+const SignUpPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
@@ -153,4 +153,4 @@ const SignUp: React.FC = () => {
     );
 };
 
-export default SignUp;
+export default SignUpPage;
