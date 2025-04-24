@@ -71,3 +71,35 @@ export const PRICING_PREMIUM_FEATURE_1 = 'Advanced Market Insights';
 export const PRICING_PREMIUM_FEATURE_2 = 'Unlimited AI Predictions';
 export const PRICING_PREMIUM_FEATURE_3 = 'Priority Support';
 export const PRICING_PREMIUM_BUTTON = 'Join Now';
+
+/// LOGIN PAGE
+export const SIGNIN_TITLE = 'Sign in to LionTrade';
+export const LOGIN_ERROR_INVALID_CREDENTIALS = 'LoginPage failed: Wrong email or password';
+export const LOGIN_BUTTON = 'Log In';
+export const OR_TEXT = 'or';
+export const CONTINUE_WITH_GOOGLE = 'Continue with Google';
+export const FORGOT_PASSWORD_LINK = 'Forgot Password?';
+export const DONT_HAVE_ACCOUNT_TEXT = 'Don’t have an account?';
+export const SIGNUP_LINK_TEXT = 'Sign up';
+
+/// SIGNUP PAGE
+export const SIGNUP_TITLE = 'Create an account';
+export const VALID_EMAIL_ERROR = 'Please enter a valid email address.';
+export const PASSWORD_MIN_LENGTH_ERROR = 'Password must be at least 8 characters long.';
+export const PASSWORD_MATCH_ERROR = 'Passwords do not match.';
+export const EMAIL_ALREADY_IN_USE_ERROR = 'This email is already registered. Please log in instead.';
+export const INVALID_EMAIL_FORMAT_ERROR = 'Invalid email format.';
+export const GENERIC_SIGNUP_ERROR = 'An error occurred. Please try again.';
+export const UNEXPECTED_SIGNUP_ERROR = 'An unexpected error occurred.';
+export const CREATE_ACCOUNT_BUTTON = 'Create Account';
+export const SIGNUP_SOCIAL_BUTTON = 'Sign up with Google';
+export const SIGNUP_INFO_TEXT = 'Join 10,000+ investors on LionTrade and get a free stock slice';
+export const SIGNUP_TERMS_TEXT = "By creating an account, you agree to LionTrade's terms of service and privacy policy";
+
+/// VERIFY EMAIL PAGE
+export const VERIFY_EMAIL_TITLE = 'Verify Your Email';
+export const VERIFY_EMAIL_INFO_PART1 = 'A verification email has been sent to';
+export const VERIFY_EMAIL_INFO_PART2 =
+    'Please check your inbox and click on the verification link. This page will automatically update once your email is verified.';
+export const RESEND_EMAIL_BUTTON_TEXT = 'Resend Email';
+export const VERIFY_EMAIL_SENT_AGAIN_ALERT = 'Verification email has been sent again.';
