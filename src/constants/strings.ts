@@ -95,3 +95,11 @@ export const CREATE_ACCOUNT_BUTTON = 'Create Account';
 export const SIGNUP_SOCIAL_BUTTON = 'Sign up with Google';
 export const SIGNUP_INFO_TEXT = 'Join 10,000+ investors on LionTrade and get a free stock slice';
 export const SIGNUP_TERMS_TEXT = "By creating an account, you agree to LionTrade's terms of service and privacy policy";
+
+/// VERIFY EMAIL PAGE
+export const VERIFY_EMAIL_TITLE = 'Verify Your Email';
+export const VERIFY_EMAIL_INFO_PART1 = 'A verification email has been sent to';
+export const VERIFY_EMAIL_INFO_PART2 =
+    'Please check your inbox and click on the verification link. This page will automatically update once your email is verified.';
+export const RESEND_EMAIL_BUTTON_TEXT = 'Resend Email';
+export const VERIFY_EMAIL_SENT_AGAIN_ALERT = 'Verification email has been sent again.';
