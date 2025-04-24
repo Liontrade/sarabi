@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import MarketFilterBar from '../../components/Market/MarketFilterBar/MarketFilterBar';
 import MarketList from '../../components/Market/MarketList/MarketList';
 import './MarketPage.css';
-import Navbar from '../../components/HomeDashboard/Navbar/Navbar';
-import Footer from '../../components/HomeDashboard/Footer/Footer';
+import Navbar from '../../components/HomeDashboardPage/Navbar/Navbar';
+import Footer from '../../components/HomeDashboardPage/Footer/Footer';
 
 const MarketPage: React.FC = () => {
     const [filter, setFilter] = useState<'all' | 'popular' | 'recent' | 'gainers' | 'losers'>('all');

@@ -6,7 +6,7 @@ import SignUp from './pages/SignUp/SignUp';
 import Login from './pages/Login/Login';
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
 import VerifyEmail from './pages/VerifyEmail/VerifyEmail';
-import Dashboard from './pages/Dashboard/Dashboard';
+import HomeDashboardPage from './pages/HomeDashboardPage/HomeDashboardPage';
 import MarketPage from './pages/MarketPage/MarketPage';
 import SettingsPage from './pages/SettingsPage/SettingsPage';
 import Spinner from './components/Spinner/Spinner';
@@ -64,7 +64,7 @@ function App() {
                     path="/dashboard"
                     element={
                         <ProtectedRoute>
-                            <Dashboard />
+                            <HomeDashboardPage />
                         </ProtectedRoute>
                     }
                 />

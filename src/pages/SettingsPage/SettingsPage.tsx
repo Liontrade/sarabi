@@ -6,8 +6,8 @@ import SecuritySettings from '../../components/Settings/SecuritySettings/Securit
 import InterfaceSettings from '../../components/Settings/InterfaceSettings/InterfaceSettings';
 import LegalHelpSettings from '../../components/Settings/LegalHelpSettings/LegalHelpSettings';
 
-import Footer from '../../components/HomeDashboard/Footer/Footer';
-import Navbar from '../../components/HomeDashboard/Navbar/Navbar';
+import Footer from '../../components/HomeDashboardPage/Footer/Footer';
+import Navbar from '../../components/HomeDashboardPage/Navbar/Navbar';
 
 import './SettingsPage.css';
 
