@@ -2,10 +2,19 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SignUp.css';
 import { auth } from '../../firebaseConfig';
-import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
+import {
+    createUserWithEmailAndPassword,
+    sendEmailVerification,
+    GoogleAuthProvider,
+    signInWithPopup,
+} from 'firebase/auth';
+import { FirebaseError } from 'firebase/app';
 import Spinner from '../../components/Spinner/Spinner';
 import MinimalNavbar from '../../components/MinimalNavbar/MinimalNavbar';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+
+export const validateEmail = (email: string): boolean => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+};
 
 const SignUp: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -14,10 +23,6 @@ const SignUp: React.FC = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-
-    const validateEmail = (email: string) => {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -41,35 +46,39 @@ const SignUp: React.FC = () => {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             await sendEmailVerification(userCredential.user);
             navigate('/verify-email');
-        } catch (error: unknown) {
-            if (error instanceof Error) {
-                if ('code' in error && typeof error.code === 'string') {
-                    if (error.code === 'auth/email-already-in-use') {
+        } catch (err: unknown) {
+            if (err instanceof FirebaseError) {
+                switch (err.code) {
+                    case 'auth/email-already-in-use':
                         setError('This email is already registered. Please log in instead.');
-                    } else if (error.code === 'auth/invalid-email') {
+                        break;
+                    case 'auth/invalid-email':
                         setError('Invalid email format.');
-                    } else {
+                        break;
+                    default:
                         setError('An error occurred. Please try again.');
-                    }
-                } else {
-                    setError('An unexpected error occurred.');
                 }
-                console.error('Error creating account:', error);
+            } else {
+                setError('An unexpected error occurred.');
             }
+            console.error('Error creating account:', err);
         } finally {
             setLoading(false);
         }
     };
+
     const handleGoogleSignIn = async () => {
         const provider = new GoogleAuthProvider();
         try {
             setLoading(true);
             await signInWithPopup(auth, provider);
             navigate('/dashboard');
-        } catch (error: unknown) {
-            const err = error as Error;
-            console.error('Error during Google sin in:', error);
-            console.error(err.message);
+        } catch (err: unknown) {
+            if (err instanceof FirebaseError) {
+                console.error('Error during Google sign-in:', err.message);
+            } else {
+                console.error('Unexpected error during Google sign-in:', err);
+            }
         } finally {
             setLoading(false);
         }
@@ -78,11 +87,14 @@ const SignUp: React.FC = () => {
     return (
         <div className="signup-page">
             <MinimalNavbar variant="login" />
-
             <div className="signup-page__content">
                 <h1>Create an account</h1>
-                <form className="signup-form" onSubmit={handleSubmit}>
-                    {error && <div className="signup-form__error">{error}</div>}
+                <form data-testid="signup-form" className="signup-form" onSubmit={handleSubmit}>
+                    {error && (
+                        <div role="alert" className="signup-form__error">
+                            {error}
+                        </div>
+                    )}
 
                     <label htmlFor="email">Email</label>
                     <input
