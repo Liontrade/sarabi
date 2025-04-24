@@ -1,0 +1,42 @@
+.notfound-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    text-align: center;
+    padding: 2rem;
+}
+
+.notfound-image {
+    max-width: 300px;
+    margin-bottom: 1.5rem;
+}
+
+.notfound-title {
+    font-family: 'Lobster', cursive;
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+
+.notfound-text {
+    font-size: 1rem;
+    color: var(--color-muted);
+    margin-bottom: 2rem;
+}
+
+.notfound-button {
+    background: var(--color-primary);
+    color: var(--color-secondary);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.notfound-button:hover {
+    background: var(--color-primary-hover);
+}

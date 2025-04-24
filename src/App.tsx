@@ -1,4 +1,3 @@
-// App.tsx
 import { JSX } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
@@ -14,6 +13,7 @@ import Spinner from './components/Spinner/Spinner';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './styles/global.css';
+import NotFound from './pages/NotFound/NotFound';
 
 function App() {
     const { user, loading } = useAuth();
@@ -43,7 +43,6 @@ function App() {
 
     return (
         <Router>
-            {/* Dodaj ToastContainer */}
             <ToastContainer
                 position="top-right"
                 autoClose={3000}
@@ -85,7 +84,7 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
-                <Route path="*" element={<Navigate to="/" />} />
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </Router>
     );
