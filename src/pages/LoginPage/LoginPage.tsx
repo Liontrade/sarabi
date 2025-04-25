@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
-import './Login.css';
+import './LoginPage.css';
 import { auth } from '../../firebaseConfig';
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useNavigate, Link } from 'react-router-dom';
 import Spinner from '../../components/Spinner/Spinner';
 import MinimalNavbar from '../../components/MinimalNavbar/MinimalNavbar';
 
-const Login: React.FC = () => {
+import {
+    SIGNIN_TITLE,
+    LOGIN_ERROR_INVALID_CREDENTIALS,
+    LOGIN_BUTTON,
+    OR_TEXT,
+    CONTINUE_WITH_GOOGLE,
+    FORGOT_PASSWORD_LINK,
+    DONT_HAVE_ACCOUNT_TEXT,
+    SIGNUP_LINK_TEXT,
+} from '../../constants/strings';
+import { FORGOT_PASSWORD_URL, SIGNUP_URL, DASHBOARD_URL } from '../../constants/urls';
+
+const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -21,26 +33,26 @@ const Login: React.FC = () => {
             setLoading(true);
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             console.log('User logged in successfully:', userCredential.user);
-            navigate('/dashboard');
-        } catch (error: unknown) {
-            console.error('Error logging in:', error);
-            setError('Login failed: Wrong email or password');
+            navigate(DASHBOARD_URL);
+        } catch (err: unknown) {
+            console.error('Error logging in:', err);
+            setError(LOGIN_ERROR_INVALID_CREDENTIALS);
         } finally {
             setLoading(false);
         }
     };
 
     const handleGoogleSignIn = async () => {
-        setError(null); // Clear previous errors
+        setError(null);
         const provider = new GoogleAuthProvider();
         console.log('Attempting Google sign in...');
         try {
             setLoading(true);
             const userCredential = await signInWithPopup(auth, provider);
             console.log('Google sign in successful:', userCredential.user);
-            navigate('/dashboard');
-        } catch (error: unknown) {
-            console.error('Error during Google sign in:', error);
+            navigate(DASHBOARD_URL);
+        } catch (err: unknown) {
+            console.error('Error during Google sign in:', err);
             setError('Google sign-in failed. Please try again.');
         } finally {
             setLoading(false);
@@ -52,8 +64,10 @@ const Login: React.FC = () => {
             <MinimalNavbar variant="signup" />
 
             <div className="login-page__content">
-                <h1>Sign in to LionTrade</h1>
-                {error && <p className="login-error">{error}</p>} {}
+                <h1>{SIGNIN_TITLE}</h1>
+
+                {error && <p className="login-error">{error}</p>}
+
                 <form className="login-form" onSubmit={handleSubmit}>
                     <label htmlFor="email">Email</label>
                     <input
@@ -82,11 +96,11 @@ const Login: React.FC = () => {
                     />
 
                     <button type="submit" className="login-form__submit" disabled={loading}>
-                        {loading ? <Spinner /> : 'Log In'}
+                        {loading ? <Spinner /> : LOGIN_BUTTON}
                     </button>
 
                     <div className="login-form__or">
-                        <span>or</span>
+                        <span>{OR_TEXT}</span>
                     </div>
 
                     <button
@@ -95,18 +109,18 @@ const Login: React.FC = () => {
                         onClick={handleGoogleSignIn}
                         disabled={loading}
                     >
-                        {loading ? <Spinner /> : 'Continue with Google'}
+                        {loading ? <Spinner /> : CONTINUE_WITH_GOOGLE}
                     </button>
 
                     <div className="login-form__links">
-                        <Link to="/forgot-password" className="login-form__link">
-                            Forgot Password?
+                        <Link to={FORGOT_PASSWORD_URL} className="login-form__link">
+                            {FORGOT_PASSWORD_LINK}
                         </Link>
                         <span> | </span>
                         <span>
-                            Don’t have an account?{' '}
-                            <Link to="/signup" className="login-form__link">
-                                Sign up
+                            {DONT_HAVE_ACCOUNT_TEXT}{' '}
+                            <Link to={SIGNUP_URL} className="login-form__link">
+                                {SIGNUP_LINK_TEXT}
                             </Link>
                         </span>
                     </div>
@@ -116,4 +130,4 @@ const Login: React.FC = () => {
     );
 };
 
-export default Login;
+export default LoginPage;
