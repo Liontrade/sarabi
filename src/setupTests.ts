@@ -1,3 +1,5 @@
+jest.useFakeTimers({ legacyFakeTimers: false });
+
 import '@testing-library/jest-dom';
 import { TextEncoder, TextDecoder } from 'util';
 import { cleanup } from '@testing-library/react';
