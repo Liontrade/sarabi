@@ -9,6 +9,7 @@ module.exports = {
     fakeTimers: {
         enableGlobally: true,
     },
+    maxWorkers: '50%',
     setupFilesAfterEnv: [
         '<rootDir>/src/setupTests.ts',
     ],
