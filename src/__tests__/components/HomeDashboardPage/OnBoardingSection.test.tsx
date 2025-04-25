@@ -1,6 +1,25 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import OnboardingSection from '../../../components/HomeDashboardPage/OnBoardingSection/OnBoardingSection';
 
+jest.mock('firebase/auth', () => ({
+    getAuth: jest.fn(),
+    onAuthStateChanged: (_auth: object, callback: (u: null | object) => void) => {
+        callback(null);
+        return () => {};
+    },
+}));
+
+jest.mock('firebase/firestore', () => ({
+    getFirestore: jest.fn(),
+    doc: jest.fn(),
+    getDoc: jest.fn().mockResolvedValue({ exists: () => false }),
+}));
+
+jest.mock('../../../firebaseConfig', () => ({
+    auth: {}, // nie używamy tych obiektów w teście
+    db: {},
+}));
+
 describe('OnboardingSection Component', () => {
     beforeEach(() => {
         jest.spyOn(console, 'log').mockImplementation(() => {});
@@ -13,7 +32,7 @@ describe('OnboardingSection Component', () => {
     it('renders header and average progress', () => {
         const { container } = render(<OnboardingSection />);
 
-        const header = screen.getByRole('heading', { level: 2, name: /Welcome back, Jane!/i });
+        const header = screen.getByRole('heading', { level: 2, name: /Welcome back, User!/i });
         expect(header).toBeInTheDocument();
 
         const overviewText = screen.getByText(/% Completed/i);

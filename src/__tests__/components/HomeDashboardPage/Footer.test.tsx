@@ -35,7 +35,6 @@ describe('Footer Component', () => {
             { text: 'Dashboard', href: '/dashboard' },
             { text: 'Market', href: '/market' },
             { text: 'Knowledge Library', href: '/knowledge' },
-            { text: 'Market Summaries', href: '/summaries' },
             { text: 'News Alerts', href: '/news-alerts' },
         ];
 
