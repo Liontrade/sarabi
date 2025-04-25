@@ -12,4 +12,5 @@ if (typeof global.TextDecoder === 'undefined') {
 
 afterEach(() => {
     cleanup();
+    jest.clearAllTimers();
 });
