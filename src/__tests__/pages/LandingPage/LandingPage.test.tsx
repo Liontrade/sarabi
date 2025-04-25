@@ -11,6 +11,8 @@ import {
 import { FOOTER_COLUMNS } from '../../../constants/LandingPage/constants_footer';
 import { PRICING_SECTION_ID } from '../../../constants/urls';
 
+jest.useFakeTimers();
+
 describe('LandingPage integration', () => {
     beforeEach(() => {
         render(
@@ -110,4 +112,8 @@ describe('LandingPage integration', () => {
         fireEvent.click(toggle!);
         expect(linksList).not.toHaveClass('navbar__links--active');
     });
+});
+
+afterAll(() => {
+    jest.useRealTimers();
 });

@@ -3,6 +3,7 @@ import Footer from '../../../components/HomeDashboardPage/Footer/Footer';
 import { MemoryRouter } from 'react-router-dom';
 
 jest.mock('../../../assets/logo_without_background.png', () => 'logo.png');
+jest.useFakeTimers();
 
 describe('Footer Component', () => {
     beforeEach(() => {
@@ -126,4 +127,8 @@ describe('Footer Component', () => {
         const copyrightText = screen.getByText(new RegExp(`© ${year} LionTrade`, 'i'));
         expect(copyrightText).toBeInTheDocument();
     });
+});
+
+afterAll(() => {
+    jest.useRealTimers();
 });
