@@ -35,7 +35,6 @@ export const DASHBOARD_URL = '/dashboard';
 export const VERIFY_EMAIL_URL = '/verify-email';
 
 /// FOOTER DASHBOARD PAGE
-export const DASHBOARD_URL = '/dashboard';
 export const MARKET_URL = '/market';
 export const KNOWLEDGE_URL = '/knowledge';
 export const NEWS_ALERTS_URL = '/news-alerts';
