@@ -17,7 +17,7 @@ const recommended: Stock[] = [
         name: 'Tesla Inc.',
         price: '$1,200',
         change: '+3.2%',
-        logo: 'src/assets/logos/tesla-logo.png',
+        logo: 'src/assets/logos/tsla-logo.png',
         reason: 'Electric vehicles',
     },
     {
@@ -25,7 +25,7 @@ const recommended: Stock[] = [
         name: 'Apple Inc.',
         price: '$150',
         change: '+5.0%',
-        logo: 'src/assets/logos/apple-logo.png',
+        logo: 'src/assets/logos/aapl-logo.png',
         reason: 'Smartphones',
     },
     {
@@ -33,7 +33,7 @@ const recommended: Stock[] = [
         name: 'Amazon.com Inc.',
         price: '$3,000',
         change: '+1.3%',
-        logo: 'src/assets/logos/amazon-logo.png',
+        logo: 'src/assets/logos/amzn-logo.png',
         reason: 'E-commerce',
     },
     {
@@ -41,7 +41,7 @@ const recommended: Stock[] = [
         name: 'Alphabet Inc.',
         price: '$2,500',
         change: '+0.9%',
-        logo: 'src/assets/logos/google-logo.png',
+        logo: 'src/assets/logos/googl-logo.png',
         reason: 'Search',
     },
 ];

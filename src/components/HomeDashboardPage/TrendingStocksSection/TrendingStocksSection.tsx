@@ -9,10 +9,10 @@ interface StockItem {
 }
 
 const trendingStocks: StockItem[] = [
-    { symbol: 'AAPL', change: '+5%', logo: 'src/assets/logos/apple-logo.png' },
-    { symbol: 'TSLA', change: '-3%', logo: 'src/assets/logos/tesla-logo.png' },
-    { symbol: 'AMZN', change: '+2.5%', logo: 'src/assets/logos/amazon-logo.png' },
-    { symbol: 'GOOGL', change: '+1.2%', logo: 'src/assets/logos/google-logo.png' },
+    { symbol: 'AAPL', change: '+5%', logo: 'src/assets/logos/aapl-logo.png' },
+    { symbol: 'TSLA', change: '-3%', logo: 'src/assets/logos/tsla-logo.png' },
+    { symbol: 'AMZN', change: '+2.5%', logo: 'src/assets/logos/amzn-logo.png' },
+    { symbol: 'GOOGL', change: '+1.2%', logo: 'src/assets/logos/googl-logo.png' },
     { symbol: 'META', change: '+3.19%', logo: 'src/assets/logos/meta-logo.png' },
 ];
 

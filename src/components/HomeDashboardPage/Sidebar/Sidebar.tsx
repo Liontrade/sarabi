@@ -18,7 +18,7 @@ const Sidebar: React.FC = () => {
     const [collapsed, setCollapsed] = useState(false);
 
     const mainLinks = [
-        { to: '/dashboard', label: 'HomeDashboardPage', icon: <MdDashboard /> },
+        { to: '/dashboard', label: 'Dashboard', icon: <MdDashboard /> },
         { to: '/knowledge', label: 'Knowledge Library', icon: <MdMenuBook /> },
         { to: '/summaries', label: 'Market Summaries', icon: <MdBarChart /> },
         { to: '/news-alerts', label: 'News Alerts', icon: <MdNotifications /> },
