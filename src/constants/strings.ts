@@ -71,3 +71,65 @@ export const PRICING_PREMIUM_FEATURE_1 = 'Advanced Market Insights';
 export const PRICING_PREMIUM_FEATURE_2 = 'Unlimited AI Predictions';
 export const PRICING_PREMIUM_FEATURE_3 = 'Priority Support';
 export const PRICING_PREMIUM_BUTTON = 'Join Now';
+
+/// FOOTER
+export const FOOTER_DESC =
+    'LionTrade – Twój przewodnik po świecie akcji. Analizy, rekomendacje i narzędzia wspierające decyzje inwestycyjne.';
+export const FOOTER_NEWSLETTER_LABEL = 'Join our newsletter';
+export const FOOTER_NEWSLETTER_PLACEHOLDER = 'Your email';
+export const FOOTER_SUBSCRIBE_BUTTON = 'Subscribe';
+export const FOOTER_EXPLORE_TITLE = 'Explore';
+export const FOOTER_SUPPORT_TITLE = 'Support';
+export const FOOTER_COPYRIGHT = 'All rights reserved.';
+export const FOOTER_BACK_TO_TOP_ARIA = 'Back to top';
+
+/// HOT NEWS SECTION
+export const HOT_NEWS_SECTION_TITLE = 'Hot News';
+export const HOT_NEWS_VIEW_MORE = 'View more news';
+
+/// NAVBAR
+export const NAV_DASHBOARD_LABEL = 'Dashboard';
+export const NAV_KNOWLEDGE_LABEL = 'Knowledge Library';
+export const NAV_MARKET_LABEL = 'Market';
+export const NAV_NEWS_ALERTS_LABEL = 'News Alerts';
+export const SEARCH_PLACEHOLDER = 'Search stocks, news...';
+export const NOTIFICATIONS_ARIA_LABEL = 'Notifications';
+export const PROFILE_LABEL = 'Profile';
+export const SETTINGS_LABEL = 'Settings';
+export const LOGOUT_LABEL = 'Logout';
+
+/// ONBOARDING SECTION
+export const ONBOARDING_WELCOME = 'Welcome back';
+export const ONBOARDING_COMPLETED_SUFFIX = '% Completed';
+
+export const STEP1_TITLE = 'Complete your user profile';
+export const STEP1_DESC = 'Help us personalize your experience';
+export const STEP1_CTA = 'Go to profile';
+
+export const STEP2_TITLE = 'Create your stock watchlist';
+export const STEP2_DESC = 'Keep track of your favorite stocks';
+export const STEP2_CTA = 'Go to watchlist';
+
+export const STEP3_TITLE = 'Read a lesson in the knowledge library';
+export const STEP3_DESC = 'Learn stock-market basics from A to Z';
+export const STEP3_CTA = 'Go to library';
+
+/// RECOMMENDED SECTION
+export const RECOMMENDED_TITLE = 'Recommended for you';
+export const REFRESH_RECOMMENDATIONS_LABEL = 'Refresh recommendations';
+export const ADD_LABEL = 'Add';
+export const VIEW_ALL_RECOMMENDATIONS = 'View all recommendations';
+
+/// SIDEBAR
+export const SIDEBAR_TOGGLE_COLLAPSE = 'Collapse';
+export const SIDEBAR_TOGGLE_EXPAND = 'Expand';
+export const SIDEBAR_SECTION_MAIN = 'Main';
+export const SIDEBAR_SECTION_SUPPORT = 'Support';
+export const SIDEBAR_ROLE_LABEL = 'Investor';
+export const SIDEBAR_AVATAR_ALT = 'Avatar';
+export const HELP_FEEDBACK_LABEL = 'Help & Feedback';
+
+/// TRENDING SECTION
+export const TRENDING_TITLE = 'Trending Stocks';
+export const REFRESH_TRENDING_LABEL = 'Refresh trending';
+export const VIEW_ALL_TRENDING = 'View all trending';

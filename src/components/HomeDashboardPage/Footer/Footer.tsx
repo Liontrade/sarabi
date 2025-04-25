@@ -4,13 +4,37 @@ import './Footer.css';
 import logo from '../../../assets/logo_without_background.png';
 import { FaTwitter, FaGithub, FaLinkedin, FaArrowUp } from 'react-icons/fa';
 
+import {
+    FOOTER_DESC,
+    FOOTER_NEWSLETTER_LABEL,
+    FOOTER_NEWSLETTER_PLACEHOLDER,
+    FOOTER_SUBSCRIBE_BUTTON,
+    FOOTER_EXPLORE_TITLE,
+    FOOTER_SUPPORT_TITLE,
+    FOOTER_COPYRIGHT,
+    FOOTER_BACK_TO_TOP_ARIA,
+} from '../../../constants/strings';
+import {
+    DASHBOARD_URL,
+    MARKET_URL,
+    KNOWLEDGE_URL,
+    NEWS_ALERTS_URL,
+    HELP_CENTER_URL,
+    SECURITY_URL,
+    PRIVACY_URL,
+    TERMS_URL,
+    CAREERS_URL,
+    TWITTER_URL,
+    GITHUB_URL,
+    LINKEDIN_URL,
+} from '../../../constants/urls';
+
 const Footer: React.FC = () => {
     const [email, setEmail] = useState('');
 
     const handleSubscribe = (e: React.FormEvent) => {
         e.preventDefault();
         console.log('Subscribe email:', email);
-        // TODO: Send email to the server or handle subscription logic
         setEmail('');
     };
 
@@ -21,75 +45,70 @@ const Footer: React.FC = () => {
             <div className="footer__container">
                 <div className="footer__col footer__col--brand">
                     <img src={logo} alt="LionTrade" className="footer__logo" />
-                    <p className="footer__desc">
-                        LionTrade – Twój przewodnik po świecie akcji. Analizy, rekomendacje i narzędzia wspierające
-                        decyzje inwestycyjne.
-                    </p>
+                    <p className="footer__desc">{FOOTER_DESC}</p>
+
                     <form className="footer__newsletter" onSubmit={handleSubscribe}>
-                        <label htmlFor="newsletter-email">Join our newsletter</label>
+                        <label htmlFor="newsletter-email">{FOOTER_NEWSLETTER_LABEL}</label>
                         <div className="newsletter__input-group">
                             <input
                                 id="newsletter-email"
                                 type="email"
-                                placeholder="Your email"
+                                placeholder={FOOTER_NEWSLETTER_PLACEHOLDER}
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
                                 required
                             />
-                            <button type="submit">Subscribe</button>
+                            <button type="submit">{FOOTER_SUBSCRIBE_BUTTON}</button>
                         </div>
                     </form>
                 </div>
 
                 <div className="footer__col">
-                    <h4>Explore</h4>
+                    <h4>{FOOTER_EXPLORE_TITLE}</h4>
                     <ul>
                         <li>
-                            <Link to="/dashboard">Dashboard</Link>
+                            <Link to={DASHBOARD_URL}>Dashboard</Link>
                         </li>
                         <li>
-                            <Link to="/market">Market</Link>
+                            <Link to={MARKET_URL}>Market</Link>
                         </li>
                         <li>
-                            <Link to="/knowledge">Knowledge Library</Link>
+                            <Link to={KNOWLEDGE_URL}>Knowledge Library</Link>
                         </li>
                         <li>
-                            <Link to="/summaries">Market Summaries</Link>
-                        </li>
-                        <li>
-                            <Link to="/news-alerts">News Alerts</Link>
+                            <Link to={NEWS_ALERTS_URL}>News Alerts</Link>
                         </li>
                     </ul>
                 </div>
 
                 <div className="footer__col">
-                    <h4>Support</h4>
+                    <h4>{FOOTER_SUPPORT_TITLE}</h4>
                     <ul>
                         <li>
-                            <Link to="/help-center">Help Center</Link>
+                            <Link to={HELP_CENTER_URL}>Help Center</Link>
                         </li>
                         <li>
-                            <Link to="/security">Security</Link>
+                            <Link to={SECURITY_URL}>Security</Link>
                         </li>
                         <li>
-                            <Link to="/privacy">Privacy</Link>
+                            <Link to={PRIVACY_URL}>Privacy</Link>
                         </li>
                         <li>
-                            <Link to="/terms">Terms</Link>
+                            <Link to={TERMS_URL}>Terms</Link>
                         </li>
                         <li>
-                            <Link to="/careers">Careers</Link>
+                            <Link to={CAREERS_URL}>Careers</Link>
                         </li>
                     </ul>
 
                     <div className="footer__social">
-                        <a href="https://twitter.com" aria-label="Twitter">
+                        <a href={TWITTER_URL} aria-label="Twitter">
                             <FaTwitter />
                         </a>
-                        <a href="https://github.com" aria-label="GitHub">
+                        <a href={GITHUB_URL} aria-label="GitHub">
                             <FaGithub />
                         </a>
-                        <a href="https://linkedin.com" aria-label="LinkedIn">
+                        <a href={LINKEDIN_URL} aria-label="LinkedIn">
                             <FaLinkedin />
                         </a>
                     </div>
@@ -97,8 +116,10 @@ const Footer: React.FC = () => {
             </div>
 
             <div className="footer__bottom">
-                <span>&copy; {new Date().getFullYear()} LionTrade. All rights reserved.</span>
-                <button className="footer__back-to-top" onClick={scrollToTop} aria-label="Back to top">
+                <span>
+                    &copy; {new Date().getFullYear()} LionTrade. {FOOTER_COPYRIGHT}
+                </span>
+                <button className="footer__back-to-top" onClick={scrollToTop} aria-label={FOOTER_BACK_TO_TOP_ARIA}>
                     <FaArrowUp />
                 </button>
             </div>
