@@ -6,9 +6,6 @@ module.exports = {
     transform: {
         '^.+\\.(ts|tsx)$': 'ts-jest',
     },
-    fakeTimers: {
-        enableGlobally: true,
-    },
     setupFilesAfterEnv: [
         '<rootDir>/src/setupTests.ts',
     ],
