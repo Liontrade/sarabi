@@ -1,6 +1,9 @@
-import React, { JSX } from 'react';
+import React, { JSX, useEffect, useState } from 'react';
 import './OnboardingSection.css';
 import { MdPerson, MdListAlt, MdMenuBook } from 'react-icons/md';
+import { onAuthStateChanged, User } from 'firebase/auth';
+import { auth, db } from '../../../firebaseConfig';
+import { doc, getDoc } from 'firebase/firestore';
 
 interface Step {
     icon: JSX.Element;
@@ -8,6 +11,10 @@ interface Step {
     description: string;
     progress: number;
     cta: { text: string; onClick: () => void };
+}
+
+interface UserData {
+    name?: string;
 }
 
 const steps: Step[] = [
@@ -35,12 +42,37 @@ const steps: Step[] = [
 ];
 
 const OnboardingSection: React.FC = () => {
+    const [userName, setUserName] = useState<string>('User');
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, async (user: User | null) => {
+            if (user) {
+                let name = user.displayName?.split(' ')[0] || '';
+
+                try {
+                    const docRef = doc(db, 'users', user.uid);
+                    const snap = await getDoc(docRef);
+                    if (snap.exists()) {
+                        const data = snap.data() as UserData;
+                        if (data.name) name = data.name.split(' ')[0];
+                    }
+                } catch (err) {
+                    console.warn('Nie udało się pobrać użytkownika z Firestore', err);
+                }
+
+                setUserName(name || 'User');
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
+
     const avgProgress = Math.round(steps.reduce((sum, s) => sum + s.progress, 0) / steps.length);
 
     return (
         <section className="onboarding-section">
             <header className="onboarding-header">
-                <h2>Welcome back, Jane!</h2>
+                <h2>Welcome back, {userName}!</h2>
                 <div className="overview-circle">
                     <div className="radial-progress" style={{ '--percent': `${avgProgress}` } as React.CSSProperties} />
                     <span className="overview-text">{avgProgress}% Completed</span>

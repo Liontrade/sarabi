@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Sidebar.css';
 import userAvatar from '../../../assets/home-page/user-avatar.png';
+import { auth } from '../../../firebaseConfig';
 import {
     MdDashboard,
     MdMenuBook,
@@ -16,6 +17,13 @@ import {
 const Sidebar: React.FC = () => {
     const location = useLocation();
     const [collapsed, setCollapsed] = useState(false);
+    const [fullName, setFullName] = useState<string>('User');
+
+    useEffect(() => {
+        if (auth.currentUser) {
+            setFullName(auth.currentUser.displayName || 'User');
+        }
+    }, []);
 
     const mainLinks = [
         { to: '/dashboard', label: 'Dashboard', icon: <MdDashboard /> },
@@ -43,7 +51,7 @@ const Sidebar: React.FC = () => {
                 <img src={userAvatar} alt="Avatar" className="sidebar__avatar" />
                 {!collapsed && (
                     <div className="sidebar__user-info">
-                        <span className="sidebar__username">Jane Smith</span>
+                        <span className="sidebar__username">{fullName}</span>
                         <span className="sidebar__role">Investor</span>
                     </div>
                 )}
