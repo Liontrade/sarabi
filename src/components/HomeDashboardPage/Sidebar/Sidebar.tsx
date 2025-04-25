@@ -28,7 +28,7 @@ const Sidebar: React.FC = () => {
     const mainLinks = [
         { to: '/dashboard', label: 'Dashboard', icon: <MdDashboard /> },
         { to: '/knowledge', label: 'Knowledge Library', icon: <MdMenuBook /> },
-        { to: '/summaries', label: 'Market Summaries', icon: <MdBarChart /> },
+        { to: '/market', label: 'Market', icon: <MdBarChart /> },
         { to: '/news-alerts', label: 'News Alerts', icon: <MdNotifications /> },
     ];
 

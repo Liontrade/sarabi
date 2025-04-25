@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
     const links = [
         { to: '/dashboard', label: 'Dashboard' },
         { to: '/knowledge', label: 'Knowledge Library' },
-        { to: '/summaries', label: 'Market Summaries' },
+        { to: '/market', label: 'Market' },
         { to: '/news-alerts', label: 'News Alerts' },
     ];
 
