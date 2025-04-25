@@ -8,26 +8,26 @@
     background: var(--color-secondary);
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto 2rem;
+    max-width: none;
+    margin: 0;
 }
 
-.trending-header {
+.trending-section .trending-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
 }
 
-.trending-header h3 {
+.trending-section .trending-header h3 {
     font-size: 1.5rem;
     font-weight: 600;
     color: var(--color-dark);
 }
 
-.trending-refresh {
+.trending-section .trending-refresh {
     background: var(--color-light);
     border: none;
     padding: 0.5rem;
@@ -40,36 +40,21 @@
         color 0.2s;
 }
 
-.trending-refresh:hover {
+.trending-section .trending-refresh:hover {
     background: var(--color-primary-hover);
     color: var(--color-secondary);
 }
 
-.trending-grid-wrapper {
-    position: relative;
+.trending-section .trending-grid {
     display: flex;
-    align-items: center;
-}
-
-.trending-grid {
-    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
     gap: 1rem;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 0.5rem;
 }
 
-.trending-grid::-webkit-scrollbar {
-    height: 6px;
-}
-
-.trending-grid::-webkit-scrollbar-thumb {
-    background: var(--color-light);
-    border-radius: 3px;
-}
-
-.stock-card {
-    flex: 0 0 300px;
+.trending-section .stock-card {
+    position: relative;
+    align-items: center;
     min-width: 300px;
     max-width: 300px;
     background: #fff;
@@ -78,29 +63,29 @@
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
     transition:
         transform 0.2s,
         box-shadow 0.2s;
 }
 
-.stock-card:hover {
+.trending-section .stock-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.stock-card__logo {
+.trending-section .stock-card__logo {
+    display: block;
+    margin: 0 auto 0.5rem;
     width: 40px;
     height: 40px;
     object-fit: contain;
-    margin-bottom: 0.5rem;
 }
 
-.stock-card__info {
+.trending-section .stock-card__info {
     text-align: center;
 }
 
-.stock-card__symbol {
+.trending-section .stock-card__symbol {
     display: block;
     font-size: 1.1rem;
     font-weight: 700;
@@ -108,25 +93,25 @@
     margin-bottom: 0.25rem;
 }
 
-.stock-card__change {
+.trending-section .stock-card__change {
     font-size: 0.9rem;
     font-weight: 600;
 }
 
-.stock-card__change.up {
+.trending-section .stock-card__change.up {
     color: #34a853;
 }
 
-.stock-card__change.down {
+.trending-section .stock-card__change.down {
     color: #d93025;
 }
 
-.trending-footer {
+.trending-section .trending-footer {
     text-align: center;
     margin-top: 1rem;
 }
 
-.trending-footer .view-all-btn {
+.trending-section .trending-footer .view-all-btn {
     background: var(--color-primary);
     color: var(--color-secondary);
     border: none;
@@ -138,20 +123,20 @@
     transition: background 0.2s;
 }
 
-.trending-footer .view-all-btn:hover {
+.trending-section .trending-footer .view-all-btn:hover {
     background: var(--color-primary-hover);
 }
 
 @media (max-width: 768px) {
-    .stock-card {
-        flex: 0 0 200px;
-        min-width: 200px;
-        max-width: 200px;
+    .trending-section .stock-card {
+        flex: 0 0 80%;
+        min-width: 80%;
+        max-width: 80%;
     }
 }
 
 @media (max-width: 480px) {
-    .stock-card {
+    .trending-section .stock-card {
         flex: 0 0 100%;
         min-width: 100%;
         max-width: 100%;
