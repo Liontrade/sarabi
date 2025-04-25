@@ -1,9 +1,3 @@
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
 .hot-news {
     background: var(--color-secondary);
     padding: 2rem;

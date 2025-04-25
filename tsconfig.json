@@ -26,7 +26,7 @@
   ],
   "include": [
     "src",
-    "src/__tests__/setupTests.ts",
+    "src/setupTests.ts",
     "src/**/*.tsx"
   ],
   "exclude": [
