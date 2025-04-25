@@ -94,6 +94,8 @@ describe('LandingPage integration', () => {
     });
 
     test('toggles navbar menu open and close within LandingPage', async () => {
+        jest.useRealTimers();
+
         const user = userEvent.setup();
         const { container } = render(
             <MemoryRouter>
@@ -111,5 +113,7 @@ describe('LandingPage integration', () => {
 
         await user.click(toggle!);
         expect(linksList).not.toHaveClass('navbar__links--active');
+
+        jest.useFakeTimers();
     });
 });

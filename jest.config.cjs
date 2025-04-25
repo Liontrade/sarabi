@@ -9,6 +9,9 @@ module.exports = {
     setupFilesAfterEnv: [
         '<rootDir>/src/__tests__/setupTests.ts',
     ],
+    fakeTimers: {
+        enableGlobally: true,
+    },
     testMatch: [
         '<rootDir>/src/**/*.(test|spec).ts?(x)',
     ],
