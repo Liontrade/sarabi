@@ -2,8 +2,6 @@ import '@testing-library/jest-dom';
 import { TextEncoder, TextDecoder } from 'util';
 import { cleanup } from '@testing-library/react';
 
-jest.useFakeTimers();
-
 if (typeof global.TextEncoder === 'undefined') {
     global.TextEncoder = TextEncoder;
 }
@@ -14,5 +12,4 @@ if (typeof global.TextDecoder === 'undefined') {
 
 afterEach(() => {
     cleanup();
-    jest.runOnlyPendingTimers();
 });
