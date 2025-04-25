@@ -1,3 +1,5 @@
+jest.useRealTimers();
+
 import { render, screen, fireEvent } from '@testing-library/react';
 import TrendingStocksSection from '../../../components/HomeDashboardPage/TrendingStocksSection/TrendingStocksSection';
 
@@ -58,5 +60,9 @@ describe('TrendingStocksSection Component', () => {
         render(<TrendingStocksSection />);
         const viewAll = screen.getByRole('button', { name: /View all trending/i });
         expect(viewAll).toBeInTheDocument();
+    });
+
+    afterAll(() => {
+        jest.useFakeTimers();
     });
 });

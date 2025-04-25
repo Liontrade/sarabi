@@ -1,3 +1,5 @@
+jest.useRealTimers();
+
 import { render, screen } from '@testing-library/react';
 import { FOOTER_COLUMNS } from '../../../constants/LandingPage/constants_footer';
 import { BRAND_NAME, COPYRIGHT } from '../../../constants/strings';
@@ -24,5 +26,9 @@ describe('Footer component', () => {
         render(<Footer />);
         const expectedText = `© ${currentYear} ${BRAND_NAME}. ${COPYRIGHT}`;
         expect(screen.getByText(expectedText)).toBeInTheDocument();
+    });
+
+    afterAll(() => {
+        jest.useFakeTimers();
     });
 });

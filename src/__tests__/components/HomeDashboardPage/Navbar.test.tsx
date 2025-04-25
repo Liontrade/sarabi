@@ -1,3 +1,5 @@
+jest.useRealTimers();
+
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Navbar from '../../../components/HomeDashboardPage/Navbar/Navbar';
@@ -157,5 +159,9 @@ describe('Navbar Component', () => {
 
         fireEvent.click(logoutButton);
         expect(mockNavigate).toHaveBeenCalledWith('/login');
+    });
+
+    afterAll(() => {
+        jest.useFakeTimers();
     });
 });

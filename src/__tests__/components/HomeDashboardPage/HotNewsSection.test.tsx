@@ -1,3 +1,5 @@
+jest.useRealTimers();
+
 import { render, screen } from '@testing-library/react';
 import HotNewsSection from '../../../components/HomeDashboardPage/HotNewsSection/HotNewsSection';
 
@@ -56,5 +58,9 @@ describe('HotNewsSection Component', () => {
         render(<HotNewsSection />);
         const button = screen.getByRole('button', { name: /view more news/i });
         expect(button).toBeInTheDocument();
+    });
+
+    afterAll(() => {
+        jest.useFakeTimers();
     });
 });

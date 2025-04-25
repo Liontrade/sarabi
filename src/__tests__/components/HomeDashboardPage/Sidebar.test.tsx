@@ -1,3 +1,5 @@
+jest.useRealTimers();
+
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Sidebar from '../../../components/HomeDashboardPage/Sidebar/Sidebar';
@@ -57,5 +59,9 @@ describe('Sidebar Component', () => {
         expect(toggleBtn).toHaveAttribute('aria-label', 'Collapse');
         expect(screen.getByText('Main')).toBeInTheDocument();
         expect(screen.getByText('Dashboard')).toBeInTheDocument();
+    });
+
+    afterAll(() => {
+        jest.useFakeTimers();
     });
 });

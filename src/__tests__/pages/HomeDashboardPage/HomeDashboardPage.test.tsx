@@ -1,3 +1,5 @@
+jest.useRealTimers();
+
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import HomeDashboardPage from '../../../pages/HomeDashboardPage/HomeDashboardPage';
@@ -64,5 +66,9 @@ describe('HomeDashboardPage', () => {
         expect(screen.getByTestId('hotnews')).toBeInTheDocument();
 
         expect(screen.getByTestId('footer')).toBeInTheDocument();
+    });
+
+    afterAll(() => {
+        jest.useFakeTimers();
     });
 });

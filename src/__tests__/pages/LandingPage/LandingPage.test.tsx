@@ -1,3 +1,5 @@
+jest.useRealTimers();
+
 import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import LandingPage from '../../../pages/LandingPage/LandingPage';
@@ -109,5 +111,9 @@ describe('LandingPage integration', () => {
 
         fireEvent.click(toggle!);
         expect(linksList).not.toHaveClass('navbar__links--active');
+    });
+
+    afterAll(() => {
+        jest.useFakeTimers();
     });
 });

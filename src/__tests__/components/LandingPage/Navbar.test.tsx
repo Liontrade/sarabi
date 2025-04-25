@@ -1,3 +1,5 @@
+jest.useRealTimers();
+
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Navbar from '../../../components/LandingPage/Navbar/Navbar';
@@ -56,5 +58,9 @@ describe('Navbar component', () => {
             expect(actionLink).toHaveAttribute('href', btn.to);
             expect(actionLink).toHaveClass(`btn btn--${btn.variant}`);
         });
+    });
+
+    afterAll(() => {
+        jest.useFakeTimers();
     });
 });

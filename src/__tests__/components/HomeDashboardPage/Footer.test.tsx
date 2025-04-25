@@ -1,3 +1,5 @@
+jest.useRealTimers();
+
 import { render, screen, fireEvent } from '@testing-library/react';
 import Footer from '../../../components/HomeDashboardPage/Footer/Footer';
 import { MemoryRouter } from 'react-router-dom';
@@ -125,5 +127,9 @@ describe('Footer Component', () => {
         const year = new Date().getFullYear().toString();
         const copyrightText = screen.getByText(new RegExp(`© ${year} LionTrade`, 'i'));
         expect(copyrightText).toBeInTheDocument();
+    });
+
+    afterAll(() => {
+        jest.useFakeTimers();
     });
 });
