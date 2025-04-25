@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './OnboardingSection.css';
+import './OnBoardingSection.css';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { auth, db } from '../../../firebaseConfig';
 import { doc, getDoc } from 'firebase/firestore';

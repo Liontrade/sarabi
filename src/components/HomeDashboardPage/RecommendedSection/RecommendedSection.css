@@ -1,9 +1,3 @@
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
 .recommended-section {
     background: var(--color-secondary);
     padding: 2rem;

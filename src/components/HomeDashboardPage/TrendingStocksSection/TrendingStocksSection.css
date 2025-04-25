@@ -1,9 +1,3 @@
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
 .trending-section {
     background: var(--color-secondary);
     padding: 2rem;
