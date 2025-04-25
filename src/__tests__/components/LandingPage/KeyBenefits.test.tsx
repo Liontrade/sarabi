@@ -1,5 +1,3 @@
-jest.useRealTimers();
-
 import { render, screen } from '@testing-library/react';
 import KeyBenefits from '../../../components/LandingPage/KeyBenefits/KeyBenefits';
 import {
@@ -42,9 +40,5 @@ describe('KeyBenefits component', () => {
             expect(benefitTitle).toBeInTheDocument();
             expect(benefitTitle?.textContent).toBe(expectedTitles[i]);
         });
-    });
-
-    afterAll(() => {
-        jest.useFakeTimers();
     });
 });

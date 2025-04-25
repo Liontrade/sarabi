@@ -1,5 +1,3 @@
-jest.useRealTimers();
-
 import { render, screen } from '@testing-library/react';
 import HowItWorks from '../../../components/LandingPage/HowItWorks/HowItWorks';
 import {
@@ -43,9 +41,5 @@ describe('HowItWorks component', () => {
             expect(textElement).toBeInTheDocument();
             expect(textElement?.textContent).toBe(texts[i]);
         });
-    });
-
-    afterAll(() => {
-        jest.useFakeTimers();
     });
 });

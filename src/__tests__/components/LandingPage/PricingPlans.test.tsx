@@ -1,5 +1,3 @@
-jest.useRealTimers();
-
 import { render, screen } from '@testing-library/react';
 import PricingPlans from '../../../components/LandingPage/PricingPlans/PricingPlans';
 import { PRICING_SECTION_ID } from '../../../constants/urls';
@@ -52,9 +50,5 @@ describe('PricingPlans component', () => {
             expect(button?.textContent).toBe(plan.buttonLabel);
             expect(button).toHaveClass('btn', 'pricing-plans__btn');
         });
-    });
-
-    afterAll(() => {
-        jest.useFakeTimers();
     });
 });

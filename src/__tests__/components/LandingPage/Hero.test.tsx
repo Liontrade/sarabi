@@ -1,5 +1,3 @@
-jest.useRealTimers();
-
 import { render, screen } from '@testing-library/react';
 import Hero from '../../../components/LandingPage/Hero/Hero';
 import heroBg from '../../../assets/hero.jpg';
@@ -35,9 +33,5 @@ describe('Hero component', () => {
             name: /Start Learning for Free/i,
         });
         expect(button).toBeInTheDocument();
-    });
-
-    afterAll(() => {
-        jest.useFakeTimers();
     });
 });

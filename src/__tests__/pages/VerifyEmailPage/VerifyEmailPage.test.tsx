@@ -1,3 +1,5 @@
+jest.useFakeTimers({ advanceTimers: true });
+
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import VerifyEmail from '../../../pages/VerifyEmailPage/VerifyEmailPage';
 import { sendEmailVerification, User } from 'firebase/auth';
@@ -24,7 +26,7 @@ describe('<VerifyEmail />', () => {
     } as unknown as User;
 
     beforeAll(() => {
-        jest.useFakeTimers();
+        jest.useFakeTimers({ advanceTimers: true });
     });
 
     afterAll(() => {
@@ -74,5 +76,9 @@ describe('<VerifyEmail />', () => {
             expect(mockReload).toHaveBeenCalled();
             expect(mockNavigate).toHaveBeenCalledWith('/dashboard');
         });
+    });
+
+    afterAll(() => {
+        jest.useRealTimers();
     });
 });

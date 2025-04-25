@@ -1,5 +1,3 @@
-jest.useRealTimers();
-
 import { render, screen, fireEvent } from '@testing-library/react';
 import RecommendedSection from '../../../components/HomeDashboardPage/RecommendedSection/RecommendedSection';
 
@@ -78,9 +76,5 @@ describe('RecommendedSection Component', () => {
         render(<RecommendedSection />);
         const viewAll = screen.getByRole('button', { name: /View all recommendations/i });
         expect(viewAll).toBeInTheDocument();
-    });
-
-    afterAll(() => {
-        jest.useFakeTimers();
     });
 });

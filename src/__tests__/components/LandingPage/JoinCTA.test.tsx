@@ -1,5 +1,3 @@
-jest.useRealTimers();
-
 import { render } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 import JoinCTA from '../../../components/LandingPage/JoinCTA/JoinCTA';
@@ -31,9 +29,5 @@ describe('JoinCTA component', () => {
         const button = screen.getByRole('button', { name: JOIN_CTA_BUTTON });
         expect(button).toBeInTheDocument();
         expect(button).toHaveClass('btn', 'join-cta__btn');
-    });
-
-    afterAll(() => {
-        jest.useFakeTimers();
     });
 });

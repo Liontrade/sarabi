@@ -1,5 +1,3 @@
-jest.useRealTimers();
-
 import { render, screen, fireEvent } from '@testing-library/react';
 import OnboardingSection from '../../../components/HomeDashboardPage/OnBoardingSection/OnBoardingSection';
 
@@ -91,9 +89,5 @@ describe('OnboardingSection Component', () => {
             fireEvent.click(btn);
             expect(console.log).toHaveBeenCalledWith(log);
         });
-    });
-
-    afterAll(() => {
-        jest.useFakeTimers();
     });
 });
