@@ -1,6 +1,5 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
 import LandingPage from '../../../pages/LandingPage/LandingPage';
 import {
     BRAND_NAME,
@@ -94,7 +93,6 @@ describe('LandingPage integration', () => {
     });
 
     test('toggles navbar menu open and close within LandingPage', async () => {
-        const user = userEvent.setup();
         const { container } = render(
             <MemoryRouter>
                 <LandingPage />
@@ -106,10 +104,10 @@ describe('LandingPage integration', () => {
         expect(toggle).toBeInTheDocument();
         expect(linksList).not.toHaveClass('navbar__links--active');
 
-        await user.click(toggle!);
+        fireEvent.click(toggle!);
         expect(linksList).toHaveClass('navbar__links--active');
 
-        await user.click(toggle!);
+        fireEvent.click(toggle!);
         expect(linksList).not.toHaveClass('navbar__links--active');
     });
 });

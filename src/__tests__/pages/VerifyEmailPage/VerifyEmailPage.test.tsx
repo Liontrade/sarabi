@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
 import VerifyEmail from '../../../pages/VerifyEmailPage/VerifyEmailPage';
 import { sendEmailVerification, User } from 'firebase/auth';
 import { auth } from '../../../firebaseConfig';
@@ -22,14 +22,6 @@ describe('<VerifyEmail />', () => {
         emailVerified: false,
         reload: mockReload,
     } as unknown as User;
-
-    beforeAll(() => {
-        jest.useFakeTimers();
-    });
-
-    afterAll(() => {
-        jest.useRealTimers();
-    });
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -68,8 +60,9 @@ describe('<VerifyEmail />', () => {
 
         render(<VerifyEmail />, { wrapper: BrowserRouter });
 
-        jest.advanceTimersByTime(3000);
-
+        act(() => {
+            jest.advanceTimersByTime(3000);
+        });
         await waitFor(() => {
             expect(mockReload).toHaveBeenCalled();
             expect(mockNavigate).toHaveBeenCalledWith('/dashboard');

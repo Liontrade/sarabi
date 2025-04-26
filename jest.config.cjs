@@ -6,8 +6,12 @@ module.exports = {
     transform: {
         '^.+\\.(ts|tsx)$': 'ts-jest',
     },
+    fakeTimers: {
+        enableGlobally: true,
+    },
+    maxWorkers: '50%',
     setupFilesAfterEnv: [
-        '<rootDir>/src/__tests__/setupTests.ts',
+        '<rootDir>/src/setupTests.ts',
     ],
     testMatch: [
         '<rootDir>/src/**/*.(test|spec).ts?(x)',

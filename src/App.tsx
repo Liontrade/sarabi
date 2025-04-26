@@ -5,14 +5,15 @@ import LandingPage from './pages/LandingPage/LandingPage';
 import SignUpPage from './pages/SignUpPage/SignUpPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
+import HomeDashboardPage from './pages/HomeDashboardPage/HomeDashboardPage';
 import VerifyEmailPage from './pages/VerifyEmailPage/VerifyEmailPage';
-import Dashboard from './pages/Dashboard/Dashboard';
 import MarketPage from './pages/MarketPage/MarketPage';
 import SettingsPage from './pages/SettingsPage/SettingsPage';
 import Spinner from './components/Spinner/Spinner';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './styles/global.css';
+import NotFound from './pages/NotFound/NotFound';
 
 function App() {
     const { user, loading } = useAuth();
@@ -42,7 +43,6 @@ function App() {
 
     return (
         <Router>
-            {/* Dodaj ToastContainer */}
             <ToastContainer
                 position="top-right"
                 autoClose={3000}
@@ -64,7 +64,7 @@ function App() {
                     path="/dashboard"
                     element={
                         <ProtectedRoute>
-                            <Dashboard />
+                            <HomeDashboardPage />
                         </ProtectedRoute>
                     }
                 />
@@ -84,7 +84,7 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
-                <Route path="*" element={<Navigate to="/" />} />
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </Router>
     );
