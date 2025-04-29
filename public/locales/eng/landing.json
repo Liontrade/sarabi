@@ -1,0 +1,12 @@
+{
+    "landing": {
+      "brand_name": "MyApp",
+      "login_text": "Log In",
+      "signup_text": "Sign Up",
+      "key_benefits_label": "Key Benefits",
+      "pricing_label": "Pricing",
+      "how_it_works_label": "How It Works",
+      "join_cta_label": "Join Now"
+    }
+  }
+  
