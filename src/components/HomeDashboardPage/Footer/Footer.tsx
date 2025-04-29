@@ -45,26 +45,26 @@ const Footer: React.FC = () => {
             <div className="footer__container">
                 <div className="footer__col footer__col--brand">
                     <img src={logo} alt="LionTrade" className="footer__logo" />
-                    <p className="footer__desc">{FOOTER_DESC}</p>
+                    <p className="footer__desc">{FOOTER_DESC()}</p>
 
                     <form className="footer__newsletter" onSubmit={handleSubscribe}>
-                        <label htmlFor="newsletter-email">{FOOTER_NEWSLETTER_LABEL}</label>
+                        <label htmlFor="newsletter-email">{FOOTER_NEWSLETTER_LABEL()}</label>
                         <div className="newsletter__input-group">
                             <input
                                 id="newsletter-email"
                                 type="email"
-                                placeholder={FOOTER_NEWSLETTER_PLACEHOLDER}
+                                placeholder={FOOTER_NEWSLETTER_PLACEHOLDER()}
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
                                 required
                             />
-                            <button type="submit">{FOOTER_SUBSCRIBE_BUTTON}</button>
+                            <button type="submit">{FOOTER_SUBSCRIBE_BUTTON()}</button>
                         </div>
                     </form>
                 </div>
 
                 <div className="footer__col">
-                    <h4>{FOOTER_EXPLORE_TITLE}</h4>
+                    <h4>{FOOTER_EXPLORE_TITLE()}</h4>
                     <ul>
                         <li>
                             <Link to={DASHBOARD_URL}>Dashboard</Link>
@@ -82,7 +82,7 @@ const Footer: React.FC = () => {
                 </div>
 
                 <div className="footer__col">
-                    <h4>{FOOTER_SUPPORT_TITLE}</h4>
+                    <h4>{FOOTER_SUPPORT_TITLE()}</h4>
                     <ul>
                         <li>
                             <Link to={HELP_CENTER_URL}>Help Center</Link>
@@ -117,9 +117,9 @@ const Footer: React.FC = () => {
 
             <div className="footer__bottom">
                 <span>
-                    &copy; {new Date().getFullYear()} LionTrade. {FOOTER_COPYRIGHT}
+                    &copy; {new Date().getFullYear()} LionTrade. {FOOTER_COPYRIGHT()}
                 </span>
-                <button className="footer__back-to-top" onClick={scrollToTop} aria-label={FOOTER_BACK_TO_TOP_ARIA}>
+                <button className="footer__back-to-top" onClick={scrollToTop} aria-label={FOOTER_BACK_TO_TOP_ARIA()}>
                     <FaArrowUp />
                 </button>
             </div>

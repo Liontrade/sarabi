@@ -8,7 +8,7 @@ import { HOT_NEWS_SECTION_TITLE, HOT_NEWS_VIEW_MORE } from '../../../constants/s
 const HotNewsSection: React.FC = () => (
     <section className="hot-news">
         <div className="hot-news__inner">
-            <h3 className="hot-news__title">{HOT_NEWS_SECTION_TITLE}</h3>
+            <h3 className="hot-news__title">{HOT_NEWS_SECTION_TITLE()}</h3>
             <div className="hot-news__grid">
                 {HOT_NEWS_ITEMS.map((item: NewsItem, idx: number) => (
                     <article key={idx} className="hot-news__card">
@@ -25,7 +25,7 @@ const HotNewsSection: React.FC = () => (
                 ))}
             </div>
             <div className="hot-news__footer">
-                <button className="hot-news__view-more">{HOT_NEWS_VIEW_MORE}</button>
+                <button className="hot-news__view-more">{HOT_NEWS_VIEW_MORE()}</button>
             </div>
         </div>
     </section>
