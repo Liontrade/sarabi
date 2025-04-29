@@ -21,7 +21,7 @@ const Footer: React.FC = () => (
         </div>
         <div className="footer__bottom">
             <p>
-                &copy; {new Date().getFullYear()} {BRAND_NAME}. {COPYRIGHT}
+                &copy; {new Date().getFullYear()} {BRAND_NAME()}. {COPYRIGHT()}
             </p>
         </div>
     </footer>

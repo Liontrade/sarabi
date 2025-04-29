@@ -32,23 +32,23 @@ const Sidebar: React.FC = () => {
             <button
                 className="sidebar__toggle"
                 onClick={() => setCollapsed(!collapsed)}
-                aria-label={collapsed ? SIDEBAR_TOGGLE_EXPAND : SIDEBAR_TOGGLE_COLLAPSE}
+                aria-label={collapsed ? SIDEBAR_TOGGLE_EXPAND() : SIDEBAR_TOGGLE_COLLAPSE()}
             >
                 {collapsed ? <MdChevronRight /> : <MdChevronLeft />}
             </button>
 
             <div className="sidebar__user">
-                <img src={userAvatar} alt={SIDEBAR_AVATAR_ALT} className="sidebar__avatar" />
+                <img src={userAvatar} alt={SIDEBAR_AVATAR_ALT()} className="sidebar__avatar" />
                 {!collapsed && (
                     <div className="sidebar__user-info">
                         <span className="sidebar__username">{fullName}</span>
-                        <span className="sidebar__role">{SIDEBAR_ROLE_LABEL}</span>
+                        <span className="sidebar__role">{SIDEBAR_ROLE_LABEL()}</span>
                     </div>
                 )}
             </div>
 
             <nav className="sidebar__nav">
-                <div className="sidebar__section-title">{!collapsed && SIDEBAR_SECTION_MAIN}</div>
+                <div className="sidebar__section-title">{!collapsed && SIDEBAR_SECTION_MAIN()}</div>
                 <ul>
                     {MAIN_LINKS.map((link: SidebarLink) => (
                         <li key={link.to}>
@@ -64,7 +64,7 @@ const Sidebar: React.FC = () => {
                     ))}
                 </ul>
 
-                <div className="sidebar__section-title">{!collapsed && SIDEBAR_SECTION_SUPPORT}</div>
+                <div className="sidebar__section-title">{!collapsed && SIDEBAR_SECTION_SUPPORT()}</div>
                 <ul>
                     {SUPPORT_LINKS.map((link: SidebarLink) => (
                         <li key={link.to}>

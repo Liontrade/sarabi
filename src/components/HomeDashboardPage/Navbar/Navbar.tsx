@@ -66,8 +66,8 @@ const Navbar: React.FC = () => {
                 </button>
 
                 <div className="navbar__brand" onClick={() => navigate(DASHBOARD_URL)}>
-                    <img src={logo} alt={BRAND_NAME} className="navbar__logo" />
-                    <span className="navbar__title">{BRAND_NAME}</span>
+                    <img src={logo} alt={BRAND_NAME()} className="navbar__logo" />
+                    <span className="navbar__title">{BRAND_NAME()}</span>
                 </div>
             </div>
 
@@ -86,7 +86,7 @@ const Navbar: React.FC = () => {
                 <div className="navbar__search">
                     <input
                         type="text"
-                        placeholder={SEARCH_PLACEHOLDER}
+                        placeholder={SEARCH_PLACEHOLDER()}
                         onKeyDown={e => e.key === 'Enter' && console.log('Search:', e.currentTarget.value)}
                     />
                 </div>
@@ -95,7 +95,7 @@ const Navbar: React.FC = () => {
             <div className="navbar__right">
                 <button
                     className="navbar__icon-btn"
-                    aria-label={NOTIFICATIONS_ARIA_LABEL}
+                    aria-label={NOTIFICATIONS_ARIA_LABEL()}
                     onClick={() => console.log('Notifications')}
                 >
                     <IoNotificationsOutline />
@@ -113,7 +113,7 @@ const Navbar: React.FC = () => {
                         <div className="navbar__dropdown">
                             {PROFILE_OPTIONS.map(opt => (
                                 <button key={opt.to} onClick={() => navigate(opt.to)}>
-                                    {opt.label}
+                                    {opt.label()}
                                 </button>
                             ))}
                         </div>

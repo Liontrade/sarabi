@@ -22,8 +22,8 @@ const RecommendedSection: React.FC = () => {
     return (
         <section className="recommended-section">
             <header className="recommended-header">
-                <h3>{RECOMMENDED_TITLE}</h3>
-                <button className="refresh-btn" onClick={handleRefresh} aria-label={REFRESH_RECOMMENDATIONS_LABEL}>
+                <h3>{RECOMMENDED_TITLE()}</h3>
+                <button className="refresh-btn" onClick={handleRefresh} aria-label={REFRESH_RECOMMENDATIONS_LABEL()}>
                     <FiRefreshCw />
                 </button>
             </header>
@@ -58,7 +58,7 @@ const RecommendedSection: React.FC = () => {
             </div>
 
             <div className="recommended-footer">
-                <button className="view-all-btn">{VIEW_ALL_RECOMMENDATIONS}</button>
+                <button className="view-all-btn">{VIEW_ALL_RECOMMENDATIONS()}</button>
             </div>
         </section>
     );

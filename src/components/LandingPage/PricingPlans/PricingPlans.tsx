@@ -6,8 +6,8 @@ import { PRICING_PLANS } from '../../../constants/LandingPage/constants_pricing'
 
 const PricingPlans: React.FC = () => (
     <section className="pricing-plans" id={PRICING_SECTION_ID}>
-        <h2 className="section-title">{PRICING_SECTION_TITLE}</h2>
-        <p className="pricing-plans__intro">{PRICING_INTRO}</p>
+        <h2 className="section-title">{PRICING_SECTION_TITLE()}</h2>
+        <p className="pricing-plans__intro">{PRICING_INTRO()}</p>
         <div className="pricing-plans__cards">
             {PRICING_PLANS.map((plan, idx) => (
                 <div key={idx} className="pricing-plans__card">

@@ -12,8 +12,8 @@ const Navbar: React.FC = () => {
     return (
         <nav className="navbar">
             <div className="navbar__logo">
-                <img src={logo} alt={`${BRAND_NAME} Logo`} className="navbar__logo-img" />
-                <h1 className="navbar__brand">{BRAND_NAME}</h1>
+                <img src={logo} alt={`${BRAND_NAME()} Logo`} className="navbar__logo-img" />
+                <h1 className="navbar__brand">{BRAND_NAME()}</h1>
             </div>
 
             <button className="navbar__toggle" onClick={() => setMenuOpen(open => !open)}>
@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
             <ul className={`navbar__links ${menuOpen ? 'navbar__links--active' : ''}`}>
                 {NAV_LINKS.map((link, i) => (
                     <li key={i}>
-                        <a href={link.href}>{link.text}</a>
+                        <a href={link.href}>{link.text()}</a>
                     </li>
                 ))}
             </ul>
@@ -31,7 +31,7 @@ const Navbar: React.FC = () => {
             <div className="navbar__actions">
                 {ACTION_BUTTONS.map((btn, i) => (
                     <Link key={i} to={btn.to} className={`btn btn--${btn.variant}`}>
-                        {btn.text}
+                        {btn.text()}
                     </Link>
                 ))}
             </div>

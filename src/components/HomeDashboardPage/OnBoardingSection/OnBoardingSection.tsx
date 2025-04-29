@@ -39,13 +39,13 @@ const OnboardingSection: React.FC = () => {
         <section className="onboarding-section">
             <header className="onboarding-header">
                 <h2>
-                    {ONBOARDING_WELCOME}, {userName}!
+                    {ONBOARDING_WELCOME()}, {userName}!
                 </h2>
                 <div className="overview-circle">
                     <div className="radial-progress" style={{ '--percent': `${avgProgress}` } as React.CSSProperties} />
                     <span className="overview-text">
                         {avgProgress}
-                        {ONBOARDING_COMPLETED_SUFFIX}
+                        {ONBOARDING_COMPLETED_SUFFIX()}
                     </span>
                 </div>
             </header>

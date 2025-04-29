@@ -17,15 +17,15 @@ const titles = [KEY_BENEFIT_1, KEY_BENEFIT_2, KEY_BENEFIT_3, KEY_BENEFIT_4];
 
 const KeyBenefits: React.FC = () => (
     <section id="key-benefits" className="key-benefits">
-        <h2 className="section-title">{KEY_BENEFITS_SECTION_TITLE}</h2>
-        <p className="section-subtitle">{KEY_BENEFITS_SECTION_SUBTITLE}</p>
+        <h2 className="section-title">{KEY_BENEFITS_SECTION_TITLE()}</h2>
+        <p className="section-subtitle">{KEY_BENEFITS_SECTION_SUBTITLE()}</p>
         <div className="benefits__grid">
             {titles.map((title, i) => {
                 const Icon = icons[i];
                 return (
                     <div key={i} className="benefits__card">
                         <Icon className="benefits__icon" />
-                        <h3 className="benefits__title">{title}</h3>
+                        <h3 className="benefits__title">{title()}</h3>
                     </div>
                 );
             })}

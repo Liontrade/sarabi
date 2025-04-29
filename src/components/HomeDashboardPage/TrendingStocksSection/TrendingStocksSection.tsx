@@ -15,8 +15,8 @@ const TrendingStocksSection: React.FC = () => {
     return (
         <section className="trending-section">
             <header className="trending-header">
-                <h3>{TRENDING_TITLE}</h3>
-                <button className="trending-refresh" onClick={handleRefresh} aria-label={REFRESH_TRENDING_LABEL}>
+                <h3>{TRENDING_TITLE()}</h3>
+                <button className="trending-refresh" onClick={handleRefresh} aria-label={REFRESH_TRENDING_LABEL()}>
                     <FiRefreshCw />
                 </button>
             </header>
@@ -41,7 +41,7 @@ const TrendingStocksSection: React.FC = () => {
             </div>
 
             <div className="trending-footer">
-                <button className="view-all-btn">{VIEW_ALL_TRENDING}</button>
+                <button className="view-all-btn">{VIEW_ALL_TRENDING()}</button>
             </div>
         </section>
     );

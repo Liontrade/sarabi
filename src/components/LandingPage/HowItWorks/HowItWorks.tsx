@@ -17,15 +17,15 @@ const texts = [HOW_IT_WORKS_STEP1_TEXT, HOW_IT_WORKS_STEP2_TEXT, HOW_IT_WORKS_ST
 
 const HowItWorks: React.FC = () => (
     <section id="how-it-works" className="how-it-works">
-        <h2 className="section-title">{HOW_IT_WORKS_SECTION_TITLE}</h2>
+        <h2 className="section-title">{HOW_IT_WORKS_SECTION_TITLE()}</h2>
         <div className="hiw__grid">
             {titles.map((title, i) => {
                 const Icon = icons[i];
                 return (
                     <div key={i} className="hiw__card">
                         <Icon className="hiw__icon" />
-                        <h3>{title}</h3>
-                        <p>{texts[i]}</p>
+                        <h3>{title()}</h3>
+                        <p>{texts[i]()}</p>
                     </div>
                 );
             })}
