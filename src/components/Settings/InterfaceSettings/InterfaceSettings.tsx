@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import i18n from 'i18next';
 import './InterfaceSettings.css';
 
 const InterfaceSettings: React.FC = () => {
     type ThemeType = 'light' | 'dark' | 'system';
-    type LanguageType = 'en' | 'es' | 'pt';
+    type LanguageType = 'en' | 'es' | 'pt' | 'pl';
     type CurrencyType = 'usd' | 'eur' | 'gbp';
     type DensityType = 'comfortable' | 'compact';
 
@@ -59,21 +60,35 @@ const InterfaceSettings: React.FC = () => {
                 <div className="btn-group">
                     <button
                         className={`btn-chip ${language === 'en' ? 'active' : ''}`}
-                        onClick={() => setLanguage('en')}
+                        onClick={() => {setLanguage('en');
+                            i18n.changeLanguage('en');
+                        }}
                     >
                         English
                     </button>
                     <button
                         className={`btn-chip ${language === 'es' ? 'active' : ''}`}
-                        onClick={() => setLanguage('es')}
+                        onClick={() => {setLanguage('es');
+                            i18n.changeLanguage('es');
+                        }}
                     >
                         Spanish
                     </button>
                     <button
                         className={`btn-chip ${language === 'pt' ? 'active' : ''}`}
-                        onClick={() => setLanguage('pt')}
+                        onClick={() => {setLanguage('pt')
+                            i18n.changeLanguage('pt');
+                        }}
                     >
                         Portuguese
+                    </button>
+                    <button
+                        className={`btn-chip ${language === 'pl' ? 'active' : ''}`}
+                        onClick={() => {setLanguage('pl')
+                            i18n.changeLanguage('pl');
+                        }}
+                    >
+                        Polski
                     </button>
                 </div>
             </div>
