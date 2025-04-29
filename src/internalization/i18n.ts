@@ -11,7 +11,7 @@ i18n
     fallbackLng: 'en',
     debug: true,
    // ns: ['common', 'header', 'footer', 'button', 'menu'], 
-    ns: ['landing'],
+    ns: ['en'],
     defaultNS: 'common', 
     interpolation: {
       escapeValue: false,
