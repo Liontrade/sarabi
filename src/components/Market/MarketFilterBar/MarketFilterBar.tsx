@@ -1,63 +1,50 @@
 import React from 'react';
 import './MarketFilterBar.css';
 
+type FilterKey = 'all' | 'popular' | 'recent' | 'gainers' | 'losers';
+
 interface MarketFilterBarProps {
-    activeFilter: 'all' | 'popular' | 'recent' | 'gainers' | 'losers';
-    onFilterChange: (filter: 'all' | 'popular' | 'recent' | 'gainers' | 'losers') => void;
+    activeFilter: FilterKey;
+    onFilterChange: (filter: FilterKey) => void;
     searchQuery: string;
     onSearchChange: (query: string) => void;
 }
+
+const tabs: { key: FilterKey; label: string }[] = [
+    { key: 'all', label: 'All' },
+    { key: 'popular', label: 'Most Popular' },
+    { key: 'recent', label: 'Recently Viewed' },
+    { key: 'gainers', label: 'Top Gainers' },
+    { key: 'losers', label: 'Top Losers' },
+];
 
 const MarketFilterBar: React.FC<MarketFilterBarProps> = ({
     activeFilter,
     onFilterChange,
     searchQuery,
     onSearchChange,
-}) => {
-    return (
-        <div className="market-filter-bar">
-            <div className="market-filter-bar__tabs">
+}) => (
+    <div className="market-filter-bar">
+        <div className="market-filter-bar__tabs">
+            {tabs.map(({ key, label }) => (
                 <button
-                    className={`market-filter-bar__tab ${activeFilter === 'all' ? 'active' : ''}`}
-                    onClick={() => onFilterChange('all')}
+                    key={key}
+                    className={`tab ${activeFilter === key ? 'tab--active' : ''}`}
+                    onClick={() => onFilterChange(key)}
                 >
-                    All
+                    {label}
                 </button>
-                <button
-                    className={`market-filter-bar__tab ${activeFilter === 'popular' ? 'active' : ''}`}
-                    onClick={() => onFilterChange('popular')}
-                >
-                    Most Popular
-                </button>
-                <button
-                    className={`market-filter-bar__tab ${activeFilter === 'recent' ? 'active' : ''}`}
-                    onClick={() => onFilterChange('recent')}
-                >
-                    Recently Viewed
-                </button>
-                <button
-                    className={`market-filter-bar__tab ${activeFilter === 'gainers' ? 'active' : ''}`}
-                    onClick={() => onFilterChange('gainers')}
-                >
-                    Top Gainers
-                </button>
-                <button
-                    className={`market-filter-bar__tab ${activeFilter === 'losers' ? 'active' : ''}`}
-                    onClick={() => onFilterChange('losers')}
-                >
-                    Top Losers
-                </button>
-            </div>
-            <div className="market-filter-bar__search">
-                <input
-                    type="text"
-                    placeholder="Search for assets by name or ticker"
-                    value={searchQuery}
-                    onChange={e => onSearchChange(e.target.value)}
-                />
-            </div>
+            ))}
         </div>
-    );
-};
+        <div className="market-filter-bar__search">
+            <input
+                type="text"
+                placeholder="Search by name or ticker…"
+                value={searchQuery}
+                onChange={e => onSearchChange(e.target.value)}
+            />
+        </div>
+    </div>
+);
 
 export default MarketFilterBar;

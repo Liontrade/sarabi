@@ -1,38 +1,88 @@
 .market-list {
-    margin-top: 1.5rem;
-    width: 100%;
-    background-color: #fff;
+    background: #fff;
     border: 1px solid #eee;
     border-radius: 8px;
-    overflow: hidden;
+    overflow-x: auto;
+}
+
+.market-list__loading {
+    padding: 1rem;
+    text-align: center;
+    color: var(--color-muted);
 }
 
 .market-list__table {
     width: 100%;
     border-collapse: collapse;
+    min-width: 800px;
 }
 
 .market-list__table thead {
-    background-color: #f9f9f9;
+    background: var(--color-light);
 }
 
 .market-list__table th,
 .market-list__table td {
-    text-align: left;
     padding: 0.75rem 1rem;
+    text-align: left;
     border-bottom: 1px solid #eee;
+    white-space: nowrap;
 }
 
-.company-logo {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
+.market-list__table tr:nth-child(even) {
+    background: #fafafa;
 }
 
-.change-cell.change--up {
-    color: green;
+.market-list__table th.sortable {
+    cursor: pointer;
+    user-select: none;
 }
 
-.change-cell.change--down {
-    color: red;
+.th-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sort-icons {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0.5rem;
+}
+
+.sort-icons .icon {
+    font-size: 0.7rem;
+    color: var(--color-muted);
+    opacity: 0.4;
+    transition:
+        color 0.2s,
+        opacity 0.2s;
+}
+
+.sort-icons .icon.active {
+    color: var(--color-primary);
+    opacity: 1;
+}
+
+.ticker-cell {
+    font-weight: 600;
+    color: var(--color-dark);
+}
+
+.change-cell {
+    font-weight: 600;
+}
+
+.change-cell.up {
+    color: #34a853;
+}
+
+.change-cell.down {
+    color: #d93025;
+}
+
+@media (min-width: 1200px) {
+    .market-list__table {
+        min-width: 0;
+    }
 }
