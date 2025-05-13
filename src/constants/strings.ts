@@ -2,34 +2,8 @@ import i18n from '../internalization/i18n';
 
 /// LANDING PAGE
 export const BRAND_NAME = () => i18n.t('landing.brand_name');
-export const LOGIN_TEXT = () => i18n.t('landing.login_text');
-export const SIGNUP_TEXT = () => i18n.t('landing.signup_text');
-export const KEY_BENEFITS_LABEL = () => i18n.t('landing.key_benefits_label');
-export const PRICING_LABEL = () => i18n.t('landing.pricing_label');
-export const HOW_IT_WORKS_LABEL = () => i18n.t('landing.how_it_works_label');
-export const JOIN_CTA_LABEL = () => i18n.t('landing.join_cta_label');
 
-/// FOOTER LANDING PAGE
-export const ABOUT_US = () => i18n.t('footer_landing.about_us');
-export const CAREERS = () => i18n.t('footer_landing.careers');
-export const PRESS = () => i18n.t('footer_landing.press');
-export const CONTACT = () => i18n.t('footer_landing.contact');
-export const AI_PREDICTIONS = () => i18n.t('footer_landing.ai_predictions');
-export const LIVE_INSIGHTS = () => i18n.t('footer_landing.live_insights');
-export const PORTFOLIO_MANAGEMENT = () => i18n.t('footer_landing.portfolio_management');
-export const CUSTOM_ALERTS = () => i18n.t('footer_landing.custom_alerts');
-export const BLOG = () => i18n.t('footer_landing.blog');
-export const TUTORIALS = () => i18n.t('footer_landing.tutorials');
-export const FAQ = () => i18n.t('footer_landing.faq');
-export const HELP_CENTER = () => i18n.t('footer_landing.help_center');
-export const TERMS_OF_SERVICE = () => i18n.t('footer_landing.terms_of_service');
-export const PRIVACY_POLICY = () => i18n.t('footer_landing.privacy_policy');
-export const COOKIE_POLICY = () => i18n.t('footer_landing.cookie_policy');
 export const COPYRIGHT = () => i18n.t('footer_landing.copyright');
-export const COMPANY_LABEL = () => i18n.t('footer_landing.company_label');
-export const FEATURES_LABEL = () => i18n.t('footer_landing.features_label');
-export const RESOURCES_LABEL = () => i18n.t('footer_landing.resources_label');
-export const LEGAL_LABEL = () => i18n.t('footer_landing.legal_label');
 
 /// HOW IT WORKS LANDING PAGE
 export const HOW_IT_WORKS_SECTION_TITLE = () => i18n.t('how_it_works_landing_page.section_title');
