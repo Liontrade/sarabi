@@ -1,0 +1,16 @@
+{
+    "onboarding_welcome": "Welcome back",
+    "onboarding_completed_suffix": "% Completed",
+
+    "step1_title": "Complete your user profile",
+    "step1_desc": "Help us personalize your experience",
+    "step1_cta": "Go to profile",
+
+    "step2_title": "Create your stock watchlist",
+    "step2_desc": "Keep track of your favorite stocks",
+    "step2_cta": "Go to watchlist",
+
+    "step3_title": "Read a lesson in the knowledge library",
+    "step3_desc": "Learn stock-market basics from A to Z",
+    "step3_cta": "Go to library"
+}

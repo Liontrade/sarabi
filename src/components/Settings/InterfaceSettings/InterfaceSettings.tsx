@@ -60,7 +60,8 @@ const InterfaceSettings: React.FC = () => {
                 <div className="btn-group">
                     <button
                         className={`btn-chip ${language === 'en' ? 'active' : ''}`}
-                        onClick={() => {setLanguage('en');
+                        onClick={() => {
+                            setLanguage('en');
                             i18n.changeLanguage('en');
                         }}
                     >
@@ -68,7 +69,8 @@ const InterfaceSettings: React.FC = () => {
                     </button>
                     <button
                         className={`btn-chip ${language === 'es' ? 'active' : ''}`}
-                        onClick={() => {setLanguage('es');
+                        onClick={() => {
+                            setLanguage('es');
                             i18n.changeLanguage('es');
                         }}
                     >
@@ -76,7 +78,8 @@ const InterfaceSettings: React.FC = () => {
                     </button>
                     <button
                         className={`btn-chip ${language === 'pt' ? 'active' : ''}`}
-                        onClick={() => {setLanguage('pt')
+                        onClick={() => {
+                            setLanguage('pt');
                             i18n.changeLanguage('pt');
                         }}
                     >
@@ -84,7 +87,8 @@ const InterfaceSettings: React.FC = () => {
                     </button>
                     <button
                         className={`btn-chip ${language === 'pl' ? 'active' : ''}`}
-                        onClick={() => {setLanguage('pl')
+                        onClick={() => {
+                            setLanguage('pl');
                             i18n.changeLanguage('pl');
                         }}
                     >

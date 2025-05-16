@@ -1,0 +1,10 @@
+{
+    "signin_title": "Sign in to LionTrade",
+    "login_error_invalid_credentials": "LoginPage failed: Wrong email or password",
+    "login_button": "Log In",
+    "or_text": "or",
+    "continue_with_google": "Continue with Google",
+    "forgot_password_link": "Forgot Password?",
+    "dont_have_account_text": "Don’t have an account?",
+    "signup_link_text": "Sign up"
+}

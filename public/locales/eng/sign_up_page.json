@@ -1,0 +1,14 @@
+{
+    "signup_title": "Create an account",
+    "valid_email_error": "Please enter a valid email address.",
+    "password_min_length_error": "Password must be at least 8 characters long.",
+    "password_match_error": "Passwords do not match.",
+    "email_already_in_use_error": "This email is already registered. Please log in instead.",
+    "invalid_email_format_error": "Invalid email format.",
+    "generic_signup_error": "An error occurred. Please try again.",
+    "unexpected_signup_error": "An unexpected error occurred.",
+    "create_account_button": "Create Account",
+    "signup_social_button": "Sign up with Google",
+    "signup_info_text": "Join 10,000+ investors on LionTrade and get a free stock slice",
+    "signup_terms_text": "By creating an account, you agree to LionTrade's terms of service and privacy policy"
+}
