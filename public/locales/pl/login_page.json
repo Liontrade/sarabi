@@ -1,0 +1,10 @@
+{
+    "signin_title": "Zaloguj się do LionTrade",
+    "login_error_invalid_credentials": "Błąd logowania: Nieprawidłowy e-mail lub hasło",
+    "login_button": "Zaloguj się",
+    "or_text": "lub",
+    "continue_with_google": "Kontynuuj z Google",
+    "forgot_password_link": "Nie pamiętasz hasła?",
+    "dont_have_account_text": "Nie masz jeszcze konta?",
+    "signup_link_text": "Zarejestruj się"
+}

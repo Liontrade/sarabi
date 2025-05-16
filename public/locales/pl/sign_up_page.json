@@ -1,0 +1,14 @@
+{
+    "signup_title": "Utwórz konto",
+    "valid_email_error": "Proszę podać poprawny adres e-mail.",
+    "password_min_length_error": "Hasło musi mieć co najmniej 8 znaków.",
+    "password_match_error": "Hasła nie są zgodne.",
+    "email_already_in_use_error": "Ten e-mail jest już zarejestrowany. Proszę się zalogować.",
+    "invalid_email_format_error": "Niepoprawny format e-mail.",
+    "generic_signup_error": "Wystąpił błąd. Spróbuj ponownie.",
+    "unexpected_signup_error": "Wystąpił nieoczekiwany błąd.",
+    "create_account_button": "Utwórz konto",
+    "signup_social_button": "Zarejestruj się przez Google",
+    "signup_info_text": "Dołącz do ponad 10 000 inwestorów na LionTrade i zdobądź darmowe akcje",
+    "signup_terms_text": "Tworząc konto, zgadzasz się na warunki korzystania z LionTrade oraz politykę prywatności"
+}
