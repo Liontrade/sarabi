@@ -1,7 +1,6 @@
 {
-    "verify_email_title": "Potwierdź swój adres e-mail",
-    "verify_email_info_part1": "Wysłano wiadomość potwierdzającą na adres",
-    "verify_email_info_part2": "Sprawdź swoją skrzynkę i kliknij w link potwierdzający. Ta strona zaktualizuje się automatycznie po weryfikacji e-maila.",
-    "resend_email_button_text": "Wyślij ponownie",
-    "verify_email_sent_again_alert": "Wiadomość potwierdzająca została wysłana ponownie."
+    "title": "Potwierdź swój adres e-mail",
+    "info": "Wysłaliśmy wiadomość potwierdzającą na adres {{email}}. Sprawdź swoją skrzynkę i kliknij link weryfikacyjny. Ta strona odświeży się automatycznie po potwierdzeniu e-maila.",
+    "resend_button": "Wyślij ponownie e-mail",
+    "resent_alert": "Wiadomość potwierdzająca została wysłana ponownie."
 }

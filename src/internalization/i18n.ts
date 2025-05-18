@@ -13,6 +13,8 @@ const namespaces = [
     'landing_how_it_works',
     'landing_join_cta',
     'login_page',
+    'sign_up_page',
+    'verify_email_page',
     'header',
     'footer',
     'pricing',

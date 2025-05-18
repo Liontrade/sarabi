@@ -1,10 +1,14 @@
 {
-    "signin_title": "Sign in to LionTrade",
-    "login_error_invalid_credentials": "LoginPage failed: Wrong email or password",
+    "title": "Sign in to LionTrade",
+    "email_label": "Email",
+    "email_placeholder": "yourname@example.com",
+    "password_label": "Password",
+    "password_placeholder": "Enter your password",
     "login_button": "Log In",
     "or_text": "or",
     "continue_with_google": "Continue with Google",
     "forgot_password_link": "Forgot Password?",
     "dont_have_account_text": "Don’t have an account?",
-    "signup_link_text": "Sign up"
+    "signup_button": "Sign up",
+    "invalid_credentials_error": "Wrong email or password."
 }

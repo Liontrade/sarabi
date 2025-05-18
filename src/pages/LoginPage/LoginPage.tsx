@@ -5,38 +5,26 @@ import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 
 import { useNavigate, Link } from 'react-router-dom';
 import Spinner from '../../components/Spinner/Spinner';
 import MinimalNavbar from '../../components/MinimalNavbar/MinimalNavbar';
-
-import {
-    SIGNIN_TITLE,
-    LOGIN_ERROR_INVALID_CREDENTIALS,
-    LOGIN_BUTTON,
-    OR_TEXT,
-    CONTINUE_WITH_GOOGLE,
-    FORGOT_PASSWORD_LINK,
-    DONT_HAVE_ACCOUNT_TEXT,
-    SIGNUP_LINK_TEXT,
-} from '../../constants/strings';
+import { useTranslation } from 'react-i18next';
 import { FORGOT_PASSWORD_URL, SIGNUP_URL, DASHBOARD_URL } from '../../constants/urls';
 
 const LoginPage: React.FC = () => {
+    const { t } = useTranslation('login_page');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError(null);
-        console.log('Attempting to log in with email:', email);
+        setLoading(true);
         try {
-            setLoading(true);
-            const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            console.log('User logged in successfully:', userCredential.user);
+            await signInWithEmailAndPassword(auth, email, password);
             navigate(DASHBOARD_URL);
-        } catch (err: unknown) {
-            console.error('Error logging in:', err);
-            setError(LOGIN_ERROR_INVALID_CREDENTIALS);
+        } catch {
+            setError(t('invalid_credentials_error'));
         } finally {
             setLoading(false);
         }
@@ -44,16 +32,13 @@ const LoginPage: React.FC = () => {
 
     const handleGoogleSignIn = async () => {
         setError(null);
-        const provider = new GoogleAuthProvider();
-        console.log('Attempting Google sign in...');
+        setLoading(true);
         try {
-            setLoading(true);
-            const userCredential = await signInWithPopup(auth, provider);
-            console.log('Google sign in successful:', userCredential.user);
+            const provider = new GoogleAuthProvider();
+            await signInWithPopup(auth, provider);
             navigate(DASHBOARD_URL);
-        } catch (err: unknown) {
-            console.error('Error during Google sign in:', err);
-            setError('Google sign-in failed. Please try again.');
+        } catch {
+            setError(t('invalid_credentials_error'));
         } finally {
             setLoading(false);
         }
@@ -64,43 +49,37 @@ const LoginPage: React.FC = () => {
             <MinimalNavbar variant="signup" />
 
             <div className="login-page__content">
-                <h1>{SIGNIN_TITLE}</h1>
+                <h1>{t('title')}</h1>
 
                 {error && <p className="login-error">{error}</p>}
 
                 <form className="login-form" onSubmit={handleSubmit}>
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email">{t('email_label')}</label>
                     <input
                         id="email"
                         type="email"
-                        placeholder="johndoe@gmail.com"
+                        placeholder={t('email_placeholder')}
                         value={email}
-                        onChange={e => {
-                            console.log('Email changed:', e.target.value);
-                            setEmail(e.target.value);
-                        }}
+                        onChange={e => setEmail(e.target.value)}
                         required
                     />
 
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">{t('password_label')}</label>
                     <input
                         id="password"
                         type="password"
-                        placeholder="Enter your password"
+                        placeholder={t('password_placeholder')}
                         value={password}
-                        onChange={e => {
-                            console.log('Password changed');
-                            setPassword(e.target.value);
-                        }}
+                        onChange={e => setPassword(e.target.value)}
                         required
                     />
 
                     <button type="submit" className="login-form__submit" disabled={loading}>
-                        {loading ? <Spinner /> : LOGIN_BUTTON}
+                        {loading ? <Spinner /> : t('login_button')}
                     </button>
 
                     <div className="login-form__or">
-                        <span>{OR_TEXT}</span>
+                        <span>{t('or_text')}</span>
                     </div>
 
                     <button
@@ -109,18 +88,18 @@ const LoginPage: React.FC = () => {
                         onClick={handleGoogleSignIn}
                         disabled={loading}
                     >
-                        {loading ? <Spinner /> : CONTINUE_WITH_GOOGLE}
+                        {loading ? <Spinner /> : t('continue_with_google')}
                     </button>
 
                     <div className="login-form__links">
                         <Link to={FORGOT_PASSWORD_URL} className="login-form__link">
-                            {FORGOT_PASSWORD_LINK}
+                            {t('forgot_password_link')}
                         </Link>
                         <span> | </span>
                         <span>
-                            {DONT_HAVE_ACCOUNT_TEXT}{' '}
+                            {t('dont_have_account_text')}{' '}
                             <Link to={SIGNUP_URL} className="login-form__link">
-                                {SIGNUP_LINK_TEXT}
+                                {t('signup_button')}
                             </Link>
                         </span>
                     </div>

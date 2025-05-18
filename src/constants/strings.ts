@@ -3,30 +3,6 @@ import i18n from '../internalization/i18n';
 /// LANDING PAGE
 export const BRAND_NAME = () => i18n.t('landing.brand_name');
 
-/// LOGIN PAGE
-export const SIGNIN_TITLE = () => i18n.t('login_page.title');
-export const LOGIN_ERROR_INVALID_CREDENTIALS = () => i18n.t('login_page.invalid_credentials');
-export const LOGIN_BUTTON = () => i18n.t('login_page.login_button');
-export const OR_TEXT = () => i18n.t('login_page.or_text');
-export const CONTINUE_WITH_GOOGLE = () => i18n.t('login_page.continue_with_google');
-export const FORGOT_PASSWORD_LINK = () => i18n.t('login_page.forgot_password_link');
-export const DONT_HAVE_ACCOUNT_TEXT = () => i18n.t('login_page.dont_have_account_text');
-export const SIGNUP_LINK_TEXT = () => i18n.t('login_page.signup_link_text');
-
-/// SIGNUP PAGE
-export const SIGNUP_TITLE = () => i18n.t('signup_page.title');
-export const VALID_EMAIL_ERROR = () => i18n.t('signup_page.valid_email_error');
-export const PASSWORD_MIN_LENGTH_ERROR = () => i18n.t('signup_page.password_min_length_error');
-export const PASSWORD_MATCH_ERROR = () => i18n.t('signup_page.password_match_error');
-export const EMAIL_ALREADY_IN_USE_ERROR = () => i18n.t('signup_page.email_already_in_use_error');
-export const INVALID_EMAIL_FORMAT_ERROR = () => i18n.t('signup_page.invalid_email_format_error');
-export const GENERIC_SIGNUP_ERROR = () => i18n.t('signup_page.generic_signup_error');
-export const UNEXPECTED_SIGNUP_ERROR = () => i18n.t('signup_page.unexpected_signup_error');
-export const CREATE_ACCOUNT_BUTTON = () => i18n.t('signup_page.create_account_button');
-export const SIGNUP_SOCIAL_BUTTON = () => i18n.t('signup_page.signup_social_button');
-export const SIGNUP_INFO_TEXT = () => i18n.t('signup_page.info_text');
-export const SIGNUP_TERMS_TEXT = () => i18n.t('signup_page.terms_text');
-
 /// VERIFY EMAIL PAGE
 export const VERIFY_EMAIL_TITLE = () => i18n.t('verify_email_page.title');
 export const VERIFY_EMAIL_INFO_PART1 = () => i18n.t('verify_email_page.info_part1');
