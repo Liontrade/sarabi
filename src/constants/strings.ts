@@ -3,46 +3,6 @@ import i18n from '../internalization/i18n';
 /// LANDING PAGE
 export const BRAND_NAME = () => i18n.t('landing.brand_name');
 
-export const COPYRIGHT = () => i18n.t('footer_landing.copyright');
-
-/// HOW IT WORKS LANDING PAGE
-export const HOW_IT_WORKS_SECTION_TITLE = () => i18n.t('how_it_works_landing_page.section_title');
-export const HOW_IT_WORKS_STEP1_TITLE = () => i18n.t('how_it_works_landing_page.step1_title');
-export const HOW_IT_WORKS_STEP1_TEXT = () => i18n.t('how_it_works_landing_page.step1_text');
-export const HOW_IT_WORKS_STEP2_TITLE = () => i18n.t('how_it_works_landing_page.step2_title');
-export const HOW_IT_WORKS_STEP2_TEXT = () => i18n.t('how_it_works_landing_page.step2_text');
-export const HOW_IT_WORKS_STEP3_TITLE = () => i18n.t('how_it_works_landing_page.step3_title');
-export const HOW_IT_WORKS_STEP3_TEXT = () => i18n.t('how_it_works_landing_page.step3_text');
-
-/// JOIN CTA LANDING PAGE
-export const JOIN_CTA_TITLE = () => i18n.t('join_cta_landing_page.title');
-export const JOIN_CTA_SUBTITLE = () => i18n.t('join_cta_landing_page.subtitle');
-export const JOIN_CTA_BUTTON = () => i18n.t('join_cta_landing_page.button');
-
-/// KEY BENEFITS LANDING PAGE
-export const KEY_BENEFITS_SECTION_TITLE = () => i18n.t('key_benefits_landing_page.section_title');
-export const KEY_BENEFITS_SECTION_SUBTITLE = () => i18n.t('key_benefits_landing_page.section_subtitle');
-export const KEY_BENEFIT_1 = () => i18n.t('key_benefits_landing_page.benefit_1');
-export const KEY_BENEFIT_2 = () => i18n.t('key_benefits_landing_page.benefit_2');
-export const KEY_BENEFIT_3 = () => i18n.t('key_benefits_landing_page.benefit_3');
-export const KEY_BENEFIT_4 = () => i18n.t('key_benefits_landing_page.benefit_4');
-
-/// PRICING PLANS LANDING PAGE
-export const PRICING_SECTION_TITLE = () => i18n.t('pricing_plans_landing_page.title');
-export const PRICING_INTRO = () => i18n.t('pricing_plans_landing_page.intro');
-export const PRICING_FREE_NAME = () => i18n.t('pricing_plans_landing_page.free_plan_name');
-export const PRICING_FREE_PRICE = () => i18n.t('pricing_plans_landing_page.free_plan_price');
-export const PRICING_FREE_FEATURE_1 = () => i18n.t('pricing_plans_landing_page.free_plan_feature_1');
-export const PRICING_FREE_FEATURE_2 = () => i18n.t('pricing_plans_landing_page.free_plan_feature_2');
-export const PRICING_FREE_FEATURE_3 = () => i18n.t('pricing_plans_landing_page.free_plan_feature_3');
-export const PRICING_FREE_BUTTON = () => i18n.t('pricing_plans_landing_page.free_plan_button');
-export const PRICING_PREMIUM_NAME = () => i18n.t('pricing_plans_landing_page.premium_plan_name');
-export const PRICING_PREMIUM_PRICE = () => i18n.t('pricing_plans_landing_page.premium_plan_price');
-export const PRICING_PREMIUM_FEATURE_1 = () => i18n.t('pricing_plans_landing_page.premium_plan_feature_1');
-export const PRICING_PREMIUM_FEATURE_2 = () => i18n.t('pricing_plans_landing_page.premium_plan_feature_2');
-export const PRICING_PREMIUM_FEATURE_3 = () => i18n.t('pricing_plans_landing_page.premium_plan_feature_3');
-export const PRICING_PREMIUM_BUTTON = () => i18n.t('pricing_plans_landing_page.premium_plan_button');
-
 /// LOGIN PAGE
 export const SIGNIN_TITLE = () => i18n.t('login_page.title');
 export const LOGIN_ERROR_INVALID_CREDENTIALS = () => i18n.t('login_page.invalid_credentials');

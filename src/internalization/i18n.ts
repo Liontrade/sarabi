@@ -3,7 +3,21 @@ import { initReactI18next } from 'react-i18next';
 import HttpBackend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-const namespaces = ['common', 'landing_navbar', 'landing_footer', 'header', 'footer', 'pricing', 'onboarding' /*…*/];
+const namespaces = [
+    'common',
+    'landing_navbar',
+    'landing_footer',
+    'landing_hero',
+    'landing_key_benefits',
+    'landing_pricing_plans',
+    'landing_how_it_works',
+    'landing_join_cta',
+    'login_page',
+    'header',
+    'footer',
+    'pricing',
+    'onboarding',
+];
 
 i18n.use(HttpBackend)
     .use(LanguageDetector)

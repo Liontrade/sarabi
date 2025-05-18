@@ -1,36 +1,27 @@
 import React from 'react';
 import { FiBookOpen, FiBell, FiBarChart2, FiMessageCircle } from 'react-icons/fi';
 import './KeyBenefits.css';
-
-import {
-    KEY_BENEFITS_SECTION_TITLE,
-    KEY_BENEFITS_SECTION_SUBTITLE,
-    KEY_BENEFIT_1,
-    KEY_BENEFIT_2,
-    KEY_BENEFIT_3,
-    KEY_BENEFIT_4,
-} from '../../../constants/strings';
+import { useTranslation } from 'react-i18next';
 
 const icons = [FiBookOpen, FiBell, FiBarChart2, FiMessageCircle];
 
-const titles = [KEY_BENEFIT_1, KEY_BENEFIT_2, KEY_BENEFIT_3, KEY_BENEFIT_4];
+const KeyBenefits: React.FC = () => {
+    const { t } = useTranslation('landing_key_benefits');
 
-const KeyBenefits: React.FC = () => (
-    <section id="key-benefits" className="key-benefits">
-        <h2 className="section-title">{KEY_BENEFITS_SECTION_TITLE()}</h2>
-        <p className="section-subtitle">{KEY_BENEFITS_SECTION_SUBTITLE()}</p>
-        <div className="benefits__grid">
-            {titles.map((title, i) => {
-                const Icon = icons[i];
-                return (
+    return (
+        <section id="key-benefits" className="key-benefits">
+            <h2 className="section-title">{t('section_title')}</h2>
+            <p className="section-subtitle">{t('section_subtitle')}</p>
+            <div className="benefits__grid">
+                {icons.map((Icon, i) => (
                     <div key={i} className="benefits__card">
                         <Icon className="benefits__icon" />
-                        <h3 className="benefits__title">{title()}</h3>
+                        <h3 className="benefits__title">{t(`benefit_${i + 1}`)}</h3>
                     </div>
-                );
-            })}
-        </div>
-    </section>
-);
+                ))}
+            </div>
+        </section>
+    );
+};
 
 export default KeyBenefits;
