@@ -3,11 +3,11 @@ import './OnBoardingSection.css';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { auth, db } from '../../../firebaseConfig';
 import { doc, getDoc } from 'firebase/firestore';
-
-import { ONBOARDING_WELCOME, ONBOARDING_COMPLETED_SUFFIX } from '../../../constants/strings';
-import { ONBOARDING_STEPS, OnboardingStep } from '../../../constants/HomeDashboardPage/constants_on_boarding_section';
+import { useTranslation } from 'react-i18next';
+import { ONBOARDING_STEPS } from '../../../constants/HomeDashboardPage/constants_on_boarding_section';
 
 const OnboardingSection: React.FC = () => {
+    const { t } = useTranslation('home_dashboard_onboarding_section');
     const [userName, setUserName] = useState('User');
 
     useEffect(() => {
@@ -19,9 +19,7 @@ const OnboardingSection: React.FC = () => {
                 const snap = await getDoc(doc(db, 'users', user.uid));
                 if (snap.exists()) {
                     const data = snap.data() as { name?: string };
-                    if (data.name) {
-                        name = data.name.split(' ')[0];
-                    }
+                    if (data.name) name = data.name.split(' ')[0];
                 }
             } catch (err) {
                 console.warn('Failed to fetch user data', err);
@@ -29,7 +27,6 @@ const OnboardingSection: React.FC = () => {
 
             setUserName(name || 'User');
         });
-
         return () => unsubscribe();
     }, []);
 
@@ -39,27 +36,27 @@ const OnboardingSection: React.FC = () => {
         <section className="onboarding-section">
             <header className="onboarding-header">
                 <h2>
-                    {ONBOARDING_WELCOME()}, {userName}!
+                    {t('welcome')}, {userName}!
                 </h2>
                 <div className="overview-circle">
                     <div className="radial-progress" style={{ '--percent': `${avgProgress}` } as React.CSSProperties} />
                     <span className="overview-text">
                         {avgProgress}
-                        {ONBOARDING_COMPLETED_SUFFIX()}
+                        {t('completed_suffix')}
                     </span>
                 </div>
             </header>
 
             <div className="steps-grid">
-                {ONBOARDING_STEPS.map((step: OnboardingStep, idx: number) => (
+                {ONBOARDING_STEPS.map((step, idx) => (
                     <div key={idx} className="step-card">
                         <div className="step-card__icon">{React.createElement(step.icon)}</div>
-                        <h3 className="step-card__title">{step.title}</h3>
-                        <p className="step-card__desc">{step.description}</p>
+                        <h3 className="step-card__title">{t(step.titleKey)}</h3>
+                        <p className="step-card__desc">{t(step.descKey)}</p>
                         <div className="step-card__footer">
                             <span className="step-card__badge">{step.progress}%</span>
-                            <button className="step-card__btn" onClick={step.cta.onClick}>
-                                {step.cta.text}
+                            <button className="step-card__btn" onClick={step.ctaOnClick}>
+                                {t(step.ctaKey)}
                             </button>
                         </div>
                     </div>

@@ -1,15 +1,12 @@
 {
-    "onboarding_welcome": "Witamy ponownie",
-    "onboarding_completed_suffix": "% ukończono",
-
-    "step1_title": "Uzupełnij swój profil użytkownika",
+    "welcome": "Witamy ponownie",
+    "completed_suffix": "% ukończone",
+    "step1_title": "Uzupełnij swój profil",
     "step1_desc": "Pomóż nam spersonalizować Twoje doświadczenie",
     "step1_cta": "Przejdź do profilu",
-
-    "step2_title": "Stwórz swoją listę obserwacyjną akcji",
-    "step2_desc": "Śledź swoje ulubione akcje",
+    "step2_title": "Utwórz listę obserwacyjną akcji",
+    "step2_desc": "Śledź swoje ulubione spółki",
     "step2_cta": "Przejdź do listy",
-
     "step3_title": "Przeczytaj lekcję w bibliotece wiedzy",
     "step3_desc": "Poznaj podstawy rynku akcji od A do Z",
     "step3_cta": "Przejdź do biblioteki"

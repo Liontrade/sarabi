@@ -11,19 +11,7 @@ import {
     IoCloseOutline,
 } from 'react-icons/io5';
 import userAvatar from '../../../assets/home-page/user-avatar.png';
-
-import {
-    BRAND_NAME,
-    NAV_DASHBOARD_LABEL,
-    NAV_KNOWLEDGE_LABEL,
-    NAV_MARKET_LABEL,
-    NAV_NEWS_ALERTS_LABEL,
-    SEARCH_PLACEHOLDER,
-    NOTIFICATIONS_ARIA_LABEL,
-    PROFILE_LABEL,
-    SETTINGS_LABEL,
-    LOGOUT_LABEL,
-} from '../../../constants/strings';
+import { useTranslation } from 'react-i18next';
 import {
     DASHBOARD_URL,
     KNOWLEDGE_URL,
@@ -34,24 +22,25 @@ import {
     LOGIN_URL,
 } from '../../../constants/urls';
 
-const NAV_LINKS = [
-    { to: DASHBOARD_URL, label: NAV_DASHBOARD_LABEL },
-    { to: KNOWLEDGE_URL, label: NAV_KNOWLEDGE_LABEL },
-    { to: MARKET_URL, label: NAV_MARKET_LABEL },
-    { to: NEWS_ALERTS_URL, label: NAV_NEWS_ALERTS_LABEL },
-];
-
-const PROFILE_OPTIONS = [
-    { to: PROFILE_URL, label: PROFILE_LABEL },
-    { to: SETTINGS_URL, label: SETTINGS_LABEL },
-    { to: LOGIN_URL, label: LOGOUT_LABEL },
-];
-
 const Navbar: React.FC = () => {
+    const { t } = useTranslation('home_dashboard_navbar');
     const navigate = useNavigate();
     const [darkMode, setDarkMode] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
     const [profileOpen, setProfileOpen] = useState(false);
+
+    const NAV_LINKS = [
+        { to: DASHBOARD_URL, label: t('dashboard_label') },
+        { to: KNOWLEDGE_URL, label: t('knowledge_label') },
+        { to: MARKET_URL, label: t('market_label') },
+        { to: NEWS_ALERTS_URL, label: t('news_alerts_label') },
+    ];
+
+    const PROFILE_OPTIONS = [
+        { to: PROFILE_URL, label: t('profile_label') },
+        { to: SETTINGS_URL, label: t('settings_label') },
+        { to: LOGIN_URL, label: t('logout_label') },
+    ];
 
     const toggleTheme = () => {
         setDarkMode(!darkMode);
@@ -61,13 +50,17 @@ const Navbar: React.FC = () => {
     return (
         <nav className="navbar">
             <div className="navbar__left">
-                <button className="navbar__mobile-toggle" onClick={() => setMobileOpen(!mobileOpen)}>
+                <button
+                    className="navbar__mobile-toggle"
+                    onClick={() => setMobileOpen(o => !o)}
+                    aria-label={mobileOpen ? t('mobile_close') : t('mobile_open')}
+                >
                     {mobileOpen ? <IoCloseOutline /> : <IoMenuOutline />}
                 </button>
 
-                <div className="navbar__brand" onClick={() => navigate(DASHBOARD_URL)}>
-                    <img src={logo} alt={BRAND_NAME()} className="navbar__logo" />
-                    <span className="navbar__title">{BRAND_NAME()}</span>
+                <div className="navbar__brand" onClick={() => navigate(DASHBOARD_URL)} role="button" tabIndex={0}>
+                    <img src={logo} alt={`${t('dashboard_label')} logo`} className="navbar__logo" />
+                    <span className="navbar__title">{t('brand_name')}</span>
                 </div>
             </div>
 
@@ -82,11 +75,10 @@ const Navbar: React.FC = () => {
                         {link.label}
                     </NavLink>
                 ))}
-
                 <div className="navbar__search">
                     <input
                         type="text"
-                        placeholder={SEARCH_PLACEHOLDER()}
+                        placeholder={t('search_placeholder')}
                         onKeyDown={e => e.key === 'Enter' && console.log('Search:', e.currentTarget.value)}
                     />
                 </div>
@@ -95,25 +87,29 @@ const Navbar: React.FC = () => {
             <div className="navbar__right">
                 <button
                     className="navbar__icon-btn"
-                    aria-label={NOTIFICATIONS_ARIA_LABEL()}
+                    aria-label={t('notifications_aria')}
                     onClick={() => console.log('Notifications')}
                 >
                     <IoNotificationsOutline />
                     <span className="navbar__badge">3</span>
                 </button>
 
-                <button className="navbar__icon-btn" onClick={toggleTheme}>
+                <button
+                    className="navbar__icon-btn"
+                    onClick={toggleTheme}
+                    aria-label={darkMode ? t('dark_mode_on') : t('dark_mode_off')}
+                >
                     {darkMode ? <IoSunnyOutline /> : <IoMoonOutline />}
                 </button>
 
-                <div className="navbar__profile" onClick={() => setProfileOpen(!profileOpen)}>
-                    <img src={userAvatar} alt="Avatar" className="navbar__avatar" />
+                <div className="navbar__profile" onClick={() => setProfileOpen(o => !o)}>
+                    <img src={userAvatar} alt={t('profile_label')} className="navbar__avatar" />
                     <IoChevronDownOutline className={`navbar__chevron ${profileOpen ? 'rotated' : ''}`} />
                     {profileOpen && (
                         <div className="navbar__dropdown">
                             {PROFILE_OPTIONS.map(opt => (
                                 <button key={opt.to} onClick={() => navigate(opt.to)}>
-                                    {opt.label()}
+                                    {opt.label}
                                 </button>
                             ))}
                         </div>

@@ -1,4 +1,5 @@
 import { JSX } from 'react';
+import './internalization/i18n';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import LandingPage from './pages/LandingPage/LandingPage';

@@ -5,6 +5,13 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 const namespaces = [
     'common',
+    'home_dashboard_navbar',
+    'home_dashboard_sidebar',
+    'home_dashboard_onboarding_section',
+    'home_dashboard_recommended_section',
+    'home_dashboard_trending_section',
+    'home_dashboard_hot_news_section',
+    'home_dashboard_footer',
     'landing_navbar',
     'landing_footer',
     'landing_hero',
@@ -15,10 +22,6 @@ const namespaces = [
     'login_page',
     'sign_up_page',
     'verify_email_page',
-    'header',
-    'footer',
-    'pricing',
-    'onboarding',
 ];
 
 i18n.use(HttpBackend)
@@ -26,10 +29,16 @@ i18n.use(HttpBackend)
     .use(initReactI18next)
     .init({
         fallbackLng: 'en',
+        supportedLngs: ['en', 'pl'],
         debug: process.env.NODE_ENV === 'development',
         ns: namespaces,
         defaultNS: 'common',
         interpolation: { escapeValue: false },
+        detection: {
+            lookupLocalStorage: 'i18nextLng',
+            order: ['localStorage', 'navigator', 'htmlTag', 'path', 'subdomain'],
+            caches: ['localStorage'],
+        },
         backend: {
             loadPath: '/locales/{{lng}}/{{ns}}.json',
         },

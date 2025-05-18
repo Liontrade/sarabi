@@ -1,11 +1,11 @@
 import React, { useRef } from 'react';
 import './TrendingStocksSection.css';
 import { FiRefreshCw } from 'react-icons/fi';
-
-import { TRENDING_TITLE, REFRESH_TRENDING_LABEL, VIEW_ALL_TRENDING } from '../../../constants/strings';
+import { useTranslation } from 'react-i18next';
 import { TRENDING_STOCKS, TrendingStock } from '../../../constants/HomeDashboardPage/constants_trending_stocks_section';
 
 const TrendingStocksSection: React.FC = () => {
+    const { t } = useTranslation('home_dashboard_trending_section');
     const scrollRef = useRef<HTMLDivElement>(null);
 
     const handleRefresh = () => {
@@ -15,8 +15,8 @@ const TrendingStocksSection: React.FC = () => {
     return (
         <section className="trending-section">
             <header className="trending-header">
-                <h3>{TRENDING_TITLE()}</h3>
-                <button className="trending-refresh" onClick={handleRefresh} aria-label={REFRESH_TRENDING_LABEL()}>
+                <h3>{t('title')}</h3>
+                <button className="trending-refresh" onClick={handleRefresh} aria-label={t('refresh_label')}>
                     <FiRefreshCw />
                 </button>
             </header>
@@ -41,7 +41,7 @@ const TrendingStocksSection: React.FC = () => {
             </div>
 
             <div className="trending-footer">
-                <button className="view-all-btn">{VIEW_ALL_TRENDING()}</button>
+                <button className="view-all-btn">{t('view_all')}</button>
             </div>
         </section>
     );

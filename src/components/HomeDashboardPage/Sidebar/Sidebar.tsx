@@ -4,19 +4,11 @@ import './Sidebar.css';
 import userAvatar from '../../../assets/home-page/user-avatar.png';
 import { auth } from '../../../firebaseConfig';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
-
-import {
-    SIDEBAR_TOGGLE_COLLAPSE,
-    SIDEBAR_TOGGLE_EXPAND,
-    SIDEBAR_SECTION_MAIN,
-    SIDEBAR_SECTION_SUPPORT,
-    SIDEBAR_ROLE_LABEL,
-    SIDEBAR_AVATAR_ALT,
-} from '../../../constants/strings';
-
+import { useTranslation } from 'react-i18next';
 import { MAIN_LINKS, SUPPORT_LINKS, SidebarLink } from '../../../constants/HomeDashboardPage/constants_sidebar_links';
 
 const Sidebar: React.FC = () => {
+    const { t } = useTranslation('home_dashboard_sidebar');
     const location = useLocation();
     const [collapsed, setCollapsed] = useState(false);
     const [fullName, setFullName] = useState('User');
@@ -31,24 +23,24 @@ const Sidebar: React.FC = () => {
         <aside className={`sidebar ${collapsed ? 'sidebar--collapsed' : ''}`}>
             <button
                 className="sidebar__toggle"
-                onClick={() => setCollapsed(!collapsed)}
-                aria-label={collapsed ? SIDEBAR_TOGGLE_EXPAND() : SIDEBAR_TOGGLE_COLLAPSE()}
+                onClick={() => setCollapsed(c => !c)}
+                aria-label={collapsed ? t('toggle_expand') : t('toggle_collapse')}
             >
                 {collapsed ? <MdChevronRight /> : <MdChevronLeft />}
             </button>
 
             <div className="sidebar__user">
-                <img src={userAvatar} alt={SIDEBAR_AVATAR_ALT()} className="sidebar__avatar" />
+                <img src={userAvatar} alt={t('avatar_alt')} className="sidebar__avatar" />
                 {!collapsed && (
                     <div className="sidebar__user-info">
                         <span className="sidebar__username">{fullName}</span>
-                        <span className="sidebar__role">{SIDEBAR_ROLE_LABEL()}</span>
+                        <span className="sidebar__role">{t('role_label')}</span>
                     </div>
                 )}
             </div>
 
             <nav className="sidebar__nav">
-                <div className="sidebar__section-title">{!collapsed && SIDEBAR_SECTION_MAIN()}</div>
+                {!collapsed && <div className="sidebar__section-title">{t('section_main')}</div>}
                 <ul>
                     {MAIN_LINKS.map((link: SidebarLink) => (
                         <li key={link.to}>
@@ -58,13 +50,13 @@ const Sidebar: React.FC = () => {
                                 onClick={() => collapsed && setCollapsed(false)}
                             >
                                 <div className="sidebar__icon">{React.createElement(link.icon)}</div>
-                                {!collapsed && <span className="sidebar__label">{link.label}</span>}
+                                {!collapsed && <span className="sidebar__label">{t(link.labelKey)}</span>}
                             </Link>
                         </li>
                     ))}
                 </ul>
 
-                <div className="sidebar__section-title">{!collapsed && SIDEBAR_SECTION_SUPPORT()}</div>
+                {!collapsed && <div className="sidebar__section-title">{t('section_support')}</div>}
                 <ul>
                     {SUPPORT_LINKS.map((link: SidebarLink) => (
                         <li key={link.to}>
@@ -74,7 +66,7 @@ const Sidebar: React.FC = () => {
                                 onClick={() => collapsed && setCollapsed(false)}
                             >
                                 <div className="sidebar__icon">{React.createElement(link.icon)}</div>
-                                {!collapsed && <span className="sidebar__label">{link.label}</span>}
+                                {!collapsed && <span className="sidebar__label">{t(link.labelKey)}</span>}
                             </Link>
                         </li>
                     ))}
