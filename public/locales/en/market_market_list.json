@@ -1,9 +1,13 @@
 {
     "header": {
-        "logo": "Logo",
-        "name": "Name",
         "ticker": "Ticker",
-        "price": "Price",
-        "change": "Change"
-    }
+        "full_name": "Name",
+        "price": "Price (PLN)",
+        "change": "Change",
+        "change_percent": "%",
+        "open": "Open",
+        "high": "High",
+        "low": "Low"
+    },
+    "loading": "Loading market data…"
 }

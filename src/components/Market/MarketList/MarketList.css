@@ -1,14 +1,11 @@
-/* MarketList.css */
-
 .market-list {
     background: #fff;
-    border: 1px solid #eee;            
-    border-radius: 8px;                
-    overflow-x: auto;                  
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow-x: auto;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-/* Informacja o ładowaniu */
 .market-list__loading {
     padding: 1rem;
     text-align: center;
@@ -17,29 +14,33 @@
 
 .market-list__table {
     width: 100%;
-    border-collapse: collapse;        
-    min-width: 800px;                 
+    border-collapse: collapse;
+    min-width: 800px;
 }
 
-.market-list__table thead {
-    background: var(--color-light);    
+.market-list__table thead th {
+    position: sticky;
+    top: 0;
+    background: var(--color-light);
+    z-index: 2;
+    border-bottom: 2px solid #ddd;
 }
 
 .market-list__table th,
 .market-list__table td {
     padding: 0.75rem 1rem;
     text-align: left;
-    font-size: 0.95rem;               
+    font-size: 0.95rem;
     border-bottom: 1px solid #eee;
     white-space: nowrap;
 }
 
 .market-list__table tr:nth-child(even) {
-    background: #fafafa;              
+    background: #fafafa;
 }
 
 .market-list__table tr:hover {
-    background: rgba(252, 163, 17, 0.1); 
+    background: rgba(252, 163, 17, 0.1);
 }
 
 .market-list__table th.sortable {
@@ -63,7 +64,9 @@
     font-size: 0.7rem;
     color: var(--color-muted);
     opacity: 0.4;
-    transition: color 0.2s, opacity 0.2s;
+    transition:
+        color 0.2s,
+        opacity 0.2s;
 }
 
 .sort-icons .icon.active {
@@ -87,7 +90,7 @@
 }
 
 .change-cell.up {
-    color: #34a853; 
+    color: #34a853;
 }
 
 .change-cell.down {
@@ -96,6 +99,6 @@
 
 @media (min-width: 1200px) {
     .market-list__table {
-        min-width: 0;  
+        min-width: 0;
     }
 }

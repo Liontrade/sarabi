@@ -43,7 +43,6 @@ const MarketFilterBar: React.FC<MarketFilterBarProps> = ({
                 />
             </div>
         </div>
-    </div>
-);
-
+    );
+};
 export default MarketFilterBar;
