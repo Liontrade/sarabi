@@ -1,0 +1,7 @@
+{
+    "delete_account_title": "Delete Account",
+    "delete_account_warning": "Are you sure you want to delete your account? This action cannot be undone.",
+    "password_label": "Enter your current password to confirm:",
+    "cancel_button": "Cancel",
+    "confirm_button": "Delete Account"
+}

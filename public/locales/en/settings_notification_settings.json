@@ -1,0 +1,23 @@
+{
+    "title": "Notification Settings",
+    "description": "Personalize your alert preferences.",
+    "section_delivery": "Delivery Methods",
+    "delivery_push": "Push Notifications",
+    "delivery_email": "Email",
+    "delivery_sms": "SMS",
+    "section_alert_types": "Alert Types",
+    "alert_price": "Price Alerts",
+    "alert_breaking": "Breaking News",
+    "alert_portfolio": "Portfolio Updates",
+    "alert_earnings": "Earnings & Dividends",
+    "alert_market": "Market Updates",
+    "section_frequency": "Update Frequency",
+    "freq_realtime": "Real-Time",
+    "freq_daily": "Daily Digest",
+    "freq_weekly": "Weekly",
+    "section_quiet_hours": "Quiet Hours",
+    "quiet_enable": "Enable Quiet Hours",
+    "quiet_start": "Start",
+    "quiet_end": "End",
+    "save_button": "Save Changes"
+}

@@ -1,0 +1,11 @@
+{
+    "title": "Ustawienia profilu",
+    "description": "Twoje dane profilowe są używane do personalizacji doświadczeń w LionTrade. Możesz edytować swoje imię; Twój email jest zweryfikowany i nie można go zmienić.",
+    "name_label": "Imię",
+    "email_label": "Email",
+    "name_error_required": "Imię nie może być puste.",
+    "name_error_format": "Imię może zawierać tylko litery i spacje.",
+    "save_button": "Zapisz",
+    "save_success": "Profil został zaktualizowany!",
+    "save_error": "Nie udało się zaktualizować profilu."
+}

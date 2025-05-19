@@ -1,150 +1,96 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import i18n from 'i18next';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import './InterfaceSettings.css';
 
 const InterfaceSettings: React.FC = () => {
     type ThemeType = 'light' | 'dark' | 'system';
-    type LanguageType = 'en' | 'es' | 'pt' | 'pl';
-    type CurrencyType = 'usd' | 'eur' | 'gbp';
-    type DensityType = 'comfortable' | 'compact';
+    type LanguageType = 'pl' | 'en';
 
-    const [theme, setTheme] = useState<ThemeType>('light');
-    const [language, setLanguage] = useState<LanguageType>('en');
-    const [currency, setCurrency] = useState<CurrencyType>('usd');
-    const [density, setDensity] = useState<DensityType>('comfortable');
+    const { t } = useTranslation('settings_interface_settings');
+
+    const storedTheme = (localStorage.getItem('theme') as ThemeType) || 'light';
+    const storedLang = (localStorage.getItem('language') as LanguageType) || 'en';
+
+    const [theme, setTheme] = useState<ThemeType>(storedTheme);
+    const [language, setLanguage] = useState<LanguageType>(storedLang);
+
+    const dirty = theme !== storedTheme || language !== storedLang;
+
+    useEffect(() => {
+        if (storedTheme === 'dark') document.body.classList.add('dark');
+        else document.body.classList.remove('dark');
+        i18n.changeLanguage(storedLang);
+    }, []);
 
     const handleSave = () => {
-        console.log('Saving interface settings:', {
-            theme,
-            language,
-            currency,
-            density,
-        });
+        try {
+            localStorage.setItem('theme', theme);
+            localStorage.setItem('language', language);
+
+            if (theme === 'dark') document.body.classList.add('dark');
+            else document.body.classList.remove('dark');
+            i18n.changeLanguage(language);
+
+            toast.success(t('save_success'));
+        } catch {
+            toast.error(t('save_error'));
+        }
     };
 
     const handleRevert = () => {
-        console.log('Reverting changes');
-        setTheme('light');
-        setLanguage('en');
-        setCurrency('usd');
-        setDensity('comfortable');
+        setTheme(storedTheme);
+        setLanguage(storedLang);
+        toast.info(t('save_success'));
     };
 
     return (
         <div className="interface-settings">
-            <h2>Interface Settings</h2>
+            <h2>{t('title')}</h2>
+
+            {dirty && <div className="interface-settings__unsaved">{t('unsaved_changes')}</div>}
 
             <div className="interface-settings__option-group">
-                <label>Theme</label>
+                <label>{t('theme_label')}</label>
                 <div className="btn-group">
-                    <button
-                        className={`btn-chip ${theme === 'light' ? 'active' : ''}`}
-                        onClick={() => setTheme('light')}
-                    >
-                        Light
-                    </button>
-                    <button className={`btn-chip ${theme === 'dark' ? 'active' : ''}`} onClick={() => setTheme('dark')}>
-                        Dark
-                    </button>
-                    <button
-                        className={`btn-chip ${theme === 'system' ? 'active' : ''}`}
-                        onClick={() => setTheme('system')}
-                    >
-                        System default
-                    </button>
+                    {(['light', 'dark', 'system'] as ThemeType[]).map(opt => (
+                        <button
+                            key={opt}
+                            className={`btn-chip ${theme === opt ? 'active' : ''}`}
+                            onClick={() => setTheme(opt)}
+                        >
+                            {opt === 'light'
+                                ? t('option_light')
+                                : opt === 'dark'
+                                  ? t('option_dark')
+                                  : t('option_system')}
+                        </button>
+                    ))}
                 </div>
             </div>
 
             <div className="interface-settings__option-group">
-                <label>Language</label>
+                <label>{t('language_label')}</label>
                 <div className="btn-group">
-                    <button
-                        className={`btn-chip ${language === 'en' ? 'active' : ''}`}
-                        onClick={() => {
-                            setLanguage('en');
-                            i18n.changeLanguage('en');
-                        }}
-                    >
-                        English
-                    </button>
-                    <button
-                        className={`btn-chip ${language === 'es' ? 'active' : ''}`}
-                        onClick={() => {
-                            setLanguage('es');
-                            i18n.changeLanguage('es');
-                        }}
-                    >
-                        Spanish
-                    </button>
-                    <button
-                        className={`btn-chip ${language === 'pt' ? 'active' : ''}`}
-                        onClick={() => {
-                            setLanguage('pt');
-                            i18n.changeLanguage('pt');
-                        }}
-                    >
-                        Portuguese
-                    </button>
-                    <button
-                        className={`btn-chip ${language === 'pl' ? 'active' : ''}`}
-                        onClick={() => {
-                            setLanguage('pl');
-                            i18n.changeLanguage('pl');
-                        }}
-                    >
-                        Polski
-                    </button>
-                </div>
-            </div>
-
-            <div className="interface-settings__option-group">
-                <label>Currency format</label>
-                <div className="btn-group">
-                    <button
-                        className={`btn-chip ${currency === 'usd' ? 'active' : ''}`}
-                        onClick={() => setCurrency('usd')}
-                    >
-                        USD ($)
-                    </button>
-                    <button
-                        className={`btn-chip ${currency === 'eur' ? 'active' : ''}`}
-                        onClick={() => setCurrency('eur')}
-                    >
-                        EUR (€)
-                    </button>
-                    <button
-                        className={`btn-chip ${currency === 'gbp' ? 'active' : ''}`}
-                        onClick={() => setCurrency('gbp')}
-                    >
-                        GBP (£)
-                    </button>
-                </div>
-            </div>
-
-            <div className="interface-settings__option-group">
-                <label>Display density</label>
-                <div className="btn-group">
-                    <button
-                        className={`btn-chip ${density === 'comfortable' ? 'active' : ''}`}
-                        onClick={() => setDensity('comfortable')}
-                    >
-                        Comfortable
-                    </button>
-                    <button
-                        className={`btn-chip ${density === 'compact' ? 'active' : ''}`}
-                        onClick={() => setDensity('compact')}
-                    >
-                        Compact
-                    </button>
+                    {(['en', 'pl'] as LanguageType[]).map(opt => (
+                        <button
+                            key={opt}
+                            className={`btn-chip ${language === opt ? 'active' : ''}`}
+                            onClick={() => setLanguage(opt)}
+                        >
+                            {opt === 'en' ? t('option_english') : t('option_polish')}
+                        </button>
+                    ))}
                 </div>
             </div>
 
             <div className="interface-settings__buttons">
-                <button className="btn btn-primary" onClick={handleSave}>
-                    Save
+                <button className="btn btn-primary" onClick={handleSave} disabled={!dirty}>
+                    {t('save_button')}
                 </button>
-                <button className="btn btn-secondary" onClick={handleRevert}>
-                    Revert
+                <button className="btn btn-secondary" onClick={handleRevert} disabled={!dirty}>
+                    {t('revert_button')}
                 </button>
             </div>
         </div>

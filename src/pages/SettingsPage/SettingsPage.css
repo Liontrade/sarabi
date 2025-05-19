@@ -26,10 +26,15 @@
 }
 
 .settings-page__sidebar li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
     padding: 0.75rem 1rem;
     cursor: pointer;
     border-left: 4px solid transparent;
-    transition: background-color 0.3s;
+    transition:
+        background-color 0.3s,
+        border-color 0.3s;
 }
 
 .settings-page__sidebar li:hover {
@@ -38,9 +43,14 @@
 
 .settings-page__sidebar li.active {
     border-left: 4px solid #fca311;
-    background-color: #f9f9f9;
+    background-color: #fdf4e8;
     font-weight: 600;
     color: #333;
+}
+
+.settings-page__sidebar .tab-icon {
+    font-size: 1.2rem;
+    color: inherit;
 }
 
 .settings-page__content {
@@ -49,4 +59,43 @@
     border: 1px solid #eee;
     border-radius: 8px;
     padding: 2rem;
+    overflow: auto;
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .settings-page__container {
+        flex-direction: column;
+    }
+
+    .settings-page__sidebar {
+        display: flex;
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #eee;
+        top: 0;
+    }
+
+    .settings-page__sidebar ul {
+        display: flex;
+        overflow-x: auto;
+    }
+
+    .settings-page__sidebar li {
+        flex-shrink: 0;
+    }
 }

@@ -1,0 +1,7 @@
+{
+    "delete_account_title": "Usuń konto",
+    "delete_account_warning": "Czy na pewno chcesz usunąć konto? Tej operacji nie można cofnąć.",
+    "password_label": "Wprowadź obecne hasło, aby potwierdzić:",
+    "cancel_button": "Anuluj",
+    "confirm_button": "Usuń konto"
+}

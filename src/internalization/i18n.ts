@@ -21,6 +21,13 @@ const namespaces = [
     'landing_join_cta',
     'login_page',
     'sign_up_page',
+    'settings_delete_account_modal',
+    'settings_interface_settings',
+    'settings_notification_settings',
+    'settings_legal_help_settings',
+    'settings_page',
+    'settings_profile_settings',
+    'settings_security_settings',
     'verify_email_page',
 ];
 

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { FiUser, FiBell, FiShield, FiSliders, FiHelpCircle } from 'react-icons/fi';
+
 import ProfileSettings from '../../components/Settings/ProfileSettings/ProfileSettings';
-import InvestmentPreferencesSettings from '../../components/Settings/InvestmentPreferncesSettings/InvestmentPreferencesSettings';
 import NotificationSettings from '../../components/Settings/NotificationSettings/NotificationSettings';
 import SecuritySettings from '../../components/Settings/SecuritySettings/SecuritySettings';
 import InterfaceSettings from '../../components/Settings/InterfaceSettings/InterfaceSettings';
@@ -11,9 +13,21 @@ import Navbar from '../../components/HomeDashboardPage/Navbar/Navbar';
 
 import './SettingsPage.css';
 
+const tabs = [
+    { key: 'profile', icon: <FiUser />, comp: ProfileSettings },
+    { key: 'notification', icon: <FiBell />, comp: NotificationSettings },
+    { key: 'security', icon: <FiShield />, comp: SecuritySettings },
+    { key: 'interface', icon: <FiSliders />, comp: InterfaceSettings },
+    { key: 'legal', icon: <FiHelpCircle />, comp: LegalHelpSettings },
+] as const;
+
+type TabKey = (typeof tabs)[number]['key'];
+
 const SettingsPage: React.FC = () => {
-    type TabType = 'profile' | 'investment' | 'notification' | 'security' | 'interface' | 'legal';
-    const [activeTab, setActiveTab] = useState<TabType>('profile');
+    const { t } = useTranslation('settings_page');
+    const [activeTab, setActiveTab] = useState<TabKey>('profile');
+
+    const ActiveComponent = tabs.find(tab => tab.key === activeTab)!.comp;
 
     return (
         <div className="settings-page">
@@ -22,46 +36,25 @@ const SettingsPage: React.FC = () => {
             <div className="settings-page__container">
                 <nav className="settings-page__sidebar">
                     <ul>
-                        <li className={activeTab === 'profile' ? 'active' : ''} onClick={() => setActiveTab('profile')}>
-                            Profile
-                        </li>
-                        <li
-                            className={activeTab === 'investment' ? 'active' : ''}
-                            onClick={() => setActiveTab('investment')}
-                        >
-                            Investment Preferences
-                        </li>
-                        <li
-                            className={activeTab === 'notification' ? 'active' : ''}
-                            onClick={() => setActiveTab('notification')}
-                        >
-                            Notification
-                        </li>
-                        <li
-                            className={activeTab === 'security' ? 'active' : ''}
-                            onClick={() => setActiveTab('security')}
-                        >
-                            Security
-                        </li>
-                        <li
-                            className={activeTab === 'interface' ? 'active' : ''}
-                            onClick={() => setActiveTab('interface')}
-                        >
-                            Interface
-                        </li>
-                        <li className={activeTab === 'legal' ? 'active' : ''} onClick={() => setActiveTab('legal')}>
-                            Legal &amp; Help
-                        </li>
+                        {tabs.map(({ key, icon }) => (
+                            <li
+                                key={key}
+                                className={key === activeTab ? 'active' : ''}
+                                onClick={() => setActiveTab(key)}
+                                role="button"
+                                aria-selected={key === activeTab}
+                            >
+                                <span className="tab-icon">{icon}</span>
+                                <span className="tab-label">{t(`tabs.${key}`)}</span>
+                            </li>
+                        ))}
                     </ul>
                 </nav>
 
                 <div className="settings-page__content">
-                    {activeTab === 'profile' && <ProfileSettings />}
-                    {activeTab === 'investment' && <InvestmentPreferencesSettings />}
-                    {activeTab === 'notification' && <NotificationSettings />}
-                    {activeTab === 'security' && <SecuritySettings />}
-                    {activeTab === 'interface' && <InterfaceSettings />}
-                    {activeTab === 'legal' && <LegalHelpSettings />}
+                    <div key={activeTab} className="fade-in">
+                        <ActiveComponent />
+                    </div>
                 </div>
             </div>
 
