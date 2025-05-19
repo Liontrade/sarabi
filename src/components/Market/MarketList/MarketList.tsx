@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import './MarketList.css';
 
 interface Company {
@@ -15,6 +16,7 @@ interface MarketListProps {
 }
 
 const MarketList: React.FC<MarketListProps> = ({ filter, searchQuery }) => {
+    const { t } = useTranslation('market_market_list');
     const [companies, setCompanies] = useState<Company[]>([
         { logo: 'https://via.placeholder.com/24', name: 'Apple Inc.', ticker: 'AAPL', price: '--', change: '--' },
         { logo: 'https://via.placeholder.com/24', name: 'Tesla Inc.', ticker: 'TSLA', price: '--', change: '--' },
@@ -32,40 +34,36 @@ const MarketList: React.FC<MarketListProps> = ({ filter, searchQuery }) => {
     useEffect(() => {
         const fetchStockData = async () => {
             try {
-                const updatedCompanies = await Promise.all(
+                const updated = await Promise.all(
                     companies.map(async company => {
                         try {
-                            const response = await fetch(`http://localhost:5000/api/stocks/${company.ticker}`);
-                            const data = await response.json();
-
+                            const res = await fetch(`/api/stocks/${company.ticker}`);
+                            const data = await res.json();
                             return {
                                 ...company,
-                                price: data.price ? `$${data.price.toFixed(2)}` : '--',
-                                change: data.change ? `${data.change.toFixed(2)}%` : '--',
+                                price: data.price != null ? `$${data.price.toFixed(2)}` : '--',
+                                change: data.change != null ? `${data.change.toFixed(2)}%` : '--',
                             };
-                        } catch (error) {
-                            console.error(`Failed to fetch data for ${company.ticker}`, error);
+                        } catch {
                             return company;
                         }
                     }),
                 );
-
-                setCompanies(updatedCompanies);
-            } catch (error) {
-                console.error('Error fetching stock data:', error);
+                setCompanies(updated);
+            } catch {
+                // error fetching overall
             }
         };
-
         fetchStockData();
     }, []);
 
-    const filteredCompanies = companies.filter(company => {
-        const matchesSearch =
-            company.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            company.ticker.toLowerCase().includes(searchQuery.toLowerCase());
-        if (filter === 'gainers') return matchesSearch && company.change.startsWith('+');
-        if (filter === 'losers') return matchesSearch && company.change.startsWith('-');
-        return matchesSearch;
+    const filtered = companies.filter(c => {
+        const match =
+            c.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            c.ticker.toLowerCase().includes(searchQuery.toLowerCase());
+        if (filter === 'gainers') return match && c.change.startsWith('+');
+        if (filter === 'losers') return match && c.change.startsWith('-');
+        return match;
     });
 
     return (
@@ -73,27 +71,27 @@ const MarketList: React.FC<MarketListProps> = ({ filter, searchQuery }) => {
             <table className="market-list__table">
                 <thead>
                     <tr>
-                        <th>Logo</th>
-                        <th>Name</th>
-                        <th>Ticker</th>
-                        <th>Price</th>
-                        <th>Change</th>
+                        <th>{t('header.logo')}</th>
+                        <th>{t('header.name')}</th>
+                        <th>{t('header.ticker')}</th>
+                        <th>{t('header.price')}</th>
+                        <th>{t('header.change')}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {filteredCompanies.map((company, idx) => {
-                        const isNegative = company.change.startsWith('-');
+                    {filtered.map((c, i) => {
+                        const isDown = c.change.startsWith('-');
                         return (
-                            <tr key={idx}>
-                                <td className="company-name-cell">
-                                    <img src={company.logo} alt={company.name} className="company-logo" />
+                            <tr key={i} className={i % 2 === 0 ? 'row--even' : 'row--odd'}>
+                                <td>
+                                    <img src={c.logo} alt={c.name} className="company-logo" />
                                 </td>
-                                <td>{company.name}</td>
-                                <td>{company.ticker}</td>
-                                <td>{company.price}</td>
-                                <td className={`change-cell ${isNegative ? 'change--down' : 'change--up'}`}>
-                                    {company.change}
+                                <td>{c.name}</td>
+                                <td>
+                                    <strong>{c.ticker}</strong>
                                 </td>
+                                <td>{c.price}</td>
+                                <td className={`change-cell ${isDown ? 'down' : 'up'}`}>{c.change}</td>
                             </tr>
                         );
                     })}

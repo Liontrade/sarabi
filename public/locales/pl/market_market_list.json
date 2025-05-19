@@ -1,0 +1,9 @@
+{
+    "header": {
+        "logo": "Logo",
+        "name": "Nazwa",
+        "ticker": "Symbol",
+        "price": "Cena",
+        "change": "Zmiana"
+    }
+}
