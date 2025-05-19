@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FiUser, FiBell, FiShield, FiSliders, FiHelpCircle } from 'react-icons/fi';
 
@@ -28,6 +28,10 @@ const SettingsPage: React.FC = () => {
     const [activeTab, setActiveTab] = useState<TabKey>('profile');
 
     const ActiveComponent = tabs.find(tab => tab.key === activeTab)!.comp;
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [activeTab]);
 
     return (
         <div className="settings-page">
