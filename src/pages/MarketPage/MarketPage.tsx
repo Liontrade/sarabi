@@ -13,6 +13,7 @@ const MarketPage: React.FC = () => {
         <div className="market-page">
             <Navbar />
             <main className="market-page__content">
+                <h1 className="market-page__title">Market Overview</h1>
                 <MarketFilterBar
                     activeFilter={filter}
                     onFilterChange={setFilter}

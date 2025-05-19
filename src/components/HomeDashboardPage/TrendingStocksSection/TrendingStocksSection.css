@@ -1,27 +1,33 @@
-.trending-section {
+.trending-stocks-section {
     background: var(--color-secondary);
-    padding: 2rem;
+    padding: 2rem 0;
     border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: none;
-    margin: 0;
 }
 
-.trending-section .trending-header {
+.trending-stocks-section__inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+.trending-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
 }
 
-.trending-section .trending-header h3 {
+.trending-header h3 {
     font-size: 1.5rem;
     font-weight: 600;
     color: var(--color-dark);
 }
 
-.trending-section .trending-refresh {
+.trending-refresh {
     background: var(--color-light);
     border: none;
     padding: 0.5rem;
@@ -34,78 +40,101 @@
         color 0.2s;
 }
 
-.trending-section .trending-refresh:hover {
+.trending-refresh:hover {
     background: var(--color-primary-hover);
     color: var(--color-secondary);
 }
 
-.trending-section .trending-grid {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: 1rem;
+.trending-loading,
+.trending-error {
+    text-align: center;
+    color: var(--color-muted);
+    margin: 1rem 0;
 }
 
-.trending-section .stock-card {
-    position: relative;
-    align-items: center;
-    min-width: 300px;
-    max-width: 300px;
+.trending-grid-wrapper {
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+}
+
+.trending-grid {
+    display: flex;
+    gap: 1rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-light) transparent;
+}
+
+.trending-grid::-webkit-scrollbar {
+    height: 6px;
+}
+
+.trending-grid::-webkit-scrollbar-thumb {
+    background: var(--color-light);
+    border-radius: 3px;
+}
+
+.stock-card {
+    flex: 0 0 140px;
+    min-width: 140px;
     background: #fff;
     border: 1px solid #eee;
     border-radius: 8px;
     padding: 1rem;
-    display: flex;
-    flex-direction: column;
+    text-align: center;
     transition:
         transform 0.2s,
         box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.trending-section .stock-card:hover {
+.stock-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.trending-section .stock-card__logo {
-    display: block;
-    margin: 0 auto 0.5rem;
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-}
-
-.trending-section .stock-card__info {
-    text-align: center;
-}
-
-.trending-section .stock-card__symbol {
-    display: block;
-    font-size: 1.1rem;
+.stock-card__ticker {
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--color-dark);
     margin-bottom: 0.25rem;
 }
 
-.trending-section .stock-card__change {
+.stock-card__name {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+}
+
+.stock-card__price {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-dark);
+    margin-bottom: 0.5rem;
+}
+
+.stock-card__percent {
     font-size: 0.9rem;
     font-weight: 600;
 }
 
-.trending-section .stock-card__change.up {
+.stock-card__percent.up {
     color: #34a853;
 }
 
-.trending-section .stock-card__change.down {
+.stock-card__percent.down {
     color: #d93025;
 }
 
-.trending-section .trending-footer {
+.trending-footer {
     text-align: center;
     margin-top: 1rem;
 }
 
-.trending-section .trending-footer .view-all-btn {
+.trending-footer .view-all-btn {
     background: var(--color-primary);
     color: var(--color-secondary);
     border: none;
@@ -117,22 +146,20 @@
     transition: background 0.2s;
 }
 
-.trending-section .trending-footer .view-all-btn:hover {
+.trending-footer .view-all-btn:hover {
     background: var(--color-primary-hover);
 }
 
 @media (max-width: 768px) {
-    .trending-section .stock-card {
-        flex: 0 0 80%;
-        min-width: 80%;
-        max-width: 80%;
+    .stock-card {
+        flex: 0 0 100px;
+        min-width: 100px;
     }
 }
 
 @media (max-width: 480px) {
-    .trending-section .stock-card {
-        flex: 0 0 100%;
-        min-width: 100%;
-        max-width: 100%;
+    .stock-card {
+        flex: 0 0 80px;
+        min-width: 80px;
     }
 }

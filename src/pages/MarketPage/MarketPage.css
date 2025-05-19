@@ -13,3 +13,10 @@
     flex-direction: column;
     gap: 2rem;
 }
+
+.market-page__title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--color-dark);
+    margin-bottom: 1.5rem;
+}
