@@ -1,0 +1,23 @@
+{
+    "title": "Ustawienia powiadomień",
+    "description": "Dostosuj swoje preferencje alertów.",
+    "section_delivery": "Metody dostarczania",
+    "delivery_push": "Push",
+    "delivery_email": "Email",
+    "delivery_sms": "SMS",
+    "section_alert_types": "Rodzaje alertów",
+    "alert_price": "Alerty cenowe",
+    "alert_breaking": "Aktualności",
+    "alert_portfolio": "Aktualizacje portfela",
+    "alert_earnings": "Zyski i dywidendy",
+    "alert_market": "Aktualizacje rynku",
+    "section_frequency": "Częstotliwość",
+    "freq_realtime": "Na bieżąco",
+    "freq_daily": "Codziennie",
+    "freq_weekly": "Co tydzień",
+    "section_quiet_hours": "Godziny ciszy",
+    "quiet_enable": "Włącz godziny ciszy",
+    "quiet_start": "Początek",
+    "quiet_end": "Koniec",
+    "save_button": "Zapisz zmiany"
+}

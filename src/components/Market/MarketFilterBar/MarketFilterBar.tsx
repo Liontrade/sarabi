@@ -1,7 +1,8 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import './MarketFilterBar.css';
 
-type FilterKey = 'all' | 'popular' | 'recent' | 'gainers' | 'losers';
+export type FilterKey = 'all' | 'popular' | 'recent' | 'gainers' | 'losers';
 
 interface MarketFilterBarProps {
     activeFilter: FilterKey;
@@ -10,41 +11,38 @@ interface MarketFilterBarProps {
     onSearchChange: (query: string) => void;
 }
 
-const tabs: { key: FilterKey; label: string }[] = [
-    { key: 'all', label: 'All' },
-    { key: 'popular', label: 'Most Popular' },
-    { key: 'recent', label: 'Recently Viewed' },
-    { key: 'gainers', label: 'Top Gainers' },
-    { key: 'losers', label: 'Top Losers' },
-];
+const FILTER_KEYS: FilterKey[] = ['all', 'popular', 'recent', 'gainers', 'losers'];
 
 const MarketFilterBar: React.FC<MarketFilterBarProps> = ({
     activeFilter,
     onFilterChange,
     searchQuery,
     onSearchChange,
-}) => (
-    <div className="market-filter-bar">
-        <div className="market-filter-bar__tabs">
-            {tabs.map(({ key, label }) => (
-                <button
-                    key={key}
-                    className={`tab ${activeFilter === key ? 'tab--active' : ''}`}
-                    onClick={() => onFilterChange(key)}
-                >
-                    {label}
-                </button>
-            ))}
-        </div>
-        <div className="market-filter-bar__search">
-            <input
-                type="text"
-                placeholder="Search by name or ticker…"
-                value={searchQuery}
-                onChange={e => onSearchChange(e.target.value)}
-            />
-        </div>
-    </div>
-);
+}) => {
+    const { t } = useTranslation('market_market_filter_bar');
 
+    return (
+        <div className="market-filter-bar">
+            <div className="market-filter-bar__tabs">
+                {FILTER_KEYS.map(key => (
+                    <button
+                        key={key}
+                        className={`market-filter-bar__tab ${activeFilter === key ? 'active' : ''}`}
+                        onClick={() => onFilterChange(key)}
+                    >
+                        {t(`filter_${key}`)}
+                    </button>
+                ))}
+            </div>
+            <div className="market-filter-bar__search">
+                <input
+                    type="text"
+                    placeholder={t('search_placeholder')}
+                    value={searchQuery}
+                    onChange={e => onSearchChange(e.target.value)}
+                />
+            </div>
+        </div>
+    );
+};
 export default MarketFilterBar;

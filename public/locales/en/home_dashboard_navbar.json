@@ -1,0 +1,16 @@
+{
+    "brand_name": "LionTrade",
+    "dashboard_label": "Dashboard",
+    "knowledge_label": "Knowledge",
+    "market_label": "Market",
+    "news_alerts_label": "News Alerts",
+    "search_placeholder": "Search...",
+    "notifications_aria": "Notifications",
+    "profile_label": "Profile",
+    "settings_label": "Settings",
+    "logout_label": "Logout",
+    "mobile_open": "Open menu",
+    "mobile_close": "Close menu",
+    "dark_mode_on": "Switch to light mode",
+    "dark_mode_off": "Switch to dark mode"
+}

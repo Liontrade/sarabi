@@ -1,0 +1,9 @@
+{
+    "tabs": {
+        "profile": "Profile",
+        "notification": "Notifications",
+        "security": "Security",
+        "interface": "Interface",
+        "legal": "Legal & Help"
+    }
+}

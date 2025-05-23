@@ -1,0 +1,11 @@
+{
+    "title": "Profile Settings",
+    "description": "Your profile information is used to personalize your LionTrade experience. You can edit your name here; your email is verified and cannot be changed.",
+    "name_label": "Name",
+    "email_label": "Email",
+    "name_error_required": "Name cannot be empty.",
+    "name_error_format": "Name can only contain letters and spaces.",
+    "save_button": "Save",
+    "save_success": "Profile updated successfully!",
+    "save_error": "Failed to update profile."
+}

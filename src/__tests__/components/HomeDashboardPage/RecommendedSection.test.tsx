@@ -1,11 +1,24 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import RecommendedSection from '../../../components/HomeDashboardPage/RecommendedSection/RecommendedSection';
 
+jest.mock('react-i18next', () => ({
+    useTranslation: () => ({
+        t: (key: string) => {
+            const map: Record<string, string> = {
+                title: 'Recommended for you',
+                refresh_label: 'Refresh recommendations',
+                add_label: 'Add',
+                view_all: 'View all recommendations',
+            };
+            return map[key] ?? key;
+        },
+    }),
+}));
+
 describe('RecommendedSection Component', () => {
     beforeEach(() => {
         jest.spyOn(console, 'log').mockImplementation(() => {});
     });
-
     afterEach(() => {
         (console.log as jest.Mock).mockRestore();
     });
@@ -13,16 +26,23 @@ describe('RecommendedSection Component', () => {
     it('renders header and refresh button', () => {
         render(<RecommendedSection />);
 
-        const header = screen.getByRole('heading', { level: 3, name: /Recommended for you/i });
+        const header = screen.getByRole('heading', {
+            level: 3,
+            name: /Recommended for you/i,
+        });
         expect(header).toBeInTheDocument();
 
-        const refreshBtn = screen.getByRole('button', { name: /Refresh recommendations/i });
+        const refreshBtn = screen.getByRole('button', {
+            name: /Refresh recommendations/i,
+        });
         expect(refreshBtn).toBeInTheDocument();
     });
 
     it('clicking refresh logs message', () => {
         render(<RecommendedSection />);
-        const refreshBtn = screen.getByRole('button', { name: /Refresh recommendations/i });
+        const refreshBtn = screen.getByRole('button', {
+            name: /Refresh recommendations/i,
+        });
         fireEvent.click(refreshBtn);
         expect(console.log).toHaveBeenCalledWith('Refresh recommendations');
     });
@@ -30,8 +50,8 @@ describe('RecommendedSection Component', () => {
     it('renders all stock cards with correct content', () => {
         render(<RecommendedSection />);
 
-        const cards = screen.getAllByRole('img'); // using img alt as ticker
-        expect(cards).toHaveLength(4);
+        const imgs = screen.getAllByRole('img');
+        expect(imgs).toHaveLength(4);
 
         const stocks = [
             { ticker: 'TSLA', name: 'Tesla Inc.', price: '$1,200', change: '+3.2%', reason: 'Electric vehicles' },
@@ -43,22 +63,28 @@ describe('RecommendedSection Component', () => {
         stocks.forEach(stock => {
             const img = screen.getByAltText(stock.ticker);
             expect(img).toBeInTheDocument();
+            expect(img).toHaveClass('stock-card__logo');
 
-            expect(screen.getByText(stock.ticker)).toBeInTheDocument();
-            expect(screen.getByText(stock.name)).toBeInTheDocument();
-            expect(screen.getByText(stock.price)).toBeInTheDocument();
-            expect(screen.getByText(stock.change)).toBeInTheDocument();
-            expect(screen.getByText(stock.reason)).toBeInTheDocument();
+            expect(screen.getByText(stock.ticker)).toHaveClass('stock-card__ticker');
+            expect(screen.getByText(stock.name)).toHaveClass('stock-card__name');
+
+            expect(screen.getByText(stock.price)).toHaveClass('price-badge');
 
             const changeBadge = screen.getByText(stock.change);
+            expect(changeBadge).toHaveClass('change-badge');
             if (stock.change.startsWith('+')) {
-                expect(changeBadge).toHaveClass('change-badge', 'up');
+                expect(changeBadge).toHaveClass('up');
             } else {
-                expect(changeBadge).toHaveClass('change-badge', 'down');
+                expect(changeBadge).toHaveClass('down');
             }
 
-            const addBtn = screen.getByRole('button', { name: `Add ${stock.ticker}` });
+            expect(screen.getByText(stock.reason)).toHaveClass('stock-card__reason');
+
+            const addBtn = screen.getByRole('button', {
+                name: `Add ${stock.ticker}`,
+            });
             expect(addBtn).toBeInTheDocument();
+            expect(addBtn).toHaveClass('stock-card__add');
         });
     });
 
@@ -74,7 +100,10 @@ describe('RecommendedSection Component', () => {
 
     it('renders view all recommendations button', () => {
         render(<RecommendedSection />);
-        const viewAll = screen.getByRole('button', { name: /View all recommendations/i });
+        const viewAll = screen.getByRole('button', {
+            name: /View all recommendations/i,
+        });
         expect(viewAll).toBeInTheDocument();
+        expect(viewAll).toHaveClass('view-all-btn');
     });
 });

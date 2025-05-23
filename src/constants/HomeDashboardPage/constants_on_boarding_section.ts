@@ -1,45 +1,40 @@
+// src/constants/HomeDashboardPage/constants_onboarding_section.ts
+
 import { MdPerson, MdListAlt, MdMenuBook } from 'react-icons/md';
-import {
-    STEP1_TITLE,
-    STEP1_DESC,
-    STEP1_CTA,
-    STEP2_TITLE,
-    STEP2_DESC,
-    STEP2_CTA,
-    STEP3_TITLE,
-    STEP3_DESC,
-    STEP3_CTA,
-} from '../strings';
 import { IconType } from 'react-icons';
 
 export interface OnboardingStep {
     icon: IconType;
-    title: string;
-    description: string;
+    titleKey: string;
+    descKey: string;
     progress: number;
-    cta: { text: string; onClick: () => void };
+    ctaKey: string;
+    ctaOnClick: () => void;
 }
 
 export const ONBOARDING_STEPS: OnboardingStep[] = [
     {
         icon: MdPerson,
-        title: STEP1_TITLE,
-        description: STEP1_DESC,
+        titleKey: 'step1_title',
+        descKey: 'step1_desc',
         progress: 80,
-        cta: { text: STEP1_CTA, onClick: () => console.log('Go to profile') },
+        ctaKey: 'step1_cta',
+        ctaOnClick: () => console.log('Go to profile'),
     },
     {
         icon: MdListAlt,
-        title: STEP2_TITLE,
-        description: STEP2_DESC,
+        titleKey: 'step2_title',
+        descKey: 'step2_desc',
         progress: 20,
-        cta: { text: STEP2_CTA, onClick: () => console.log('Go to watchlist') },
+        ctaKey: 'step2_cta',
+        ctaOnClick: () => console.log('Go to watchlist'),
     },
     {
         icon: MdMenuBook,
-        title: STEP3_TITLE,
-        description: STEP3_DESC,
+        titleKey: 'step3_title',
+        descKey: 'step3_desc',
         progress: 40,
-        cta: { text: STEP3_CTA, onClick: () => console.log('Go to library') },
+        ctaKey: 'step3_cta',
+        ctaOnClick: () => console.log('Go to library'),
     },
 ];

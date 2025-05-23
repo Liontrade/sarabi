@@ -2,6 +2,26 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Sidebar from '../../../components/HomeDashboardPage/Sidebar/Sidebar';
 
+jest.mock('react-i18next', () => ({
+    useTranslation: () => ({
+        t: (key: string) => {
+            const map: Record<string, string> = {
+                avatar_alt: 'Avatar',
+                role_label: 'Investor',
+                section_main: 'Main',
+                section_support: 'Support',
+                link_dashboard: 'Dashboard',
+                link_knowledge: 'Knowledge Library',
+                link_market: 'Market',
+                link_news_alerts: 'News Alerts',
+                toggle_collapse: 'Collapse',
+                toggle_expand: 'Expand',
+            };
+            return map[key] ?? key;
+        },
+    }),
+}));
+
 jest.mock('../../../firebaseConfig', () => ({
     auth: { currentUser: { displayName: 'Jane Smith' } },
 }));
@@ -43,6 +63,7 @@ describe('Sidebar Component', () => {
         renderSidebar();
         const toggleBtn = screen.getByRole('button', { name: 'Collapse' });
         fireEvent.click(toggleBtn);
+
         expect(toggleBtn).toHaveAttribute('aria-label', 'Expand');
         expect(document.querySelector('.sidebar')).toHaveClass('sidebar--collapsed');
         expect(screen.queryByText('Main')).toBeNull();
@@ -54,6 +75,7 @@ describe('Sidebar Component', () => {
         const toggleBtn = screen.getByRole('button', { name: 'Collapse' });
         fireEvent.click(toggleBtn); // collapse
         fireEvent.click(toggleBtn); // expand
+
         expect(toggleBtn).toHaveAttribute('aria-label', 'Collapse');
         expect(screen.getByText('Main')).toBeInTheDocument();
         expect(screen.getByText('Dashboard')).toBeInTheDocument();

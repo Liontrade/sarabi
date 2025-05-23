@@ -1,0 +1,15 @@
+{
+    "title": "Interface Settings",
+    "theme_label": "Theme",
+    "language_label": "Language",
+    "option_light": "Light",
+    "option_dark": "Dark",
+    "option_system": "System default",
+    "option_english": "English",
+    "option_polish": "Polish",
+    "save_button": "Save",
+    "revert_button": "Revert",
+    "save_success": "Settings saved!",
+    "save_error": "Failed to save settings.",
+    "unsaved_changes": "You have unsaved changes"
+}

@@ -3,17 +3,8 @@ import { Link } from 'react-router-dom';
 import './Footer.css';
 import logo from '../../../assets/logo_without_background.png';
 import { FaTwitter, FaGithub, FaLinkedin, FaArrowUp } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
-import {
-    FOOTER_DESC,
-    FOOTER_NEWSLETTER_LABEL,
-    FOOTER_NEWSLETTER_PLACEHOLDER,
-    FOOTER_SUBSCRIBE_BUTTON,
-    FOOTER_EXPLORE_TITLE,
-    FOOTER_SUPPORT_TITLE,
-    FOOTER_COPYRIGHT,
-    FOOTER_BACK_TO_TOP_ARIA,
-} from '../../../constants/strings';
 import {
     DASHBOARD_URL,
     MARKET_URL,
@@ -30,6 +21,7 @@ import {
 } from '../../../constants/urls';
 
 const Footer: React.FC = () => {
+    const { t } = useTranslation('home_dashboard_footer');
     const [email, setEmail] = useState('');
 
     const handleSubscribe = (e: React.FormEvent) => {
@@ -45,59 +37,59 @@ const Footer: React.FC = () => {
             <div className="footer__container">
                 <div className="footer__col footer__col--brand">
                     <img src={logo} alt="LionTrade" className="footer__logo" />
-                    <p className="footer__desc">{FOOTER_DESC}</p>
+                    <p className="footer__desc">{t('desc')}</p>
 
                     <form className="footer__newsletter" onSubmit={handleSubscribe}>
-                        <label htmlFor="newsletter-email">{FOOTER_NEWSLETTER_LABEL}</label>
+                        <label htmlFor="newsletter-email">{t('newsletter_label')}</label>
                         <div className="newsletter__input-group">
                             <input
                                 id="newsletter-email"
                                 type="email"
-                                placeholder={FOOTER_NEWSLETTER_PLACEHOLDER}
+                                placeholder={t('newsletter_placeholder')}
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
                                 required
                             />
-                            <button type="submit">{FOOTER_SUBSCRIBE_BUTTON}</button>
+                            <button type="submit">{t('subscribe_button')}</button>
                         </div>
                     </form>
                 </div>
 
                 <div className="footer__col">
-                    <h4>{FOOTER_EXPLORE_TITLE}</h4>
+                    <h4>{t('explore_title')}</h4>
                     <ul>
                         <li>
-                            <Link to={DASHBOARD_URL}>Dashboard</Link>
+                            <Link to={DASHBOARD_URL}>{t('link_dashboard')}</Link>
                         </li>
                         <li>
-                            <Link to={MARKET_URL}>Market</Link>
+                            <Link to={MARKET_URL}>{t('link_market')}</Link>
                         </li>
                         <li>
-                            <Link to={KNOWLEDGE_URL}>Knowledge Library</Link>
+                            <Link to={KNOWLEDGE_URL}>{t('link_knowledge')}</Link>
                         </li>
                         <li>
-                            <Link to={NEWS_ALERTS_URL}>News Alerts</Link>
+                            <Link to={NEWS_ALERTS_URL}>{t('link_news_alerts')}</Link>
                         </li>
                     </ul>
                 </div>
 
                 <div className="footer__col">
-                    <h4>{FOOTER_SUPPORT_TITLE}</h4>
+                    <h4>{t('support_title')}</h4>
                     <ul>
                         <li>
-                            <Link to={HELP_CENTER_URL}>Help Center</Link>
+                            <Link to={HELP_CENTER_URL}>{t('link_help_center')}</Link>
                         </li>
                         <li>
-                            <Link to={SECURITY_URL}>Security</Link>
+                            <Link to={SECURITY_URL}>{t('link_security')}</Link>
                         </li>
                         <li>
-                            <Link to={PRIVACY_URL}>Privacy</Link>
+                            <Link to={PRIVACY_URL}>{t('link_privacy')}</Link>
                         </li>
                         <li>
-                            <Link to={TERMS_URL}>Terms</Link>
+                            <Link to={TERMS_URL}>{t('link_terms')}</Link>
                         </li>
                         <li>
-                            <Link to={CAREERS_URL}>Careers</Link>
+                            <Link to={CAREERS_URL}>{t('link_careers')}</Link>
                         </li>
                     </ul>
 
@@ -115,11 +107,12 @@ const Footer: React.FC = () => {
                 </div>
             </div>
 
+            {/* Bottom */}
             <div className="footer__bottom">
                 <span>
-                    &copy; {new Date().getFullYear()} LionTrade. {FOOTER_COPYRIGHT}
+                    &copy; {new Date().getFullYear()} LionTrade. {t('copyright')}
                 </span>
-                <button className="footer__back-to-top" onClick={scrollToTop} aria-label={FOOTER_BACK_TO_TOP_ARIA}>
+                <button className="footer__back-to-top" onClick={scrollToTop} aria-label={t('back_to_top_aria')}>
                     <FaArrowUp />
                 </button>
             </div>

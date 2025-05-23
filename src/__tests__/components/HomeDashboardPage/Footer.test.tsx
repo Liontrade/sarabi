@@ -4,6 +4,33 @@ import { MemoryRouter } from 'react-router-dom';
 
 jest.mock('../../../assets/logo_without_background.png', () => 'logo.png');
 
+jest.mock('react-i18next', () => ({
+    useTranslation: () => ({
+        t: (key: string) => {
+            const translations: Record<string, string> = {
+                desc: 'LionTrade – Twój przewodnik po świecie akcji',
+                newsletter_label: 'Zapisz się do newslettera',
+                newsletter_placeholder: 'Your email',
+                subscribe_button: 'Subscribe',
+                explore_title: 'Explore',
+                link_dashboard: 'Dashboard',
+                link_market: 'Market',
+                link_knowledge: 'Knowledge Library',
+                link_news_alerts: 'News Alerts',
+                support_title: 'Support',
+                link_help_center: 'Help Center',
+                link_security: 'Security',
+                link_privacy: 'Privacy',
+                link_terms: 'Terms',
+                link_careers: 'Careers',
+                copyright: 'All rights reserved.',
+                back_to_top_aria: 'Back to top',
+            };
+            return translations[key] || key;
+        },
+    }),
+}));
+
 describe('Footer Component', () => {
     beforeEach(() => {
         window.scrollTo = jest.fn();
@@ -20,8 +47,7 @@ describe('Footer Component', () => {
         expect(logo).toBeInTheDocument();
         expect(logo).toHaveAttribute('src', 'logo.png');
 
-        const description = screen.getByText(/LionTrade – Twój przewodnik po świecie akcji/i);
-        expect(description).toBeInTheDocument();
+        expect(screen.getByText('LionTrade – Twój przewodnik po świecie akcji')).toBeInTheDocument();
     });
 
     it('renders navigation links in Explore section', () => {
@@ -31,16 +57,13 @@ describe('Footer Component', () => {
             </MemoryRouter>,
         );
 
-        const exploreLinks = [
+        [
             { text: 'Dashboard', href: '/dashboard' },
             { text: 'Market', href: '/market' },
             { text: 'Knowledge Library', href: '/knowledge' },
             { text: 'News Alerts', href: '/news-alerts' },
-        ];
-
-        exploreLinks.forEach(({ text, href }) => {
+        ].forEach(({ text, href }) => {
             const link = screen.getByRole('link', { name: text });
-            expect(link).toBeInTheDocument();
             expect(link).toHaveAttribute('href', href);
         });
     });
@@ -52,34 +75,28 @@ describe('Footer Component', () => {
             </MemoryRouter>,
         );
 
-        const supportLinks = [
+        [
             { text: 'Help Center', href: '/help-center' },
             { text: 'Security', href: '/security' },
             { text: 'Privacy', href: '/privacy' },
             { text: 'Terms', href: '/terms' },
             { text: 'Careers', href: '/careers' },
-        ];
-
-        supportLinks.forEach(({ text, href }) => {
+        ].forEach(({ text, href }) => {
             const link = screen.getByRole('link', { name: text });
-            expect(link).toBeInTheDocument();
             expect(link).toHaveAttribute('href', href);
         });
 
-        const socialIcons = [
+        [
             { label: 'Twitter', href: 'https://twitter.com' },
             { label: 'GitHub', href: 'https://github.com' },
             { label: 'LinkedIn', href: 'https://linkedin.com' },
-        ];
-
-        socialIcons.forEach(({ label, href }) => {
+        ].forEach(({ label, href }) => {
             const iconLink = screen.getByRole('link', { name: label });
-            expect(iconLink).toBeInTheDocument();
             expect(iconLink).toHaveAttribute('href', href);
         });
     });
 
-    it('newsletter subscription clears input and logs email', () => {
+    it('newsletter form is accessible and clears input on submit', () => {
         const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
 
         render(
@@ -88,16 +105,19 @@ describe('Footer Component', () => {
             </MemoryRouter>,
         );
 
-        const input = screen.getByPlaceholderText('Your email');
-        const button = screen.getByRole('button', { name: /subscribe/i });
+        const input = screen.getByLabelText('Zapisz się do newslettera') as HTMLInputElement;
+        expect(input.id).toBe('newsletter-email');
+        expect(input).toHaveAttribute('type', 'email');
+        expect(input).toBeRequired();
+
+        const button = screen.getByRole('button', { name: 'Subscribe' });
 
         fireEvent.change(input, { target: { value: 'it@example.com' } });
-        expect((input as HTMLInputElement).value).toBe('it@example.com');
+        expect(input.value).toBe('it@example.com');
 
         fireEvent.click(button);
-
         expect(consoleSpy).toHaveBeenCalledWith('Subscribe email:', 'it@example.com');
-        expect((input as HTMLInputElement).value).toBe('');
+        expect(input.value).toBe('');
 
         consoleSpy.mockRestore();
     });
@@ -109,9 +129,8 @@ describe('Footer Component', () => {
             </MemoryRouter>,
         );
 
-        const backToTop = screen.getByRole('button', { name: /back to top/i });
+        const backToTop = screen.getByRole('button', { name: 'Back to top' });
         fireEvent.click(backToTop);
-
         expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, behavior: 'smooth' });
     });
 
@@ -123,7 +142,6 @@ describe('Footer Component', () => {
         );
 
         const year = new Date().getFullYear().toString();
-        const copyrightText = screen.getByText(new RegExp(`© ${year} LionTrade`, 'i'));
-        expect(copyrightText).toBeInTheDocument();
+        expect(screen.getByText(new RegExp(`© ${year} LionTrade`, 'i'))).toBeInTheDocument();
     });
 });

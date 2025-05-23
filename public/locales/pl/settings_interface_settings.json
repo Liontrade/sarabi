@@ -1,0 +1,15 @@
+{
+    "title": "Ustawienia interfejsu",
+    "theme_label": "Motyw",
+    "language_label": "Język",
+    "option_light": "Jasny",
+    "option_dark": "Ciemny",
+    "option_system": "Domyślny systemowy",
+    "option_english": "Angielski",
+    "option_polish": "Polski",
+    "save_button": "Zapisz",
+    "revert_button": "Przywróć",
+    "save_success": "Ustawienia zapisane!",
+    "save_error": "Nie udało się zapisać ustawień.",
+    "unsaved_changes": "Masz niezapisane zmiany"
+}

@@ -1,0 +1,8 @@
+{
+    "filter_all": "Wszystkie",
+    "filter_popular": "Najpopularniejsze",
+    "filter_recent": "Ostatnio przeglądane",
+    "filter_gainers": "Największe wzrosty",
+    "filter_losers": "Największe spadki",
+    "search_placeholder": "Wyszukaj po nazwie lub symbolu"
+}

@@ -1,21 +1,18 @@
 import { render, screen } from '@testing-library/react';
 import HowItWorks from '../../../components/LandingPage/HowItWorks/HowItWorks';
-import {
-    HOW_IT_WORKS_SECTION_TITLE,
-    HOW_IT_WORKS_STEP1_TITLE,
-    HOW_IT_WORKS_STEP1_TEXT,
-    HOW_IT_WORKS_STEP2_TITLE,
-    HOW_IT_WORKS_STEP2_TEXT,
-    HOW_IT_WORKS_STEP3_TITLE,
-    HOW_IT_WORKS_STEP3_TEXT,
-} from '../../../constants/strings';
+
+jest.mock('react-i18next', () => ({
+    useTranslation: () => ({
+        t: (key: string) => key,
+    }),
+}));
 
 describe('HowItWorks component', () => {
     test('renders section title', () => {
         render(<HowItWorks />);
         const heading = screen.getByRole('heading', {
             level: 2,
-            name: HOW_IT_WORKS_SECTION_TITLE,
+            name: 'section_title',
         });
         expect(heading).toBeInTheDocument();
     });
@@ -24,22 +21,22 @@ describe('HowItWorks component', () => {
         const { container } = render(<HowItWorks />);
 
         const cards = container.getElementsByClassName('hiw__card');
-        expect(cards.length).toBe(3);
+        expect(cards).toHaveLength(3);
 
-        const titles = [HOW_IT_WORKS_STEP1_TITLE, HOW_IT_WORKS_STEP2_TITLE, HOW_IT_WORKS_STEP3_TITLE];
-        const texts = [HOW_IT_WORKS_STEP1_TEXT, HOW_IT_WORKS_STEP2_TEXT, HOW_IT_WORKS_STEP3_TEXT];
+        const titleKeys = ['step1_title', 'step2_title', 'step3_title'];
+        const textKeys = ['step1_text', 'step2_text', 'step3_text'];
 
         Array.from(cards).forEach((card, i) => {
             const icon = card.querySelector('.hiw__icon');
             expect(icon).toBeInTheDocument();
 
-            const titleElement = card.querySelector('h3');
-            expect(titleElement).toBeInTheDocument();
-            expect(titleElement?.textContent).toBe(titles[i]);
+            const titleEl = card.querySelector('h3');
+            expect(titleEl).toBeInTheDocument();
+            expect(titleEl?.textContent).toBe(titleKeys[i]);
 
-            const textElement = card.querySelector('p');
-            expect(textElement).toBeInTheDocument();
-            expect(textElement?.textContent).toBe(texts[i]);
+            const textEl = card.querySelector('p');
+            expect(textEl).toBeInTheDocument();
+            expect(textEl?.textContent).toBe(textKeys[i]);
         });
     });
 });

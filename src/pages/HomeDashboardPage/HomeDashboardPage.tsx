@@ -15,10 +15,6 @@ const HomeDashboardPage: React.FC = () => {
             <div className="dashboard-page__layout">
                 <Sidebar />
                 <main className="dashboard-page__content">
-                    <div className="dashboard-header">
-                        <h2 className="dashboard-page__title">Dashboard</h2>
-                    </div>
-
                     <OnboardingSection />
 
                     <RecommendedSection />

@@ -1,44 +1,43 @@
 import { render, screen } from '@testing-library/react';
 import KeyBenefits from '../../../components/LandingPage/KeyBenefits/KeyBenefits';
-import {
-    KEY_BENEFITS_SECTION_TITLE,
-    KEY_BENEFITS_SECTION_SUBTITLE,
-    KEY_BENEFIT_1,
-    KEY_BENEFIT_2,
-    KEY_BENEFIT_3,
-    KEY_BENEFIT_4,
-} from '../../../constants/strings';
+
+jest.mock('react-i18next', () => ({
+    useTranslation: () => ({
+        t: (key: string) => key,
+    }),
+}));
 
 describe('KeyBenefits component', () => {
-    test('renders section title and subtitle', () => {
+    it('renders section title and subtitle', () => {
         render(<KeyBenefits />);
 
         const title = screen.getByRole('heading', {
             level: 2,
-            name: KEY_BENEFITS_SECTION_TITLE,
+            name: 'section_title',
         });
         expect(title).toBeInTheDocument();
         expect(title).toHaveClass('section-title');
 
-        const subtitle = screen.getByText(KEY_BENEFITS_SECTION_SUBTITLE);
+        const subtitle = screen.getByText('section_subtitle');
         expect(subtitle).toBeInTheDocument();
         expect(subtitle).toHaveClass('section-subtitle');
     });
 
-    test('renders four benefit cards with icons and titles', () => {
+    it('renders four benefit cards with icons and titles', () => {
         const { container } = render(<KeyBenefits />);
         const cards = container.getElementsByClassName('benefits__card');
-        expect(cards.length).toBe(4);
+        expect(cards).toHaveLength(4);
 
-        const expectedTitles = [KEY_BENEFIT_1, KEY_BENEFIT_2, KEY_BENEFIT_3, KEY_BENEFIT_4];
+        const expectedKeys = ['benefit_1', 'benefit_2', 'benefit_3', 'benefit_4'];
 
         Array.from(cards).forEach((card, i) => {
             const icon = card.querySelector('.benefits__icon');
             expect(icon).toBeInTheDocument();
 
-            const benefitTitle = card.querySelector('h3.benefits__title');
-            expect(benefitTitle).toBeInTheDocument();
-            expect(benefitTitle?.textContent).toBe(expectedTitles[i]);
+            const titleEl = card.querySelector('h3.benefits__title');
+            expect(titleEl).toBeInTheDocument();
+
+            expect(titleEl?.textContent).toBe(expectedKeys[i]);
         });
     });
 });

@@ -1,0 +1,16 @@
+{
+    "section_title": "Pricing & Plans",
+    "intro": "Join thousands of investors optimizing their portfolios with AI!",
+    "free_plan_name": "Free Plan",
+    "free_plan_price": "$0/month",
+    "free_plan_feature_1": "Basic Market Insights",
+    "free_plan_feature_2": "Limited AI Predictions",
+    "free_plan_feature_3": "Email Support",
+    "free_plan_button": "Get Started",
+    "premium_plan_name": "Premium Plan",
+    "premium_plan_price": "$39/month",
+    "premium_plan_feature_1": "Advanced Market Insights",
+    "premium_plan_feature_2": "Unlimited AI Predictions",
+    "premium_plan_feature_3": "Priority Support",
+    "premium_plan_button": "Join Now"
+}
