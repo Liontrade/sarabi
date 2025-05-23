@@ -55,11 +55,12 @@ const SignUpPage: React.FC = () => {
                     setError(t('invalid_email_format_error'));
                 } else {
                     setError(t('generic_signup_error'));
+                    console.error(err);
                 }
             } else {
                 setError(t('unexpected_signup_error'));
+                console.error(err);
             }
-            console.error(err);
         } finally {
             setLoading(false);
         }

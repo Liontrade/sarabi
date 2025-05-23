@@ -10,19 +10,22 @@ const InterfaceSettings: React.FC = () => {
 
     const { t } = useTranslation('settings_interface_settings');
 
-    const storedTheme = (localStorage.getItem('theme') as ThemeType) || 'light';
-    const storedLang = (localStorage.getItem('language') as LanguageType) || 'en';
+    const initialTheme = (localStorage.getItem('theme') as ThemeType) || 'light';
+    const initialLang = (localStorage.getItem('language') as LanguageType) || 'en';
 
-    const [theme, setTheme] = useState<ThemeType>(storedTheme);
-    const [language, setLanguage] = useState<LanguageType>(storedLang);
+    const [savedTheme, setSavedTheme] = useState<ThemeType>(initialTheme);
+    const [savedLang, setSavedLang] = useState<LanguageType>(initialLang);
 
-    const dirty = theme !== storedTheme || language !== storedLang;
+    const [theme, setTheme] = useState<ThemeType>(initialTheme);
+    const [language, setLanguage] = useState<LanguageType>(initialLang);
+
+    const dirty = theme !== savedTheme || language !== savedLang;
 
     useEffect(() => {
-        if (storedTheme === 'dark') document.body.classList.add('dark');
+        if (savedTheme === 'dark') document.body.classList.add('dark');
         else document.body.classList.remove('dark');
-        i18n.changeLanguage(storedLang);
-    }, []);
+        i18n.changeLanguage(savedLang);
+    }, [savedTheme, savedLang]);
 
     const handleSave = () => {
         try {
@@ -33,6 +36,8 @@ const InterfaceSettings: React.FC = () => {
             else document.body.classList.remove('dark');
             i18n.changeLanguage(language);
 
+            setSavedTheme(theme);
+            setSavedLang(language);
             toast.success(t('save_success'));
         } catch {
             toast.error(t('save_error'));
@@ -40,8 +45,8 @@ const InterfaceSettings: React.FC = () => {
     };
 
     const handleRevert = () => {
-        setTheme(storedTheme);
-        setLanguage(storedLang);
+        setTheme(savedTheme);
+        setLanguage(savedLang);
         toast.info(t('save_success'));
     };
 

@@ -12,7 +12,6 @@ const MinimalNavbar: React.FC<MinimalNavbarProps> = ({ variant = 'none' }) => {
     const { t } = useTranslation('common');
     const navigate = useNavigate();
 
-    // Pobieramy teksty z JSON-ów
     const buttonText = variant === 'login' ? t('sign_in') : variant === 'signup' ? t('sign_up') : '';
 
     const buttonLink = variant === 'login' ? '/login' : variant === 'signup' ? '/signup' : '';

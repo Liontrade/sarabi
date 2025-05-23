@@ -1,4 +1,3 @@
-// TrendingStocksSection.tsx
 import React, { useRef, useState, useEffect } from 'react';
 import './TrendingStocksSection.css';
 import { FiRefreshCw } from 'react-icons/fi';
@@ -11,8 +10,8 @@ interface TrendingStock {
     change_percent: number;
 }
 
-const CARD_WIDTH = 250; // px
-const GAP_PX = 16; // 1rem gap (adjust if your root font-size is different)
+const CARD_WIDTH = 250;
+const GAP_PX = 16;
 
 const TrendingStocksSection: React.FC = () => {
     const { t } = useTranslation('home_dashboard_trending_section');
@@ -22,7 +21,6 @@ const TrendingStocksSection: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    // 1) Fetch your data
     const fetchTrending = async () => {
         setLoading(true);
         setError(null);
@@ -39,7 +37,6 @@ const TrendingStocksSection: React.FC = () => {
         }
     };
 
-    // 2) Measure how many cards fit
     const updateVisibleCount = () => {
         const el = containerRef.current;
         if (!el) return;
@@ -49,21 +46,18 @@ const TrendingStocksSection: React.FC = () => {
         setVisibleCount(count > 0 ? count : 1);
     };
 
-    // 3) On mount, fetch and bind resize
     useEffect(() => {
         fetchTrending();
         window.addEventListener('resize', updateVisibleCount);
         return () => window.removeEventListener('resize', updateVisibleCount);
     }, []);
 
-    // 4) **NEW**: once loading finishes (and your grid is in the DOM), measure again
     useEffect(() => {
         if (!loading && !error) {
             updateVisibleCount();
         }
     }, [loading, error]);
 
-    // 5) Slice out only the items that will fit
     const toDisplay = stocks.slice(0, visibleCount);
 
     return (

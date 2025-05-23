@@ -5,9 +5,9 @@ import { sendPasswordResetEmail } from 'firebase/auth';
 import Spinner from '../../components/Spinner/Spinner';
 import MinimalNavbar from '../../components/MinimalNavbar/MinimalNavbar';
 import { useTranslation } from 'react-i18next';
-import './ForgotPassword.css';
+import './ForgotPasswordPage.css';
 
-const ForgotPassword: React.FC = () => {
+const ForgotPasswordPage: React.FC = () => {
     const { t } = useTranslation('forgot_password_page');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
@@ -82,4 +82,4 @@ const ForgotPassword: React.FC = () => {
     );
 };
 
-export default ForgotPassword;
+export default ForgotPasswordPage;
