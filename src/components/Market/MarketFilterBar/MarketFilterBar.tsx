@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import './MarketFilterBar.css';
 
-type FilterKey = 'all' | 'popular' | 'recent' | 'gainers' | 'losers';
+export type FilterKey = 'all' | 'popular' | 'recent' | 'gainers' | 'losers';
 
 interface MarketFilterBarProps {
     activeFilter: FilterKey;

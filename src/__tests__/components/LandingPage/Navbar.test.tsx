@@ -2,7 +2,14 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Navbar from '../../../components/LandingPage/Navbar/Navbar';
 import { NAV_LINKS, ACTION_BUTTONS } from '../../../constants/LandingPage/constants_navbar';
-import { BRAND_NAME } from '../../../constants/strings';
+
+jest.mock('react-i18next', () => ({
+    useTranslation: () => ({
+        t: (key: string) => key,
+    }),
+}));
+
+jest.mock('../../../assets/logo_without_background.png', () => 'logo.png');
 
 describe('Navbar component', () => {
     beforeEach(() => {
@@ -14,11 +21,11 @@ describe('Navbar component', () => {
     });
 
     test('renders logo image and brand name', () => {
-        const logoImg = screen.getByAltText(`${BRAND_NAME} Logo`);
+        const logoImg = screen.getByAltText('brand_name Logo');
         expect(logoImg).toBeInTheDocument();
         expect(logoImg).toHaveClass('navbar__logo-img');
 
-        const brandHeading = screen.getByRole('heading', { level: 1, name: BRAND_NAME });
+        const brandHeading = screen.getByRole('heading', { level: 1, name: 'brand_name' });
         expect(brandHeading).toBeInTheDocument();
         expect(brandHeading).toHaveClass('navbar__brand');
     });
@@ -30,9 +37,9 @@ describe('Navbar component', () => {
         expect(ul).not.toHaveClass('navbar__links--active');
 
         NAV_LINKS.forEach(link => {
-            const linkElement = screen.getByRole('link', { name: link.text });
-            expect(linkElement).toBeInTheDocument();
-            expect(linkElement).toHaveAttribute('href', link.href);
+            const linkEl = screen.getByRole('link', { name: link.key });
+            expect(linkEl).toBeInTheDocument();
+            expect(linkEl).toHaveAttribute('href', link.href);
         });
     });
 
@@ -51,7 +58,7 @@ describe('Navbar component', () => {
 
     test('renders action buttons with correct links', () => {
         ACTION_BUTTONS.forEach(btn => {
-            const actionLink = screen.getByRole('link', { name: btn.text });
+            const actionLink = screen.getByRole('link', { name: btn.key });
             expect(actionLink).toBeInTheDocument();
             expect(actionLink).toHaveAttribute('href', btn.to);
             expect(actionLink).toHaveClass(`btn btn--${btn.variant}`);

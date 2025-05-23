@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import HomeDashboardPage from '../../../pages/HomeDashboardPage/HomeDashboardPage';
 
@@ -45,24 +45,30 @@ jest.mock('../../../components/HomeDashboardPage/Footer/Footer', () => {
 });
 
 describe('HomeDashboardPage', () => {
-    it('renders layout with Navbar, Sidebar, and main content sections', () => {
+    beforeEach(() => {
         render(
             <MemoryRouter>
                 <HomeDashboardPage />
             </MemoryRouter>,
         );
+    });
 
+    it('renders Navbar and Sidebar', () => {
         expect(screen.getByTestId('navbar')).toBeInTheDocument();
         expect(screen.getByTestId('sidebar')).toBeInTheDocument();
+    });
 
-        const title = screen.getByRole('heading', { level: 2, name: 'Dashboard' });
-        expect(title).toBeInTheDocument();
+    it('renders main content area with all sections', () => {
+        const main = screen.getByRole('main');
+        expect(main).toBeInTheDocument();
+        expect(main).toHaveClass('dashboard-page__content');
 
-        expect(screen.getByTestId('onboarding')).toBeInTheDocument();
-        expect(screen.getByTestId('recommended')).toBeInTheDocument();
-        expect(screen.getByTestId('trending')).toBeInTheDocument();
-        expect(screen.getByTestId('hotnews')).toBeInTheDocument();
+        ['onboarding', 'recommended', 'trending', 'hotnews'].forEach(id => {
+            expect(within(main).getByTestId(id)).toBeInTheDocument();
+        });
+    });
 
+    it('renders Footer', () => {
         expect(screen.getByTestId('footer')).toBeInTheDocument();
     });
 });
