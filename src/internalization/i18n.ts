@@ -23,6 +23,7 @@ const namespaces = [
     'login_page',
     'market_market_filter_bar',
     'market_market_list',
+    'not_found_page',
     'sign_up_page',
     'settings_delete_account_modal',
     'settings_interface_settings',
