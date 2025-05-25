@@ -4,25 +4,21 @@ import { auth } from '../../firebaseConfig';
 import { sendEmailVerification } from 'firebase/auth';
 import './VerifyEmailPage.css';
 import MinimalNavbar from '../../components/MinimalNavbar/MinimalNavbar';
-
-import {
-    VERIFY_EMAIL_TITLE,
-    VERIFY_EMAIL_INFO_PART1,
-    VERIFY_EMAIL_INFO_PART2,
-    RESEND_EMAIL_BUTTON_TEXT,
-    VERIFY_EMAIL_SENT_AGAIN_ALERT,
-} from '../../constants/strings';
+import { useTranslation } from 'react-i18next';
 import { DASHBOARD_URL } from '../../constants/urls';
 
 const VerifyEmailPage: React.FC = () => {
+    const { t } = useTranslation('verify_email_page');
     const navigate = useNavigate();
+
+    const userEmail = auth.currentUser?.email || '';
 
     const handleResend = async () => {
         if (auth.currentUser && !auth.currentUser.emailVerified) {
             try {
                 await sendEmailVerification(auth.currentUser);
-                alert(VERIFY_EMAIL_SENT_AGAIN_ALERT);
-            } catch (err: unknown) {
+                alert(t('resent_alert'));
+            } catch (err) {
                 console.error('Error resending email:', err);
             }
         }
@@ -46,12 +42,10 @@ const VerifyEmailPage: React.FC = () => {
         <div className="verify-email-page">
             <MinimalNavbar variant="none" />
             <div className="verify-email-page__container">
-                <h1>{VERIFY_EMAIL_TITLE}</h1>
-                <p>
-                    {VERIFY_EMAIL_INFO_PART1} <strong>{auth.currentUser?.email}</strong>. {VERIFY_EMAIL_INFO_PART2}
-                </p>
+                <h1>{t('title')}</h1>
+                <p className="verify-email__info">{t('info', { email: userEmail })}</p>
                 <button onClick={handleResend} className="verify-email__btn">
-                    {RESEND_EMAIL_BUTTON_TEXT}
+                    {t('resend_button')}
                 </button>
             </div>
         </div>

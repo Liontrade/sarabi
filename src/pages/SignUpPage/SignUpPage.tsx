@@ -8,91 +8,71 @@ import {
     signInWithPopup,
 } from 'firebase/auth';
 import { FirebaseError } from 'firebase/app';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Spinner from '../../components/Spinner/Spinner';
 import MinimalNavbar from '../../components/MinimalNavbar/MinimalNavbar';
-
-import {
-    SIGNUP_TITLE,
-    CREATE_ACCOUNT_BUTTON,
-    SIGNUP_SOCIAL_BUTTON,
-    SIGNUP_INFO_TEXT,
-    SIGNUP_TERMS_TEXT,
-    VALID_EMAIL_ERROR,
-    PASSWORD_MIN_LENGTH_ERROR,
-    PASSWORD_MATCH_ERROR,
-    EMAIL_ALREADY_IN_USE_ERROR,
-    INVALID_EMAIL_FORMAT_ERROR,
-    GENERIC_SIGNUP_ERROR,
-    UNEXPECTED_SIGNUP_ERROR,
-} from '../../constants/strings';
-import { VERIFY_EMAIL_URL, DASHBOARD_URL } from '../../constants/urls';
+import { useTranslation, Trans } from 'react-i18next';
+import { VERIFY_EMAIL_URL, DASHBOARD_URL, TERMS_URL, PRIVACY_URL } from '../../constants/urls';
 
 export const validateEmail = (email: string): boolean => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
 const SignUpPage: React.FC = () => {
+    const { t } = useTranslation('sign_up_page');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [repeatPassword, setRepeatPassword] = useState('');
+    const [repeatPassword, setRepeat] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
 
         if (!validateEmail(email)) {
-            setError(VALID_EMAIL_ERROR);
+            setError(t('valid_email_error'));
             return;
         }
         if (password.length < 8) {
-            setError(PASSWORD_MIN_LENGTH_ERROR);
+            setError(t('password_min_length_error'));
             return;
         }
         if (password !== repeatPassword) {
-            setError(PASSWORD_MATCH_ERROR);
+            setError(t('password_match_error'));
             return;
         }
 
         try {
             setLoading(true);
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            await sendEmailVerification(userCredential.user);
+            const uc = await createUserWithEmailAndPassword(auth, email, password);
+            await sendEmailVerification(uc.user);
             navigate(VERIFY_EMAIL_URL);
         } catch (err: unknown) {
             if (err instanceof FirebaseError) {
-                switch (err.code) {
-                    case 'auth/email-already-in-use':
-                        setError(EMAIL_ALREADY_IN_USE_ERROR);
-                        break;
-                    case 'auth/invalid-email':
-                        setError(INVALID_EMAIL_FORMAT_ERROR);
-                        break;
-                    default:
-                        setError(GENERIC_SIGNUP_ERROR);
+                if (err.code === 'auth/email-already-in-use') {
+                    setError(t('email_already_in_use_error'));
+                } else if (err.code === 'auth/invalid-email') {
+                    setError(t('invalid_email_format_error'));
+                } else {
+                    setError(t('generic_signup_error'));
+                    console.error(err);
                 }
             } else {
-                setError(UNEXPECTED_SIGNUP_ERROR);
+                setError(t('unexpected_signup_error'));
+                console.error(err);
             }
-            console.error('Error creating account:', err);
         } finally {
             setLoading(false);
         }
     };
 
     const handleGoogleSignIn = async () => {
-        const provider = new GoogleAuthProvider();
+        setLoading(true);
         try {
-            setLoading(true);
-            await signInWithPopup(auth, provider);
+            await signInWithPopup(auth, new GoogleAuthProvider());
             navigate(DASHBOARD_URL);
-        } catch (err: unknown) {
-            if (err instanceof FirebaseError) {
-                console.error('Error during Google sign-in:', err.message);
-            } else {
-                console.error('Unexpected error during Google sign-in:', err);
-            }
+        } catch (err) {
+            console.error(err);
         } finally {
             setLoading(false);
         }
@@ -103,7 +83,7 @@ const SignUpPage: React.FC = () => {
             <MinimalNavbar variant="login" />
 
             <div className="signup-page__content">
-                <h1>{SIGNUP_TITLE}</h1>
+                <h1>{t('title')}</h1>
 
                 <form data-testid="signup-form" className="signup-form" onSubmit={handleSubmit}>
                     {error && (
@@ -112,44 +92,41 @@ const SignUpPage: React.FC = () => {
                         </div>
                     )}
 
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email">{t('email_label')}</label>
                     <input
                         id="email"
                         type="email"
-                        placeholder="Enter your email"
+                        placeholder={t('email_placeholder')}
                         value={email}
                         onChange={e => setEmail(e.target.value)}
-                        className={error.includes('email') ? 'input-error' : ''}
                         required
                     />
 
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">{t('password_label')}</label>
                     <input
                         id="password"
                         type="password"
-                        placeholder="Password must be at least 8 characters"
+                        placeholder={t('password_placeholder')}
                         value={password}
                         onChange={e => setPassword(e.target.value)}
-                        className={error.includes('Password') ? 'input-error' : ''}
                         required
                     />
 
-                    <label htmlFor="repeatPassword">Repeat Password</label>
+                    <label htmlFor="repeatPassword">{t('repeat_password_label')}</label>
                     <input
                         id="repeatPassword"
                         type="password"
-                        placeholder="Repeat your password"
+                        placeholder={t('repeat_password_placeholder')}
                         value={repeatPassword}
-                        onChange={e => setRepeatPassword(e.target.value)}
-                        className={error.includes('match') ? 'input-error' : ''}
+                        onChange={e => setRepeat(e.target.value)}
                         required
                     />
 
                     <button type="submit" className="signup-form__submit" disabled={loading}>
-                        {loading ? <Spinner /> : CREATE_ACCOUNT_BUTTON}
+                        {loading ? <Spinner /> : t('create_account_button')}
                     </button>
 
-                    <p className="signup-form__info">{SIGNUP_INFO_TEXT}</p>
+                    <p className="signup-form__info">{t('info_text')}</p>
 
                     <button
                         type="button"
@@ -157,10 +134,19 @@ const SignUpPage: React.FC = () => {
                         onClick={handleGoogleSignIn}
                         disabled={loading}
                     >
-                        {loading ? <Spinner /> : SIGNUP_SOCIAL_BUTTON}
+                        {loading ? <Spinner /> : t('signup_social_button')}
                     </button>
 
-                    <p className="signup-form__terms">{SIGNUP_TERMS_TEXT}</p>
+                    <p className="signup-form__terms">
+                        <Trans
+                            i18nKey="terms_text"
+                            t={t}
+                            components={{
+                                terms: <Link to={TERMS_URL} className="link" />,
+                                privacy: <Link to={PRIVACY_URL} className="link" />,
+                            }}
+                        />
+                    </p>
                 </form>
             </div>
         </div>

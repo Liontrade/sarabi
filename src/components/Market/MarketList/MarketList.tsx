@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import './MarketList.css';
 import { FiChevronUp, FiChevronDown } from 'react-icons/fi';
 
@@ -27,6 +28,7 @@ const plnFormatter = new Intl.NumberFormat('pl-PL', {
 });
 
 const MarketList: React.FC<MarketListProps> = ({ filter, searchQuery }) => {
+    const { t } = useTranslation('market_market_list');
     const [data, setData] = useState<PriceSummary[]>([]);
     const [loading, setLoading] = useState(true);
     const [sortConfig, setSortConfig] = useState<{
@@ -43,17 +45,16 @@ const MarketList: React.FC<MarketListProps> = ({ filter, searchQuery }) => {
     }, []);
 
     const onSort = (key: keyof PriceSummary) => {
-        setSortConfig(prev => {
-            if (prev?.key === key) {
-                return { key, direction: prev.direction === 'asc' ? 'desc' : 'asc' };
-            }
-            return { key, direction: 'asc' };
-        });
+        setSortConfig(prev =>
+            prev?.key === key
+                ? { key, direction: prev.direction === 'asc' ? 'desc' : 'asc' }
+                : { key, direction: 'asc' },
+        );
     };
 
     const filtered = useMemo(() => {
+        const q = searchQuery.toLowerCase();
         return data.filter(item => {
-            const q = searchQuery.toLowerCase();
             if (!item.full_name.toLowerCase().includes(q) && !item.ticker.toLowerCase().includes(q)) return false;
             if (filter === 'gainers') return item.change > 0;
             if (filter === 'losers') return item.change < 0;
@@ -78,18 +79,18 @@ const MarketList: React.FC<MarketListProps> = ({ filter, searchQuery }) => {
     }, [filtered, sortConfig]);
 
     if (loading) {
-        return <p className="market-list__loading">Ładowanie danych rynku…</p>;
+        return <p className="market-list__loading">{t('loading')}</p>;
     }
 
-    const headers: { key: keyof PriceSummary; label: string }[] = [
-        { key: 'ticker', label: 'Ticker' },
-        { key: 'full_name', label: 'Name' },
-        { key: 'price', label: 'Price (PLN)' },
-        { key: 'change', label: 'Change' },
-        { key: 'change_percent', label: '%' },
-        { key: 'open', label: 'Open' },
-        { key: 'high', label: 'High' },
-        { key: 'low', label: 'Low' },
+    const headers: { key: keyof PriceSummary; labelKey: string }[] = [
+        { key: 'ticker', labelKey: 'header.ticker' },
+        { key: 'full_name', labelKey: 'header.full_name' },
+        { key: 'price', labelKey: 'header.price' },
+        { key: 'change', labelKey: 'header.change' },
+        { key: 'change_percent', labelKey: 'header.change_percent' },
+        { key: 'open', labelKey: 'header.open' },
+        { key: 'high', labelKey: 'header.high' },
+        { key: 'low', labelKey: 'header.low' },
     ];
 
     return (
@@ -100,7 +101,7 @@ const MarketList: React.FC<MarketListProps> = ({ filter, searchQuery }) => {
                         {headers.map(h => (
                             <th key={h.key} onClick={() => onSort(h.key)} className="sortable">
                                 <div className="th-content">
-                                    <span>{h.label}</span>
+                                    <span>{t(h.labelKey)}</span>
                                     <span className="sort-icons">
                                         <FiChevronUp
                                             className={
@@ -126,7 +127,7 @@ const MarketList: React.FC<MarketListProps> = ({ filter, searchQuery }) => {
                     {sorted.map((c, i) => {
                         const isDown = c.change < 0;
                         return (
-                            <tr key={i}>
+                            <tr key={i} className={i % 2 === 0 ? 'row--even' : ''}>
                                 <td className="ticker-cell">{c.ticker}</td>
                                 <td>{c.full_name}</td>
                                 <td>{plnFormatter.format(c.price)}</td>

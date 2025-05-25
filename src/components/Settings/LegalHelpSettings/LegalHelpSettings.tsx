@@ -1,116 +1,93 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import './LegalHelpSettings.css';
 
 interface FaqItem {
-    question: string;
-    answer: string;
+    key: string;
+    q: string;
+    a: string;
 }
 
 const LegalHelpSettings: React.FC = () => {
-    const [faqs] = useState<FaqItem[]>([
-        {
-            question: 'What is LionTrade?',
-            answer: 'LionTrade is a brokerage platform that offers commission-free trading in stocks, options, ETFs, and cryptocurrency. Users can fund their accounts with bank transfers, wire transfers, or other supported methods.',
-        },
-        {
-            question: 'How do I create an account?',
-            answer: 'You can create an account by downloading the LionTrade app or visiting our website, clicking "Sign Up," and following the on-screen instructions to provide your personal details and verify your identity.',
-        },
-        {
-            question: 'What types of accounts does LionTrade offer?',
-            answer: 'LionTrade offers individual brokerage accounts, retirement accounts (e.g., IRA), and custodial accounts for minors, among others.',
-        },
-    ]);
+    const { t } = useTranslation('settings_legal_help_settings');
+    const [expanded, setExpanded] = useState<string | null>(null);
 
-    const [expandedQuestion, setExpandedQuestion] = useState<string | null>(null);
+    const faqs: FaqItem[] = [
+        { key: 'faq_access_library', q: t('faq_access_library'), a: t('faq_access_library_ans') },
+        { key: 'faq_available_courses', q: t('faq_available_courses'), a: t('faq_available_courses_ans') },
+        { key: 'faq_ai_chatbot', q: t('faq_ai_chatbot'), a: t('faq_ai_chatbot_ans') },
+        { key: 'faq_paper_trading', q: t('faq_paper_trading'), a: t('faq_paper_trading_ans') },
+        { key: 'faq_progress_tracking', q: t('faq_progress_tracking'), a: t('faq_progress_tracking_ans') },
+    ];
 
-    const toggleFaq = (question: string) => {
-        if (expandedQuestion === question) {
-            setExpandedQuestion(null);
-        } else {
-            setExpandedQuestion(question);
-        }
-    };
-
-    const handleViewReleaseNotes = () => {
-        console.log('Viewing release notes...');
-    };
+    const toggleFaq = (key: string) => setExpanded(expanded === key ? null : key);
 
     return (
         <div className="legal-help-settings">
-            <h2>Legal &amp; Help</h2>
-            <p>Find legal documents, FAQs, and ways to contact support</p>
+            <h2>{t('title')}</h2>
+            <p className="desc">{t('description')}</p>
 
-            <div className="section legal-docs">
-                <h3>Legal Documents</h3>
-                <ul>
+            <div className="section card">
+                <h3>{t('legal_docs_title')}</h3>
+                <ul className="links-list">
                     <li>
-                        <a href="#privacy-policy" onClick={() => console.log('Open Privacy Policy')}>
-                            Privacy Policy
-                        </a>
+                        <a href="#privacy-policy">{t('privacy_policy')}</a>
                     </li>
                     <li>
-                        <a href="#terms-of-service" onClick={() => console.log('Open Terms of Service')}>
-                            Terms of Service
-                        </a>
+                        <a href="#terms-of-service">{t('terms_of_service')}</a>
                     </li>
                 </ul>
             </div>
 
-            <div className="section faq">
-                <h3>FAQ</h3>
-                <div className="faq-list">
-                    {faqs.map(item => (
-                        <div key={item.question} className="faq-item">
-                            <button className="faq-question" onClick={() => toggleFaq(item.question)}>
-                                {item.question}
-                                <span className="faq-icon">{expandedQuestion === item.question ? '▲' : '▼'}</span>
-                            </button>
-                            {expandedQuestion === item.question && <div className="faq-answer">{item.answer}</div>}
+            <div className="section card">
+                <h3>{t('faq_title')}</h3>
+                {faqs.map(item => (
+                    <div key={item.key} className={`faq-item ${expanded === item.key ? 'expanded' : ''}`}>
+                        <button className="faq-question" onClick={() => toggleFaq(item.key)}>
+                            <span>{item.q}</span>
+                            {expanded === item.key ? (
+                                <FiChevronUp className="faq-icon" />
+                            ) : (
+                                <FiChevronDown className="faq-icon" />
+                            )}
+                        </button>
+                        <div className="faq-answer-wrapper">
+                            <div className="faq-answer">{item.a}</div>
                         </div>
-                    ))}
-                </div>
+                    </div>
+                ))}
             </div>
 
-            <div className="section contact-support">
-                <h3>Contact Support</h3>
-                <ul>
+            <div className="section card">
+                <h3>{t('contact_support_title')}</h3>
+                <ul className="links-list">
                     <li>
-                        <a href="#email-support" onClick={() => console.log('Email Support')}>
-                            Email Support
-                        </a>
+                        <a href="#email">{t('contact_email')}</a>
                     </li>
                     <li>
-                        <a href="#chat" onClick={() => console.log('Chat with Us')}>
-                            Chat with Us
-                        </a>
+                        <a href="#chat">{t('contact_chat')}</a>
                     </li>
                     <li>
-                        <a href="#call-us" onClick={() => console.log('Call Us')}>
-                            Call Us
-                        </a>
+                        <a href="#call">{t('contact_call')}</a>
                     </li>
                 </ul>
             </div>
 
-            <div className="section community">
-                <h3>Community</h3>
-                <p>Join the LionTrade Community to connect with fellow traders and share insights.</p>
-                <a
-                    href="#liontrade-community"
-                    className="btn-community"
-                    onClick={() => console.log('LionTrade Community clicked')}
-                >
-                    LionTrade Community
-                </a>
+            <div className="section card">
+                <h3>{t('community_title')}</h3>
+                <p>{t('community_text')}</p>
+                <button className="btn-community" onClick={() => console.log('Community clicked')}>
+                    {t('community_button')}
+                </button>
             </div>
 
-            <div className="section app-version">
-                <h3>App Version</h3>
+            <div className="section card">
+                <h3>{t('app_version_title')}</h3>
                 <div className="version-info">
-                    <span>v1.2.0</span>
-                    <button className="btn btn-primary" onClick={handleViewReleaseNotes}>
-                        View Release Notes
+                    <span className="version">{t('current_version')}</span>
+                    <button className="btn-release" onClick={() => console.log('View Release Notes')}>
+                        {t('view_release_notes')}
                     </button>
                 </div>
             </div>

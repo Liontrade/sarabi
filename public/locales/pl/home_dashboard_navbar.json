@@ -1,0 +1,16 @@
+{
+    "brand_name": "LionTrade",
+    "dashboard_label": "Panel",
+    "knowledge_label": "Wiedza",
+    "market_label": "Rynek",
+    "news_alerts_label": "Alerty",
+    "search_placeholder": "Szukaj...",
+    "notifications_aria": "Powiadomienia",
+    "profile_label": "Profil",
+    "settings_label": "Ustawienia",
+    "logout_label": "Wyloguj się",
+    "mobile_open": "Otwórz menu",
+    "mobile_close": "Zamknij menu",
+    "dark_mode_on": "Przełącz na tryb jasny",
+    "dark_mode_off": "Przełącz na tryb ciemny"
+}

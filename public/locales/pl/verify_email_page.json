@@ -1,0 +1,6 @@
+{
+    "title": "Potwierdź swój adres e-mail",
+    "info": "Wysłaliśmy wiadomość potwierdzającą na adres {{email}}. Sprawdź swoją skrzynkę i kliknij link weryfikacyjny. Ta strona odświeży się automatycznie po potwierdzeniu e-maila.",
+    "resend_button": "Wyślij ponownie e-mail",
+    "resent_alert": "Wiadomość potwierdzająca została wysłana ponownie."
+}

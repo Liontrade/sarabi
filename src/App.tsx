@@ -1,10 +1,11 @@
 import { JSX } from 'react';
+import './internalization/i18n';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import LandingPage from './pages/LandingPage/LandingPage';
 import SignUpPage from './pages/SignUpPage/SignUpPage';
 import LoginPage from './pages/LoginPage/LoginPage';
-import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
+import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPasswordPage';
 import HomeDashboardPage from './pages/HomeDashboardPage/HomeDashboardPage';
 import VerifyEmailPage from './pages/VerifyEmailPage/VerifyEmailPage';
 import MarketPage from './pages/MarketPage/MarketPage';
@@ -13,7 +14,7 @@ import Spinner from './components/Spinner/Spinner';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './styles/global.css';
-import NotFound from './pages/NotFound/NotFound';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
 function App() {
     const { user, loading } = useAuth();
@@ -58,7 +59,7 @@ function App() {
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/signup" element={<SignUpPage />} />
                 <Route path="/login" element={<LoginPage />} />
-                <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/forgot-password" element={<ForgotPasswordPage />} />
                 <Route path="/verify-email" element={<VerifyEmailPage />} />
                 <Route
                     path="/dashboard"
@@ -84,7 +85,7 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
-                <Route path="*" element={<NotFound />} />
+                <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </Router>
     );

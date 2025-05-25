@@ -1,0 +1,8 @@
+{
+    "filter_all": "All",
+    "filter_popular": "Most Popular",
+    "filter_recent": "Recently Viewed",
+    "filter_gainers": "Top Gainers",
+    "filter_losers": "Top Losers",
+    "search_placeholder": "Search for assets by name or ticker"
+}

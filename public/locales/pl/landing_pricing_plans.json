@@ -1,0 +1,16 @@
+{
+    "section_title": "Cennik i plany",
+    "intro": "Dołącz do tysięcy inwestorów optymalizujących swoje portfele dzięki AI!",
+    "free_plan_name": "Plan Darmowy",
+    "free_plan_price": "0 USD/miesiąc",
+    "free_plan_feature_1": "Podstawowe analizy rynkowe",
+    "free_plan_feature_2": "Ograniczone prognozy AI",
+    "free_plan_feature_3": "Wsparcie e-mailowe",
+    "free_plan_button": "Zacznij za darmo",
+    "premium_plan_name": "Plan Premium",
+    "premium_plan_price": "39 USD/miesiąc",
+    "premium_plan_feature_1": "Zaawansowane analizy rynkowe",
+    "premium_plan_feature_2": "Nieograniczone prognozy AI",
+    "premium_plan_feature_3": "Priorytetowe wsparcie",
+    "premium_plan_button": "Dołącz teraz"
+}

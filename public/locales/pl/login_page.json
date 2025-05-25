@@ -1,0 +1,14 @@
+{
+    "title": "Zaloguj się do LionTrade",
+    "email_label": "Email",
+    "email_placeholder": "twoj@email.pl",
+    "password_label": "Hasło",
+    "password_placeholder": "Wprowadź hasło",
+    "login_button": "Zaloguj się",
+    "or_text": "lub",
+    "continue_with_google": "Zaloguj przez Google",
+    "forgot_password_link": "Zapomniałeś hasła?",
+    "dont_have_account_text": "Nie masz konta?",
+    "signup_button": "Zarejestruj się",
+    "invalid_credentials_error": "Nieprawidłowy email lub hasło."
+}

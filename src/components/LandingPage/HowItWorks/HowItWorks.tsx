@@ -1,36 +1,27 @@
 import React from 'react';
 import { FiBookOpen, FiMessageCircle, FiTrendingUp } from 'react-icons/fi';
+import { useTranslation } from 'react-i18next';
 import './HowItWorks.css';
-import {
-    HOW_IT_WORKS_SECTION_TITLE,
-    HOW_IT_WORKS_STEP1_TITLE,
-    HOW_IT_WORKS_STEP1_TEXT,
-    HOW_IT_WORKS_STEP2_TITLE,
-    HOW_IT_WORKS_STEP2_TEXT,
-    HOW_IT_WORKS_STEP3_TITLE,
-    HOW_IT_WORKS_STEP3_TEXT,
-} from '../../../constants/strings';
 
-const icons = [FiBookOpen, FiMessageCircle, FiTrendingUp];
-const titles = [HOW_IT_WORKS_STEP1_TITLE, HOW_IT_WORKS_STEP2_TITLE, HOW_IT_WORKS_STEP3_TITLE];
-const texts = [HOW_IT_WORKS_STEP1_TEXT, HOW_IT_WORKS_STEP2_TEXT, HOW_IT_WORKS_STEP3_TEXT];
+const icons = [FiBookOpen, FiMessageCircle, FiTrendingUp] as const;
 
-const HowItWorks: React.FC = () => (
-    <section id="how-it-works" className="how-it-works">
-        <h2 className="section-title">{HOW_IT_WORKS_SECTION_TITLE}</h2>
-        <div className="hiw__grid">
-            {titles.map((title, i) => {
-                const Icon = icons[i];
-                return (
+const HowItWorks: React.FC = () => {
+    const { t } = useTranslation('landing_how_it_works');
+
+    return (
+        <section id="how-it-works" className="how-it-works">
+            <h2 className="section-title">{t('section_title')}</h2>
+            <div className="hiw__grid">
+                {icons.map((Icon, i) => (
                     <div key={i} className="hiw__card">
                         <Icon className="hiw__icon" />
-                        <h3>{title}</h3>
-                        <p>{texts[i]}</p>
+                        <h3>{t(`step${i + 1}_title`)}</h3>
+                        <p>{t(`step${i + 1}_text`)}</p>
                     </div>
-                );
-            })}
-        </div>
-    </section>
-);
+                ))}
+            </div>
+        </section>
+    );
+};
 
 export default HowItWorks;

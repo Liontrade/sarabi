@@ -2,30 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { auth, db } from '../../../firebaseConfig';
 import { updateProfile } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
-import './ProfileSettings.css';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
+import './ProfileSettings.css';
 
 const ProfileSettings: React.FC = () => {
+    const { t } = useTranslation('settings_profile_settings');
     const currentUser = auth.currentUser;
-    const profilePictures = [
-        'https://via.placeholder.com/100?text=Avatar+1',
-        'https://via.placeholder.com/100?text=Avatar+2',
-        'https://via.placeholder.com/100?text=Avatar+3',
-    ];
 
-    const [selectedPicture, setSelectedPicture] = useState<string>(profilePictures[0]);
-    const [name, setName] = useState<string>('');
-    const [email, setEmail] = useState<string>('');
-    const [nameError, setNameError] = useState<string>('');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [nameError, setNameError] = useState('');
 
     const validateName = (value: string): string | null => {
         const trimmed = value.trim();
         if (!trimmed) {
-            return 'Name cannot be empty.';
+            return t('name_error_required');
         }
-        const regex = /^[A-Za-z\s]+$/;
-        if (!regex.test(trimmed)) {
-            return 'Name can only contain letters and spaces.';
+        if (!/^[A-Za-z\s]+$/.test(trimmed)) {
+            return t('name_error_format');
         }
         return null;
     };
@@ -34,83 +29,53 @@ const ProfileSettings: React.FC = () => {
         if (currentUser) {
             setName(currentUser.displayName || '');
             setEmail(currentUser.email || '');
-            if (currentUser.photoURL) {
-                setSelectedPicture(currentUser.photoURL);
-            }
         }
     }, [currentUser]);
 
     const handleSave = async () => {
-        const errorMsg = validateName(name);
-        if (errorMsg) {
-            setNameError(errorMsg);
+        const err = validateName(name);
+        if (err) {
+            setNameError(err);
             return;
-        } else {
-            setNameError('');
         }
+        setNameError('');
         try {
-            if (auth.currentUser) {
-                await updateProfile(auth.currentUser, {
-                    displayName: name,
-                    photoURL: selectedPicture,
-                });
-
-                const userDocRef = doc(db, 'users', auth.currentUser.uid);
-                await setDoc(userDocRef, { name: name, photoURL: selectedPicture }, { merge: true });
-                console.log('Profile updated successfully');
-                toast.success('Profile updated successfully');
+            if (currentUser) {
+                await updateProfile(currentUser, { displayName: name });
+                const userDoc = doc(db, 'users', currentUser.uid);
+                await setDoc(userDoc, { name }, { merge: true });
+                toast.success(t('save_success'));
             }
         } catch (error: unknown) {
             console.error('Error updating profile:', error);
-            if (error instanceof Error) {
-                toast.error(error.message);
-            } else {
-                toast.error('An unknown error occurred');
-            }
+            const message = error instanceof Error ? error.message : t('save_error');
+            toast.error(message);
         }
     };
 
     return (
         <div className="profile-settings">
-            <h2>Profile</h2>
-            <p>
-                Your profile information is used to personalize your LionTrade experience. You can edit your name and
-                change your profile picture. Your email is verified and cannot be changed.
-            </p>
-
-            <div className="profile-settings__pictures">
-                {profilePictures.map(pic => (
-                    <div
-                        key={pic}
-                        className={`profile-settings__picture ${selectedPicture === pic ? 'active' : ''}`}
-                        onClick={() => setSelectedPicture(pic)}
-                    >
-                        <img src={pic} alt="Profile option" />
-                    </div>
-                ))}
-            </div>
+            <h2>{t('title')}</h2>
+            <p className="profile-settings__desc">{t('description')}</p>
 
             <div className="profile-settings__fields">
-                <label htmlFor="profileName">Name</label>
+                <label htmlFor="profileName">{t('name_label')}</label>
                 <input
                     id="profileName"
                     type="text"
                     value={name}
                     onChange={e => setName(e.target.value)}
-                    onBlur={() => {
-                        const errorMsg = validateName(name);
-                        setNameError(errorMsg ? errorMsg : '');
-                    }}
+                    onBlur={() => setNameError(validateName(name) || '')}
                     className={nameError ? 'input-error' : ''}
                 />
                 {nameError && <div className="error-message">{nameError}</div>}
 
-                <label htmlFor="profileEmail">Email</label>
+                <label htmlFor="profileEmail">{t('email_label')}</label>
                 <input id="profileEmail" type="email" value={email} disabled />
             </div>
 
             <button className="profile-settings__save-btn" onClick={handleSave}>
-                Save
+                {t('save_button')}
             </button>
         </div>
     );

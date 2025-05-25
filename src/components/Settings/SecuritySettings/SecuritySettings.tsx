@@ -1,20 +1,16 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './SecuritySettings.css';
 import { auth } from '../../../firebaseConfig';
 import { EmailAuthProvider, reauthenticateWithCredential, updatePassword, deleteUser } from 'firebase/auth';
 import { toast } from 'react-toastify';
 import DeleteAccountModal from '../DeleteAccountModal/DeleteAccountModal';
-
-interface LoginSession {
-    id: string;
-    date: string;
-    device: string;
-    location: string;
-}
+import { useTranslation } from 'react-i18next';
+import './SecuritySettings.css';
 
 const SecuritySettings: React.FC = () => {
+    const { t } = useTranslation('settings_security_settings');
     const navigate = useNavigate();
+
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
@@ -24,57 +20,20 @@ const SecuritySettings: React.FC = () => {
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
 
     const [twoFactorEnabled, setTwoFactorEnabled] = useState(false);
-
-    const [loginHistory, setLoginHistory] = useState<LoginSession[]>([
-        {
-            id: 'session1',
-            date: 'Jan 3, 2023 12:01pm',
-            device: 'Chrome, Windows 10',
-            location: 'Seattle, WA',
-        },
-        {
-            id: 'session2',
-            date: 'Jan 2, 2023 9:15am',
-            device: 'Safari, iOS',
-            location: 'San Francisco, CA',
-        },
-    ]);
-
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-    const validateCurrentPassword = (value: string) => {
-        if (!value.trim()) {
-            return 'Current password cannot be empty.';
-        }
+    const validateCurrentPassword = (v: string) => (!v.trim() ? t('error_current_empty') : '');
+
+    const validateNewPassword = (v: string, curr: string) => {
+        if (!v.trim()) return t('error_new_empty');
+        if (v.length < 8) return t('error_new_length');
+        if (v === curr) return t('error_new_same');
+        if (!/^[A-Za-z0-9]+$/.test(v)) return t('error_new_format');
         return '';
     };
 
-    const validateNewPassword = (value: string, currentVal: string) => {
-        if (!value.trim()) {
-            return 'New password cannot be empty.';
-        }
-        if (value.trim().length < 8) {
-            return 'New password must be at least 8 characters.';
-        }
-        if (value === currentVal) {
-            return 'New password must be different from current password.';
-        }
-        const regex = /^[A-Za-z0-9]+$/;
-        if (!regex.test(value)) {
-            return 'New password can only contain letters and numbers.';
-        }
-        return '';
-    };
-
-    const validateConfirmNewPassword = (newPass: string, confirmPass: string) => {
-        if (!confirmPass.trim()) {
-            return 'Please confirm your new password.';
-        }
-        if (newPass !== confirmPass) {
-            return 'New passwords do not match.';
-        }
-        return '';
-    };
+    const validateConfirmNewPassword = (newP: string, conf: string) =>
+        !conf.trim() ? t('error_confirm_empty') : newP !== conf ? t('error_confirm_mismatch') : '';
 
     const handleChangePassword = async () => {
         const currErr = validateCurrentPassword(currentPassword);
@@ -84,103 +43,87 @@ const SecuritySettings: React.FC = () => {
         setCurrentPasswordError(currErr);
         setNewPasswordError(newErr);
         setConfirmPasswordError(confErr);
-
-        if (currErr || newErr || confErr) {
-            return;
-        }
+        if (currErr || newErr || confErr) return;
 
         try {
-            if (!auth.currentUser || !auth.currentUser.email) {
-                toast.error('No authenticated user or missing email.');
+            const user = auth.currentUser;
+            if (!user || !user.email) {
+                toast.error(t('error_no_user'));
                 return;
             }
-            const credential = EmailAuthProvider.credential(auth.currentUser.email, currentPassword);
-            await reauthenticateWithCredential(auth.currentUser, credential);
-            await updatePassword(auth.currentUser, newPassword);
-            toast.success('Password updated successfully');
+            const cred = EmailAuthProvider.credential(user.email, currentPassword);
+            await reauthenticateWithCredential(user, cred);
+            await updatePassword(user, newPassword);
+            toast.success(t('password_change_success'));
             setCurrentPassword('');
             setNewPassword('');
             setConfirmNewPassword('');
         } catch (error: unknown) {
-            console.error('Error updating password:', error);
-            if (error instanceof Error) {
-                toast.error(error.message);
-            } else {
-                toast.error('An unknown error occurred');
-            }
+            console.error(error);
+            const message = error instanceof Error ? error.message : t('error_unknown');
+            toast.error(message);
         }
     };
 
     const handleToggle2FA = () => {
-        setTwoFactorEnabled(!twoFactorEnabled);
-        console.log(twoFactorEnabled ? 'Disabling 2FA...' : 'Enabling 2FA...');
+        setTwoFactorEnabled(f => !f);
+        toast.info(twoFactorEnabled ? t('two_fa_disable') : t('two_fa_enable'));
     };
 
-    const handleSignOutSession = (sessionId: string) => {
-        console.log('Signing out session:', sessionId);
-        setLoginHistory(loginHistory.filter(s => s.id !== sessionId));
-    };
+    const openDeleteModal = () => setShowDeleteModal(true);
 
-    const openDeleteModal = () => {
-        setShowDeleteModal(true);
-    };
-
-    const handleDeleteAccount = async (passwordForDeletion: string) => {
+    const handleDeleteAccount = async (pwd: string) => {
         try {
-            if (!auth.currentUser || !auth.currentUser.email) {
-                toast.error('No authenticated user or missing email.');
+            const user = auth.currentUser;
+            if (!user || !user.email) {
+                toast.error(t('error_no_user'));
                 return;
             }
-            const credential = EmailAuthProvider.credential(auth.currentUser.email, passwordForDeletion);
-            await reauthenticateWithCredential(auth.currentUser, credential);
-            await deleteUser(auth.currentUser);
-            toast.success('Account deleted successfully');
+            const cred = EmailAuthProvider.credential(user.email, pwd);
+            await reauthenticateWithCredential(user, cred);
+            await deleteUser(user);
+            toast.success(t('delete_success'));
             navigate('/');
         } catch (error: unknown) {
-            console.error('Error deleting account:', error);
-            if (error instanceof Error) {
-                toast.error(error.message);
-            } else {
-                toast.error('An unknown error occurred');
-            }
+            console.error(error);
+            const message = error instanceof Error ? error.message : t('error_unknown');
+            toast.error(message);
         }
     };
 
     return (
         <div className="security-settings">
-            <h2>Security</h2>
-            <p>Stay safe and secure</p>
+            <h2>{t('title')}</h2>
+            <p className="sec-desc">{t('description')}</p>
 
-            <div className="section change-password">
-                <h3>Change Password</h3>
+            {/* Change Password */}
+            <div className="section card">
+                <h3>{t('change_password_title')}</h3>
                 <div className="form-narrow">
-                    <label htmlFor="currentPassword">Current Password</label>
+                    <label>{t('change_password_current_label')}</label>
                     <input
-                        id="currentPassword"
                         type="password"
-                        placeholder="Enter current password"
+                        placeholder={t('change_password_current_placeholder')}
                         value={currentPassword}
                         onChange={e => setCurrentPassword(e.target.value)}
                         className={currentPasswordError ? 'input-error' : ''}
                     />
                     {currentPasswordError && <div className="error-message">{currentPasswordError}</div>}
 
-                    <label htmlFor="newPassword">New Password</label>
+                    <label>{t('change_password_new_label')}</label>
                     <input
-                        id="newPassword"
                         type="password"
-                        placeholder="At least 8 characters, letters and numbers only"
+                        placeholder={t('change_password_new_placeholder')}
                         value={newPassword}
                         onChange={e => setNewPassword(e.target.value)}
                         className={newPasswordError ? 'input-error' : ''}
                     />
                     {newPasswordError && <div className="error-message">{newPasswordError}</div>}
 
-                    <label htmlFor="confirmNewPassword">Confirm New Password</label>
+                    <label>{t('change_password_confirm_label')}</label>
                     <input
-                        id="confirmNewPassword"
                         type="password"
-                        placeholder="Re-enter your new password"
+                        placeholder={t('change_password_confirm_placeholder')}
                         value={confirmNewPassword}
                         onChange={e => setConfirmNewPassword(e.target.value)}
                         className={confirmPasswordError ? 'input-error' : ''}
@@ -188,70 +131,42 @@ const SecuritySettings: React.FC = () => {
                     {confirmPasswordError && <div className="error-message">{confirmPasswordError}</div>}
 
                     <button className="btn btn-primary" onClick={handleChangePassword}>
-                        Change Password
+                        {t('change_password_button')}
                     </button>
                 </div>
             </div>
 
-            <div className="section two-factor">
-                <h3>Two-Factor Authentication (2FA)</h3>
-                <p>
-                    Add an extra layer of security to your account. When 2FA is enabled, you’ll need to provide a second
-                    form of verification in addition to your password.
-                </p>
+            <div className="section card">
+                <h3>{t('two_fa_title')}</h3>
+                <p>{t('two_fa_description')}</p>
                 <button className="btn btn-secondary" onClick={handleToggle2FA}>
-                    {twoFactorEnabled ? 'Disable 2FA' : 'Enable 2FA'}
+                    {twoFactorEnabled ? t('two_fa_disable') : t('two_fa_enable')}
                 </button>
             </div>
 
-            <div className="section login-history">
-                <h3>Login History</h3>
-                {loginHistory.length === 0 ? (
-                    <p>No active sessions.</p>
-                ) : (
-                    <ul className="session-list">
-                        {loginHistory.map(session => (
-                            <li key={session.id} className="session-item">
-                                <div>
-                                    <div className="session-date">{session.date}</div>
-                                    <div className="session-info">
-                                        {session.device}, {session.location}
-                                    </div>
-                                </div>
-                                <button className="btn btn-signout" onClick={() => handleSignOutSession(session.id)}>
-                                    Sign Out
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-                )}
-            </div>
-
-            <div className="section account-deletion">
-                <h3>Account Deletion</h3>
-                <p>
-                    If you delete your account, you won’t be able to recover it. You will lose access to all data,
-                    including your portfolio and personal settings.
-                </p>
+            <div className="section card">
+                <h3>{t('account_deletion_title')}</h3>
+                <p>{t('account_deletion_description')}</p>
                 <button className="btn btn-delete" onClick={openDeleteModal}>
-                    Delete Account
+                    {t('account_deletion_button')}
                 </button>
             </div>
 
-            <div className="section security-tips">
-                <h3>Additional Security Tips</h3>
-                <ul>
-                    <li>Be cautious of phishing emails and links.</li>
-                    <li>Keep your recovery codes safe.</li>
-                    <li>Always enable 2FA on your critical accounts.</li>
+            {/* Security Tips */}
+            <div className="section card">
+                <h3>{t('security_tips_title')}</h3>
+                <ul className="security-tips">
+                    <li>{t('security_tip_phishing')}</li>
+                    <li>{t('security_tip_recovery')}</li>
+                    <li>{t('security_tip_2fa')}</li>
                 </ul>
             </div>
 
             {showDeleteModal && (
                 <DeleteAccountModal
-                    onConfirm={password => {
+                    onConfirm={pwd => {
                         setShowDeleteModal(false);
-                        handleDeleteAccount(password);
+                        handleDeleteAccount(pwd);
                     }}
                     onCancel={() => setShowDeleteModal(false)}
                 />

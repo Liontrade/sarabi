@@ -16,15 +16,47 @@ jest.mock('firebase/firestore', () => ({
 }));
 
 jest.mock('../../../firebaseConfig', () => ({
-    auth: {}, // nie używamy tych obiektów w teście
+    auth: {},
     db: {},
+}));
+
+jest.mock('react-i18next', () => ({
+    useTranslation: () => ({
+        t: (key: string) => {
+            switch (key) {
+                case 'welcome':
+                    return 'Welcome back';
+                case 'completed_suffix':
+                    return '% Completed';
+                case 'step1_title':
+                    return 'Complete your user profile';
+                case 'step1_desc':
+                    return 'Help us personalize your experience';
+                case 'step1_cta':
+                    return 'Go to profile';
+                case 'step2_title':
+                    return 'Create your stock watchlist';
+                case 'step2_desc':
+                    return 'Keep track of your favorite stocks';
+                case 'step2_cta':
+                    return 'Go to watchlist';
+                case 'step3_title':
+                    return 'Read a lesson in the knowledge library';
+                case 'step3_desc':
+                    return 'Learn stock-market basics from A to Z';
+                case 'step3_cta':
+                    return 'Go to library';
+                default:
+                    return key;
+            }
+        },
+    }),
 }));
 
 describe('OnboardingSection Component', () => {
     beforeEach(() => {
         jest.spyOn(console, 'log').mockImplementation(() => {});
     });
-
     afterEach(() => {
         (console.log as jest.Mock).mockRestore();
     });
@@ -32,10 +64,9 @@ describe('OnboardingSection Component', () => {
     it('renders header and average progress', () => {
         const { container } = render(<OnboardingSection />);
 
-        const header = screen.getByRole('heading', { level: 2, name: /Welcome back, User!/i });
-        expect(header).toBeInTheDocument();
+        expect(screen.getByRole('heading', { level: 2, name: /Welcome back, User!/i })).toBeInTheDocument();
 
-        const overviewText = screen.getByText(/% Completed/i);
+        const overviewText = screen.getByText(/% Completed$/i);
         expect(overviewText).toHaveTextContent('47% Completed');
 
         const radial = container.querySelector('.radial-progress') as HTMLElement;
@@ -66,28 +97,26 @@ describe('OnboardingSection Component', () => {
             },
         ];
 
-        steps.forEach(step => {
-            expect(screen.getByRole('heading', { level: 3, name: step.title })).toBeInTheDocument();
-            expect(screen.getByText(step.desc)).toBeInTheDocument();
-            expect(screen.getByText(step.progress)).toBeInTheDocument();
-            const btn = screen.getByRole('button', { name: step.cta });
+        steps.forEach(({ title, desc, progress, cta }) => {
+            expect(screen.getByRole('heading', { level: 3, name: title })).toBeInTheDocument();
+
+            expect(screen.getByText(desc)).toBeInTheDocument();
+
+            expect(screen.getByText(progress)).toBeInTheDocument();
+
+            const btn = screen.getByRole('button', { name: cta });
             expect(btn).toBeInTheDocument();
+            expect(btn).toHaveClass('step-card__btn');
         });
     });
 
     it('clicking CTA buttons logs appropriate messages', () => {
         render(<OnboardingSection />);
 
-        const ctaButtons = [
-            { text: 'Go to profile', log: 'Go to profile' },
-            { text: 'Go to watchlist', log: 'Go to watchlist' },
-            { text: 'Go to library', log: 'Go to library' },
-        ];
-
-        ctaButtons.forEach(({ text, log }) => {
+        ['Go to profile', 'Go to watchlist', 'Go to library'].forEach(text => {
             const btn = screen.getByRole('button', { name: text });
             fireEvent.click(btn);
-            expect(console.log).toHaveBeenCalledWith(log);
+            expect(console.log).toHaveBeenCalledWith(text);
         });
     });
 });

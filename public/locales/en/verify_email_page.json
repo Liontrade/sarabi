@@ -1,0 +1,6 @@
+{
+    "title": "Confirm Your Email Address",
+    "info": "A confirmation email has been sent to {{email}}. Please check your inbox and click the verification link. This page will refresh automatically once your email is verified.",
+    "resend_button": "Resend Email",
+    "resent_alert": "Confirmation email has been resent."
+}
